@@ -1,0 +1,17 @@
+module.exports = {
+    // MONGO_URI: 'mongodb://localhost:27017/SpellEng',
+    MONGO_URI: 'mongodb+srv://SpellEng_USPabbi:@clusterspelleng.nbsvai6.mongodb.net/SpellEng?retryWrites=true&w=majority&appName=ClusterSpellEng',
+    JWT_SECRET: 'kdjkasjqr8239r8kfj939kdjkdjfkwt944039043kjgkwjgkwgwlkg404204wegklgkt42-owpglw4-y34pyo3py0239tfkeit049igkjkvjvw049t09tofjkwrjt034tigdfkjgkdfjg0rt9304fsdkfj04t904gigo',
+    JWT_EXPIRE: '24h',
+    CLOUDINARY_CLOUD_NAME: 'saeedahmed',
+    CLOUDINARY_API_KEY: '633615861791628',
+    CLOUDINARY_SECRET_KEY: 'pcu5hDuFK01arwcxuotN3EHXFRc',
+    EMAIL: 'ali9656623@gmail.com',
+    PASSWORD: "dnrdgeoodzullmnp",
+    FRONTEND_URL: "http://localhost:3000",
+    OTP_LESS_BASE_URL: "https://auth.otpless.app/auth/otp/v1",
+    OTP_LESS_CLIENT_ID: "SQSB40PCHO7XSIRSHZBVDSFF4LYVSY9I",
+    OTP_LESS_CLIENT_SECRET: "y8935rd9lirshfoabpjnvgto3m9ku3vh",
+    RAZORPAY_KEY_ID: "rzp_test_V2ixbI12n2K74v",
+    RAZORPAY_KEY_SECRET: "FX7NWhK7hB4BQ71sFuB5hl5n",
+} 

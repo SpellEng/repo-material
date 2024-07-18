@@ -1,0 +1,5 @@
+.ReviewsAndRatings .ant-list-item-meta-avatar img {
+    width: 43px !important;
+    height: 43px !important;
+    border-radius: 6px !important;
+}

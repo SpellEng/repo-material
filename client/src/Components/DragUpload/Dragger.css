@@ -1,0 +1,19 @@
+.dragger>div {
+    background-color: transparent !important;
+    /* margin-top: 32px; */
+}
+
+.dragger span[role="button"] {
+    padding: 16px 24px !important;
+}
+
+.dragger span div {
+    display: flex !important;
+    align-items: center;
+    /* width: 100%; */
+}
+
+.imagesList img {
+    width: 64px;
+    height: 64px;
+}

@@ -1,0 +1,40 @@
+/* AboutTeacher.css */
+
+.AboutTeacher .container {
+    margin: auto;
+  }
+  
+  .AboutTeacher .about-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .AboutTeacher .avatar {
+    border: 2px solid #1890ff;
+  }
+  
+  .AboutTeacher .teacher-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .AboutTeacher .section-title {
+    font-size: 1.25rem;
+    margin-top: 20px;
+    color: #1890ff;
+  }
+  
+  .AboutTeacher .section-content {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #555;
+  }
+  
+  .AboutTeacher .contact-info a {
+    color: #1890ff;
+  }
+  
+  .AboutTeacher .contact-info a:hover {
+    text-decoration: underline;
+  }

@@ -1,0 +1,165 @@
+.registration .row .leftRegistration img {
+  width: 100%;
+}
+
+.registration .leftRegistration img {
+  height: 100vh;
+  height: 100dvh;
+  object-fit: cover;
+}
+
+.registration .rightRegistration {
+  padding: 30px 60px !important;
+}
+
+.registration .rightRegistration .logo {
+  width: 200px;
+  margin-bottom: 23px;
+}
+
+.registration .rightRegistration h2 {
+  font-weight: 900;
+  font-size: 32px;
+}
+
+.registration .rightRegistration p {
+  margin-bottom: 23px;
+}
+
+.registration .rightRegistration .item {
+  margin-bottom: 17px;
+}
+
+.registration .rightRegistration .item label {
+  display: block;
+}
+
+.registration .rightRegistration button {
+  width: 100%;
+}
+
+.registration .rightRegistration .sendCodeBtn {
+  font-size: 14px;
+}
+
+.registration .rightRegistration .otpPart {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 23px;
+}
+
+.registration .rightRegistration .otpPart input {
+  width: 100% !important;
+  max-width: 70px;
+  height: 80px;
+  border-radius: 4px;
+  border: 1px solid #b6b7b8;
+}
+
+.registration .rightRegistration .loginOption {
+  text-align: center;
+}
+
+.registration .rightRegistration .PhoneInput input {
+  border: none;
+  outline: none;
+  padding: 8px;
+  max-width: 160px;
+}
+
+.registration .rightRegistration .PhoneBtnContainer {
+  position: relative;
+  border: 1px solid #b6b7b8;
+  border-radius: 4px;
+  padding: 0px 10px;
+  display: flex;
+  align-items: center;
+  height: 43px;
+}
+
+.registration .rightRegistration .PhoneBtnContainer .codebtn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  /* margin-left: -15px; */
+  font-size: 14px;
+  width: max-content;
+  padding: 0px;
+  background-color: transparent;
+  color: black;
+}
+
+
+.registration button {
+  background-color: var(--btn-color);
+  color: white;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+
+.registration .swiperSlide {
+  position: relative;
+  margin-right: 0px !important;
+}
+
+.registration .swiperSlide:after {
+  content: '';
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+
+.registration .swiperSlide .caption {
+  position: absolute;
+  bottom: 15%;
+  margin: 60px;
+  color: white;
+  z-index: 1000;
+}
+
+.registration .swiperSlide .caption h3 {
+  color: white;
+  font-weight: 400;
+  margin-bottom: 23px;
+}
+
+.registration .swiperSlide .caption h2 {
+  color: white;
+}
+
+.registration .swiperSlide .nameAndReviews {
+  display: flex;
+  justify-content: space-between;
+}
+
+.registration .swiperSlide .nameAndReviews .ant-rate {
+  color: white;
+}
+
+@media (max-width: 767px) {
+  .registration .leftRegistration {
+    display: none !important;
+  }
+
+  .registration .rightRegistration {
+    padding: 30px !important;
+    max-width: 500px !important;
+    margin: 0px auto;
+  }
+
+  .registration .rightRegistration>a {
+    display: none !important;
+  }
+
+  .registration .rightRegistration .text-center {
+    text-align: left !important;
+  }
+}

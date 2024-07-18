@@ -1,0 +1,70 @@
+.AboutTestimonials {
+    background-color: rgb(32, 31, 31);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 0 !important;
+    padding: 60px 80px;
+}
+
+.AboutTestimonials>div {
+    min-width: 0 !important;
+}
+
+.AboutTestimonials .leftContainer {
+    padding: 23px;
+    max-width: 500px;
+}
+
+.AboutTestimonials .leftContainer h1 {
+    color: white;
+    font-size: 45px !important;
+    margin-bottom: 15px;
+}
+
+.AboutTestimonials .leftContainer p {
+    color: #c4c5c7;
+    font-size: 18px;
+}
+
+.AboutTestimonials .leftContainer .arrowsContainer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 19px;
+}
+
+.AboutTestimonials .leftContainer .arrowsContainer button {
+    width: 47px;
+    height: 47px;
+    color: white;
+    border: 1px solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.AboutTestimonials .swiper {
+    width: 100%;
+    height: 100%;
+    min-width: 0px !important;
+}
+
+
+@media (max-width: 1100px) {
+    .AboutTestimonials {
+        flex-wrap: wrap;
+        justify-content: start;
+        padding: 20px !important;
+        gap: 28px;
+    }
+
+    .AboutTestimonials .leftContainer h1 {
+        font-size: 28px !important;
+    }
+
+    .AboutTestimonials .leftContainer {
+        padding: 0px !important;
+    }
+}

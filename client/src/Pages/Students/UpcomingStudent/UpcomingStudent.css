@@ -1,0 +1,9 @@
+.UpcomingStudent {
+    padding: 45px 80px;
+}
+
+@media (max-width:767px) {
+    .UpcomingStudent {
+        padding: 15px !important;
+    }
+}

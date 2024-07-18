@@ -1,0 +1,35 @@
+.terms .inner h1 {
+    text-align: center;
+    padding-bottom: 50px;
+    color: rgb(12, 12, 12);
+}
+
+.terms .inner {
+    margin: 45px 80px;
+}
+
+.terms h3 {
+    text-align: start;
+    padding-bottom: 20px;
+}
+
+.terms .inner h4 {
+    padding-top: 30px;
+    padding-bottom: 15px !important;
+}
+
+.terms .inner ul {
+    padding-top: 15px !important;
+}
+
+@media (max-width:767px) {
+    .terms .inner {
+        margin: 15px !important;
+    }
+
+    .terms .inner h2 {
+        font-size: 36px !important;
+        padding-bottom: 10px !important;
+        text-align: left !important;
+    }
+}

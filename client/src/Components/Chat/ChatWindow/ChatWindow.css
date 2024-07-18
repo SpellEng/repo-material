@@ -1,0 +1,75 @@
+/* src/components/ChatWindow.css */
+
+.chat-window {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.chat-window .chat-header {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.chat-window .chat-header h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.chat-window .chat-header .status {
+    color: #888;
+    font-size: 0.875rem;
+}
+
+.chat-window .messages {
+    flex: 1;
+    overflow-y: auto;
+    /* Enable scrolling */
+    padding: 10px;
+    max-height: calc(100vh - 180px);
+    /* Adjust height as needed */
+}
+
+.chat-window .message.my-message .message-content {
+    background-color: #e1ffc7;
+}
+
+.chat-window .messageFile {
+    width: 310px;
+    max-height: 341px !important;
+    border: 1px solid rgb(172, 170, 170, 0.3);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.chat-window .messageFileLink {
+    display: block;
+    margin-bottom: 10px;
+    border: 1px solid rgb(172, 170, 170, 0.3);
+    padding: 10px;
+    width: max-content;
+    border-radius: 10px;
+    color: #1890ff;
+}
+
+.chat-window .chat-input {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    gap: 10px;
+}
+
+.chat-window .chat-input .ant-input {
+    flex: 1;
+}
+
+.chat-window .ant-list-item-meta-description {
+    word-wrap: break-word !important;
+}

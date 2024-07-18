@@ -1,0 +1,84 @@
+:root {
+  --bg-color: #ffffff;
+  --bg-dark-color: #041b29;
+  --link-color: #09B850;
+  --btn-color: #22a791;
+  --text-color: #606261;
+  --text-secondary-color: #7c7d7c;
+  --shadow-universal: 0px 10px 30px rgba(29, 58, 83, 0.15);
+  --violet-light: #8c85ff;
+  --violet-dark: #673de6;
+  --yellow: #f0be0d;
+  --blue: #30aae2;
+}
+
+body,
+html {
+  background: #fff !important;
+  padding: 0px !important;
+  margin: 0px !important;
+  overflow-x: hidden !important;
+  color: var(--text-color);
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #000;
+  margin-bottom: 0px;
+}
+
+h1 span {
+  color: var(--link-color);
+}
+
+p {
+  margin-bottom: 0px;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+}
+
+.ant-input,
+.ant-input-password {
+  padding: 10px;
+}
+
+.ant-btn-primary {
+  background-color: var(--btn-color);
+}
+
+.ant-select,
+.ant-select-selector {
+  height: 45px;
+  overflow: hidden !important;
+}
+
+.ant-table-container {
+  overflow-x: auto !important;
+}
+
+.anticon {
+  cursor: pointer !important;
+}
+
+h1 {
+  font-size: 3.6rem !important;
+  font-weight: 700 !important;
+}
+
+@media (max-width: 767px) {
+  h1 {
+    font-size: calc(1.485rem + 2.82vw) !important;
+  }
+}

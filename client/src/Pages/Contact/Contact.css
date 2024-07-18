@@ -1,0 +1,67 @@
+.contact {
+  margin: 40px 80px;
+}
+
+.contact .innerContact .contactleft h2 {
+  margin-top: 40px;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.contact .innerContact .contactleft h2 span {
+  display: block;
+}
+
+.innerContact .contactleft p {
+  font-size: 20px;
+}
+
+.innerContact .contactleft p a {
+  text-decoration: none;
+  color: #09b850;
+}
+
+.innerContact .contactleft .followUs a img {
+  width: 36px;
+  border-radius: 50px;
+  padding: 5px;
+  background-color: #e5eee9;
+}
+
+.innerContact .contactleft .followUs a {
+  margin-left: 10px;
+}
+
+.innerContact .contactleft .followUs {
+  display: flex;
+  align-items: center;
+}
+
+.innerContact .contactleft .followUs h6 {
+  font-size: 18px;
+}
+
+@media (max-width:767px) {
+  .contact {
+    margin: 15px !important;
+  }
+
+  .contact .innerContact .contactleft h2 {
+    font-size: 21px;
+    word-wrap: break-word;
+    margin-top: 15px !important;
+  }
+
+  .contact .ContactCard .inner {
+    padding: 15px !important;
+  }
+
+  .contact .ContactCard h4 {
+    padding: 0px 0px !important;
+    padding-bottom: 10px !important;
+  }
+
+  .contact .ContactCard .flag {
+    padding: 15px 0px !important;
+  }
+}

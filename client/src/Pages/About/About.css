@@ -1,0 +1,170 @@
+.aboutus>div {
+  padding: 40px 80px;
+}
+
+.aboutus .noPadding {
+  padding: 40px 0px;
+}
+
+.aboutus .leftAbout h1 {
+  font-size: 50px;
+  padding-bottom: 20px;
+}
+
+.aboutus .leftAbout h1 span {
+  color: #09b850;
+  font-size: 3.6rem;
+}
+
+.aboutus .leftAbout p {
+  color: #606261;
+  margin-bottom: 41px;
+}
+
+.aboutus .ratingPart {
+  margin-top: 110px !important;
+}
+
+.aboutus .leftAbout .commentPart p {
+  font-size: 20px;
+  color: black;
+  margin: 0px;
+  padding-bottom: 20px;
+  font-weight: bold;
+}
+
+.aboutus .leftAbout .commentPart h5 span {
+  font-size: 17px;
+  color: #606261;
+  padding-left: 10px;
+}
+
+.aboutus .leftAbout .infoPart {
+  margin: 0px;
+  padding: 0px;
+}
+
+.aboutus .leftAbout .infoPart svg {
+  color: var(--btn-color);
+  font-size: 23px;
+  margin-bottom: 6px;
+}
+
+.aboutus .rightAbout .row {
+  margin: 0px;
+  padding-top: 100px;
+}
+
+.aboutus .rightAbout .oneVideo {
+  padding-top: 100px;
+}
+
+.aboutus .rightAbout iframe {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-left: 50px;
+  height: 330px !important;
+}
+
+.aboutus .rightAbout .twoVideo iframe {
+  padding-bottom: 50px;
+  margin-left: -30px;
+}
+
+.knowAbout .cardRender .items {
+  border: none;
+  border-radius: 6px;
+  background-color: #f8f8f8;
+  padding: 23px;
+  margin-bottom: 23px;
+}
+
+.knowAbout .infoScetion {
+  padding-left: 50px;
+}
+
+.knowAbout .infoScetion h4 {
+  margin-bottom: 8px;
+  margin-top: 28px;
+}
+
+.knowAbout .infoScetion h2 {
+  font-size: 50px;
+}
+
+.knowAbout .items svg {
+  font-size: 28px;
+  color: var(--btn-color);
+  margin-bottom: 10px;
+}
+
+.knowAbout .items h5 {
+  margin-bottom: 6px;
+}
+
+@media (max-width: 767px) {
+  .aboutus>div {
+    padding: 15px !important;
+  }
+
+  .aboutus .noPadding {
+    padding: 15px 0px !important;
+  }
+
+  .aboutus .leftAbout p {
+    margin-bottom: 19px !important;
+    font-weight: 400 !important;
+    font-size: 15px !important;
+  }
+
+  .aboutus .leftAbout .commentPart p {
+    padding-bottom: 0px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .aboutus .leftAbout h1,
+  .aboutus .leftAbout h1 span {
+    font-size: 28px !important;
+  }
+
+  .aboutus .infoPart .infoItem {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .knowAbout .VerticalRow {
+    margin-top: 0px !important;
+  }
+
+  .aboutus .infoPart .infoItem p {
+    margin-bottom: 0px !important;
+  }
+
+  .aboutus .rightAbout .oneVideo {
+    padding-top: 40px !important;
+  }
+
+  .aboutus .rightAbout .twoVideo iframe,
+  .aboutus .rightAbout iframe {
+    margin-left: 0px;
+  }
+
+  .aboutus .twoVideo {
+    margin-top: 43px;
+  }
+
+  .aboutFaqs {
+    margin-top: 40px !important;
+  }
+
+  .aboutFaqs .aboveFaqs h2 {
+    margin-bottom: 10px !important;
+  }
+
+  .aboutFaqs .mainFaqs .headingFAqs h2 {
+    margin-bottom: 32px !important;
+  }
+}

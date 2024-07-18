@@ -1,0 +1,36 @@
+.AllTutors {
+  padding: 20px 80px;
+}
+
+.AllTutors .header {
+  background-color: white;
+  border-radius: 10px;
+  background-color: #f9f5f2;
+  padding: 15px;
+  margin: 30px 0px;
+}
+
+
+.AllTutors h1 {
+  font-size: 32px;
+  /* line-height: 1.4; */
+  letter-spacing: -.02em;
+  font-weight: bold;
+  color: var(--violet-dark);
+}
+
+@media (max-width: 767px) {
+  .AllTutors {
+    margin: 0px 0px !important;
+    padding: 15px !important;
+  }
+
+  .AllTutors .header {
+    margin-top: 10px !important;
+  }
+
+  .AllTutors .header h1 {
+    margin-bottom: 19px !important;
+    /* line-height: 34px !important; */
+  }
+}

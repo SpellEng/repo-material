@@ -1,0 +1,66 @@
+.Availability {
+    padding: 45px 80px;
+}
+
+.Availability .items {
+    display: flex;
+    flex-direction: column;
+    row-gap: 19px;
+    border: 1px solid #bcbdbc;
+    padding: 10px;
+}
+
+.Availability .items .item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #bcbdbc;
+    padding: 10px;
+}
+
+.Availability .items .item div:first-of-type {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+}
+
+.Availability .items .item div.buttons {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-weight: 500;
+    position: relative;
+}
+
+.Availability .items .item div.buttons button {
+    background-color: var(--text-secondary-color);
+    border-radius: 0px;
+    font-size: 14px;
+    color: white;
+    text-transform: capitalize;
+}
+
+.Availability .items .item div.buttons button:last-of-type {
+    background-color: #bcbdbc;
+}
+
+.Availability .items .item div.buttons span {
+    margin-left: -10px;
+    margin-right: -10px;
+    z-index: 1000;
+    background-color: white;
+    border-radius: 50%;
+    width: 21px;
+    height: 21px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width:767px) {
+    .Availability {
+        padding: 15px !important;
+    }
+}

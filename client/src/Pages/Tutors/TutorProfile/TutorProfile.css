@@ -1,0 +1,14 @@
+.TutorProfile {
+    padding: 45px 80px;
+}
+
+.TutorProfile label {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+@media (max-width:767px) {
+    .TutorProfile {
+        padding: 15px !important;
+    }
+}

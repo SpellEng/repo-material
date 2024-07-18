@@ -1,0 +1,37 @@
+.StudentProfile {
+    padding: 45px 80px;
+}
+
+.StudentProfile label {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.StudentProfile .learningGoalsBtns {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.StudentProfile .learningGoalsBtns button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #d1cac4;
+    padding: 10px 19px;
+    border-radius: 10px;
+    width: max-content;
+}
+
+.StudentProfile .learningGoalsBtns button.selectedButton {
+    background-color: #5c554d;
+    color: white;
+}
+
+
+@media (max-width:767px) {
+    .StudentProfile {
+        padding: 15px !important;
+    }
+}

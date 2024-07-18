@@ -1,0 +1,49 @@
+.ContactForm {
+  border: 1px solid rgb(218, 212, 212);
+  border-radius: 8px;
+  box-shadow: 0px 0px 40px rgb(29 58 83 / 10%);
+  padding: 50px 40px;
+  position: relative;
+  max-width: 500px;
+  /* padding-bottom: 100px; */
+}
+
+.ContactForm .form-label {
+  padding-top: 10px;
+  color: #606261;
+}
+
+.ContactForm .formbtn button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  color: white;
+  background-color: #09b850;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+}
+
+.ContactForm .dropDown a {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+}
+
+.ContactForm .arrowImage {
+  position: absolute;
+  bottom: -20px;
+  left: -80px;
+  width: 180px;
+}
+
+@media (max-width: 767px) {
+  .ContactForm {
+    padding: 15px !important;
+  }
+
+  .ContactForm .arrowImage {
+    left: 0px;
+    bottom: -45px;
+  }
+}

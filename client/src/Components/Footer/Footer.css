@@ -1,0 +1,148 @@
+.footer {
+  margin: 0px 80px;
+}
+
+.footer section {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer .footerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 0px;
+}
+
+.footer .footerTop button {
+  background-color: rgb(213, 246, 213);
+  color: rgb(64, 172, 64);
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  padding: 10px 50px;
+}
+
+.footer .footerTop h3 {
+  font-size: 50px;
+  font-weight: 600;
+}
+
+.footer h4 {
+  margin-bottom: 19px;
+}
+
+.footer h3 span {
+  display: block;
+}
+
+.footer img {
+  width: 100%;
+}
+
+.footer section a {
+  text-decoration: none;
+}
+
+.footer section .quick p {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.footer section .quick a {
+  display: block;
+  padding-bottom: 10px;
+  font-size: 17px;
+  color: black;
+}
+
+.footer .legal p {
+  font-size: 25px;
+  font-weight: 500;
+  margin-bottom: 0px;
+}
+
+.footer section .legal a {
+  display: block;
+  padding-bottom: 10px;
+  font-size: 17px;
+  color: black;
+}
+
+.footer .contactLinks h4 {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.footer .contactLinks .location {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer .contactLinks a {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+  color: black;
+}
+
+.footer .contactLinks div svg {
+  width: 32px;
+}
+
+.footer .followPart img {
+  width: 32px;
+}
+
+.footer .copyright {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  padding-top: 0px !important;
+}
+
+.footer .copyright img {
+  width: 180px !important;
+}
+
+@media (max-width: 767px) {
+  .footer {
+    margin: 0px !important;
+  }
+
+  .footer .footerTop {
+    flex-wrap: wrap !important;
+    gap: 19px;
+    padding: 15px !important;
+    margin-top: 40px;
+  }
+
+  .footer .footerTop h3 {
+    font-size: 28px !important;
+  }
+
+  .footer section {
+    margin: 15px !important;
+    gap: 28px !important;
+  }
+
+  .footer .contactLinks a {
+    align-items: flex-start !important;
+  }
+
+  .footer .contactLinks a svg {
+    margin-top: 3px;
+    font-size: 23px;
+  }
+
+  .footer .copyright {
+    flex-wrap: wrap !important;
+    text-align: center;
+    justify-content: center;
+    gap: 19px;
+  }
+}

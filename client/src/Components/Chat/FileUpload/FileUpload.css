@@ -1,0 +1,19 @@
+/* src/components/FileUpload.css */
+.file-upload {
+    padding: 10px 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.file-upload .ant-upload-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.file-upload .ant-upload-wrapper .ant-upload-list-item {
+    margin-top: 0px !important;
+    max-width: 200px;
+    overflow-y: hidden;
+}

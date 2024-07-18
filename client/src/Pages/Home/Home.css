@@ -1,0 +1,105 @@
+.mainHome {
+    overflow-x: hidden;
+}
+
+.mainHome .stepPart {
+    padding: 40px 60px;
+}
+
+.mainHome .testimonialPart .rightTestimonail img {
+    width: 90px;
+    border-radius: 50px;
+}
+
+.mainHome .testimonialPart .testimonialArray {
+    display: flex;
+    align-items: center;
+    gap: 19px;
+    margin-top: 23px;
+}
+
+.mainHome .testimonialPart .testimonialArray button {
+    width: max-content;
+}
+
+.mainHome .testimonialPart .testimonialArray button:focus {
+    background-color: rgb(227, 253, 244);
+}
+
+.mainHome .testimonialPart .leftTestimonial .quoteTestimonial {
+    background-color: black;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 19px;
+}
+
+.mainHome .testimonialPart .leftTestimonial .quoteTestimonial svg {
+    fill: rgb(241, 241, 241);
+    font-size: 28px;
+}
+
+
+.mainHome .testimonialPart {
+    margin: 10px 80px;
+}
+
+.mainHome .testimonialPart .mainHeading h2 {
+    font-size: 40px;
+    padding: 10px 0px;
+    font-weight: 650;
+}
+
+.mainHome .testimonialPart .mainHeading p {
+    color: rgb(93, 93, 93);
+    font-size: 16px;
+}
+
+@media (max-width: 767px) {
+    .mainHome .stepPart {
+        padding-left: 0px;
+        padding: 15px;
+        margin-top: 0px !important;
+    }
+
+    .mainHome .testimonialPart {
+        margin: 15px !important;
+        margin-top: 30px !important;
+    }
+
+    .mainHome .testimonialPart .mainHeading h2 {
+        font-size: 28px !important;
+    }
+
+    .mainHome .testimonialPart .mainHeading p {
+        margin-top: 0px !important;
+    }
+
+    .mainHome .testimonialPart .leftTestimonial {
+        margin-top: 30px !important;
+    }
+
+    .mainHome .testimonialPart .testimonialArray {
+        flex-wrap: wrap !important;
+    }
+
+    .mainHome .testimonialPart .testimonialArray .btn {
+        padding: 10px 0px !important;
+    }
+
+    .WhyChoose {
+        padding: 15px !important;
+    }
+
+    .WhyChoose .questionPart h2 {
+        font-size: 28px !important;
+    }
+
+    .WhyChoose .questionPart {
+        margin-top: 19px !important;
+    }
+
+    .WhyChoose .questionPart .whyChooseFooter {
+        flex-wrap: wrap !important;
+    }
+}

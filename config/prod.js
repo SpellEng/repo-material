@@ -1,0 +1,16 @@
+module.exports = {
+    MONGO_URI: process.env.MONGO_URI,
+    JWT_SECRET: process.env.JWT_SECRET,
+    JWT_EXPIRE: process.env.JWT_EXPIRE,
+    CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
+    CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
+    CLOUDINARY_SECRET_KEY: process.env.CLOUDINARY_SECRET_KEY,
+    EMAIL: process.env.EMAIL,
+    PASSWORD: process.env.PASSWORD,
+    FRONTEND_URL: process.env.FRONTEND_URL,
+    OTP_LESS_BASE_URL: process.env.OTP_LESS_BASE_URL,
+    OTP_LESS_CLIENT_ID: process.env.OTP_LESS_CLIENT_ID,
+    OTP_LESS_CLIENT_SECRET: process.env.OTP_LESS_CLIENT_SECRET,
+    RAZORPAY_KEY_ID: process.env.RAZORPAY_KEY_ID,
+    RAZORPAY_KEY_SECRET: process.env.RAZORPAY_KEY_SECRET
+}

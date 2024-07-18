@@ -1,0 +1,52 @@
+.TutorEarnings {
+    padding: 45px 80px;
+}
+
+.TutorEarnings header {
+    background-color: rgba(212, 237, 218, 255);
+    text-align: center;
+    padding: 15px;
+    color: #6d9f8d;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin: 23px 0px;
+}
+
+.TutorEarnings .amountContainer {
+    border: 1px solid var(--text-secondary-color);
+    padding: 23px;
+    display: flex;
+    align-items: center;
+}
+
+.TutorEarnings .amountContainer div {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
+
+.TutorEarnings .amountContainer div p {
+    margin-bottom: 19px;
+}
+
+.TutorEarnings .withdrawBtns {
+    display: flex;
+    align-items: center;
+    gap: 19px;
+    margin: 17px 0px;
+}
+
+.TutorEarnings .withdrawBtns button {
+    background-color: #d1d8d9;
+    width: 130px;
+    border-radius: 0px;
+}
+
+@media (max-width:767px) {
+    .TutorEarnings {
+        padding: 15px !important;
+    }
+}

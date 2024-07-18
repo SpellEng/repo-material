@@ -1,0 +1,26 @@
+.testimonial .userTestimonial .userImg img {
+  width: 43px;
+  height: 43px;
+  border-radius: 50px;
+}
+
+.testimonial .userTestimonial {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.testimonial .userTestimonial .postName {
+  text-align: left;
+}
+
+.testimonial .userTestimonial .postName h4 {
+  margin: 0px;
+  font-size: 15px;
+  text-align: left;
+}
+
+.testimonial .userTestimonial .postName small {
+  color: rgb(82, 82, 82);
+  font-size: 13.5px;
+}

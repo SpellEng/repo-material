@@ -1,0 +1,82 @@
+.tutorCard .mainPic img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 6px !important;
+}
+
+.tutorCard .nameSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0px;
+}
+
+.tutorCard .nameSection .name {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.tutorCard .nameSection .rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.tutorCard .nameSection .rating img {
+    width: 17px;
+}
+
+.tutorCard .buttons {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    justify-content: center;
+    text-align: center;
+}
+
+.tutorCard .buttons .btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0px auto;
+    padding: 10px 23px;
+    color: black;
+    background-color: var(--yellow);
+}
+
+.tutorCard .buttons .btn svg {
+    color: black;
+}
+
+.tutorCard .buttons .btn:nth-child(2) {
+    background-color: var(--blue);
+    color: white;
+}
+
+.tutorCard .buttons .btn:nth-child(2) svg {
+    color: white;
+}
+
+.tutorCard .buttons button img {
+    width: 17px;
+}
+
+
+@media (max-width: 767px) {
+    .tutorCard .buttons .btn {
+        padding: 8px !important;
+    }
+
+    .tutorCard .nameSection {
+        flex-wrap: wrap !important;
+        flex-direction: column;
+        row-gap: 0px;
+        justify-content: center !important;
+    }
+
+    .tutorCard .nameSection .name {
+        gap: 8px !important;
+    }
+}

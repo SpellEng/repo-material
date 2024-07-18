@@ -1,0 +1,151 @@
+.mainNavbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 75px;
+    margin-top: 10px;
+}
+
+.mainNavbar .logo img {
+    width: 200px;
+}
+
+.mainNavbar .navLinks a {
+    text-decoration: none;
+    color: #606261;
+}
+
+.mainNavbar .navLinks a:hover {
+    color: #09b850;
+}
+
+.mainNavbar .rightSide {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+
+.fa-solid {
+    padding-right: 5px;
+}
+
+.rightSide li {
+    list-style: none;
+}
+
+.rightSide .btnSign {
+    text-decoration: none;
+}
+
+.rightSide .btnBuy {
+    background-color: #09b850;
+    color: white;
+    border-radius: 3px;
+    border: none;
+    padding: 8px 20px;
+}
+
+.rightSide .darkMood button {
+    border: none;
+}
+
+.rightSide .btnSign {
+    color: black;
+    background-color: #f3f4f3;
+    border-radius: 3px;
+    border: none;
+    padding: 10px 17px;
+    margin-left: 10px;
+}
+
+.rightSide .darkMood button {
+    background-color: none;
+}
+
+.mainNavbar a {
+    color: black;
+}
+
+@media (min-width: 992px) {
+    .navbar-expand-lg .navbar-collapse {
+        display: flex !important;
+        flex-basis: unset;
+        flex-grow: unset;
+    }
+
+    .navbar-expand-lg {
+        flex-wrap: nowrap;
+        justify-content: space-between !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .mainNavbar {
+        margin: 6px 0px !important;
+    }
+
+    .mainNavbar .container-fluid {
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .mainNavbar .logo {
+        margin-right: 0px !important;
+    }
+
+    .mainNavbar .logo img {
+        width: auto !important;
+        height: 45px !important;
+    }
+
+    .mainNavbar .rightSide {
+        justify-content: start !important;
+        gap: 10px;
+        margin-top: 8px;
+        margin-right: 32px;
+    }
+
+    .mainNavbar .navbar-collapse.show+.rightSide {
+        margin-top: 23px;
+        padding-left: 19px !important;
+    }
+
+    .mainNavbar .rightSide .btnSign {
+        margin-left: 0px !important;
+        background-color: transparent !important;
+        font-size: 23px;
+    }
+
+    .mainNavbar .rightSide a {
+        padding: 0px !important;
+        text-align: center;
+    }
+
+    .mainNavbar .rightSide .btnBuy {
+        padding: 6px !important;
+    }
+
+    .mainNavbar .rightSide .signUp .signInText {
+        display: none !important;
+    }
+
+    .mainNavbar .navbar-collapse {
+        margin-top: 23px;
+        padding-left: 19px;
+    }
+
+    .mainNavbar .navbar-toggler {
+        position: absolute;
+        top: 25px;
+        right: 10px;
+    }
+
+    .mainNavbar .navbar-toggler svg {
+        color: black !important;
+    }
+
+    .mainNavbar .navbar-toggler[aria-expanded="false"] {
+        padding: 0px !important;
+    }
+}

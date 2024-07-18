@@ -1,0 +1,211 @@
+.TeacherDetails {
+    padding: 20px 80px;
+}
+
+.TeacherDetails img {
+    width: 100%;
+    border-radius: 6px !important;
+}
+
+.TeacherDetails iframe {
+    border-radius: 6px !important;
+}
+
+.TeacherDetails .teacher {
+    display: flex;
+    gap: 17px;
+}
+
+.TeacherDetails .teacher .teacherPic {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+}
+
+.TeacherDetails .teacher .nameRating {
+    display: flex;
+    align-items: center;
+    gap: 23px;
+}
+
+.TeacherDetails .teacher .nameRating img {
+    width: 17px;
+}
+
+.TeacherDetails .teacherItems {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    margin-top: 10px;
+}
+
+.TeacherDetails .teacherItems>div {
+    display: flex;
+    gap: 10px;
+}
+
+.TeacherDetails .teacherItems img {
+    width: 17px !important;
+}
+
+.TeacherDetails .aboutSchedule {
+    margin-top: 43px;
+}
+
+.TeacherDetails .scheduleClass>div {
+    display: flex;
+    gap: 17px;
+}
+
+.TeacherDetails .scheduleClass .timingPart {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0px;
+    width: 100%;
+}
+
+.TeacherDetails .scheduleClass .timingPart .inner {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    row-gap: 17px;
+    border-top: 1px solid rgba(5, 5, 5, 0.06);
+    border-left: 1px solid rgba(5, 5, 5, 0.06);
+    border-bottom: 1px solid rgba(5, 5, 5, 0.06);
+    padding: 15px;
+}
+
+.TeacherDetails .scheduleClass .timingPart .inner .lessonPart {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.TeacherDetails .scheduleClass .timingPart .inner .timeBtns {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.TeacherDetails .scheduleClass .timingPart .inner .timeBtns button {
+    border: 1px solid black;
+    border-radius: 40px;
+    padding: 6px 15px;
+}
+
+.TeacherDetails .scheduleClass .timingPart .inner .timeBtns button.selected {
+    background-color: black !important;
+    color: white !important;
+}
+
+.TeacherDetails .scheduleClass .timingPart .ant-divider-horizontal {
+    margin: 10px 0px;
+}
+
+.TeacherDetails .schedulePart .buttons {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.TeacherDetails .schedulePart .buttons button,
+.TeacherDetails .schedulePart .buttons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 0px auto;
+    border: 2px solid rgba(5, 5, 5, 0.06);
+    padding: 10px 23px;
+    color: black;
+    /* background-color: var(--yellow); */
+    width: 100%;
+    font-weight: 600 !important;
+    transition: .2s ease-in-out all;
+}
+
+.TeacherDetails .schedulePart .buttons button:hover,
+.TeacherDetails .schedulePart .buttons a:hover {
+    font-size: 21px !important;
+    font-weight: 700 !important;
+}
+
+.TeacherDetails .schedulePart .buttons a img {
+    width: 23px;
+}
+
+.TeacherDetails .schedulePart {
+    box-shadow: var(--shadow-universal);
+    padding: 10px 23px;
+    border-radius: 6px;
+}
+
+.TeacherDetails .schedulePart iframe {
+    width: 100% !important;
+    height: 240px !important;
+}
+
+.TeacherDetails .schedulePart .buttons button svg {
+    color: black;
+}
+
+.TeacherDetails .schedulePart .buttons button:nth-child(1) {
+    background-color: #f95fb5;
+    border: 2px solid black;
+}
+
+.TeacherDetails .schedulePart .buttons button img {
+    width: 19px;
+}
+
+.TeacherDetails .schedulePart .reviewsLessons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 23px;
+}
+
+.TeacherDetails .schedulePart .reviewsLessons img {
+    width: 17px;
+}
+
+.TeacherDetails .schedulePart .reviewsLessons div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 6px;
+    justify-content: center;
+    text-align: center;
+}
+
+.TeacherDetails .schedulePart .reviewsLessons div b {
+    color: black;
+}
+
+@media (max-width: 767px) {
+    .TeacherDetails {
+        padding: 15px !important;
+    }
+
+    .TeacherDetails .teacher {
+        flex-direction: column !important;
+        row-gap: 15px;
+    }
+
+    .TeacherDetails .ant-card-body {
+        padding: 0px !important;
+    }
+
+    .TeacherDetails .AboutTeacher .about-card {
+        padding: 10px !important;
+    }
+
+    .TeacherDetails .scheduleClass>div {
+        flex-direction: column !important;
+        row-gap: 28px !important;
+    }
+
+    .TeacherDetails .ReviewsAndRatings .ant-card {
+        padding: 10px !important;
+    }
+}

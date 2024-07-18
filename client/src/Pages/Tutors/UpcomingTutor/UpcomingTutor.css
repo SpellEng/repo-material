@@ -1,0 +1,9 @@
+.UpcomingTutor {
+    padding: 45px 80px;
+}
+
+@media (max-width:767px) {
+    .UpcomingTutor {
+        padding: 15px !important;
+    }
+}

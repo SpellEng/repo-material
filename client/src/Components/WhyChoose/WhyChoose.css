@@ -1,0 +1,86 @@
+.WhyChoose {
+  background-color: black;
+  color: white;
+  padding: 73px 80px;
+}
+
+.WhyChoose .imgPart {
+  position: relative;
+}
+
+.WhyChoose .imgPart .spread {
+  position: absolute;
+  top: -40px;
+  left: -32px;
+  width: 100px;
+}
+
+.WhyChoose .imgPart img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.WhyChoose .row {
+  margin: 80px;
+}
+
+.WhyChoose .questionPart {
+  margin-top: 120px;
+}
+
+.WhyChoose .questionPart h2 {
+  font-weight: 700;
+  font-size: 37px;
+  padding-bottom: 30px;
+  color: white;
+}
+
+.collapseWhyChoose {
+  margin-bottom: 23px;
+}
+
+.collapseWhyChoose .anticon {
+  color: white !important;
+  font-size: 17px !important;
+  vertical-align: text-bottom;
+  margin-top: 5px;
+}
+
+.WhyChoose .ant-collapse-header {
+  background-color: #292a2d;
+}
+
+.WhyChoose .ant-collapse-item {
+  margin-bottom: 17px;
+}
+
+.WhyChoose .ant-collapse-item p {
+  color: white;
+  padding-top: 15px;
+  font-size: 16px;
+  color: #c4c5c7;
+}
+
+.WhyChoose .ant-collapse-header-text {
+  color: white;
+  font-size: 18px;
+  text-align: start;
+}
+
+.WhyChoose .questionPart .whyChooseFooter {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding-top: 30px;
+}
+
+.questionPart .whyChooseFooter button {
+  padding: 5px 20px;
+  border-radius: 6px;
+  font-size: 18px;
+}
+
+.questionPart .whyChooseFooter p {
+  font-size: 19px;
+}

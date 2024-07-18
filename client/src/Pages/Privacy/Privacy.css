@@ -1,0 +1,42 @@
+.privacy .inner h1 {
+    text-align: center;
+    padding-bottom: 50px;
+    color: rgb(12, 12, 12);
+    text-transform: capitalize;
+}
+
+.privacy .inner {
+    margin: 45px 80px;
+}
+
+.privacy h3 {
+    text-align: start;
+    padding: 20px 0px !important;
+    text-transform: capitalize;
+}
+
+.privacy .inner h4 {
+    padding-top: 30px;
+    text-transform: capitalize;
+}
+
+.privacy .inner h5 {
+    padding-top: 23px;
+    text-transform: capitalize;
+}
+
+.privacy .inner ul {
+    padding-top: 15px !important;
+}
+
+@media (max-width:767px) {
+    .privacy .inner {
+        margin: 15px !important;
+    }
+
+    .privacy .inner h2 {
+        font-size: 36px !important;
+        padding-bottom: 10px !important;
+        text-align: left !important;
+    }
+}

@@ -1,0 +1,53 @@
+.StudentDashboard {
+    background-color: rgb(251, 255, 42, 0.2);
+    padding: 32px 80px;
+}
+
+.StudentDashboard section {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.StudentDashboard section span {
+    color: red;
+    text-decoration: underline;
+}
+
+.StudentDashboard .firstPart h3 {
+    font-size: 32px;
+    margin: 15px 0px;
+}
+
+.StudentDashboard .firstPart img {
+    width: 43px;
+    height: 43px;
+}
+
+.StudentDashboard .firstPart .stats {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.StudentDashboard .secondSection {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    row-gap: 23px;
+    text-align: center;
+    padding: 32px;
+}
+
+.StudentDashboard .secondSection p {
+    font-size: 19px;
+    max-width: 400px;
+    margin: 0px auto;
+}
+
+.StudentDashboard .howitworks div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}

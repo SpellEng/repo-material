@@ -1,0 +1,58 @@
+/* src/components/UserList.css */
+.user-list {
+    width: 100%;
+    max-width: 300px;
+    border-right: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+.user-list .header {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.user-list h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.user-list .ant-list-item-meta-title {
+    font-size: 0.875rem;
+}
+
+.user-list .ant-list-item-meta-description {
+    color: #888;
+    font-size: 0.75rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-list .ant-list-item {
+    padding: 10px 15px;
+}
+
+.user-list .ant-list-item .ant-avatar {
+    width: 43px !important;
+    height: 43px !important;
+}
+
+.user-list .ant-list-item.active {
+    background-color: var(--btn-color) !important;
+    color: white !important;
+}
+
+.user-list .ant-list-item.active h4,
+.user-list .ant-list-item.active div {
+    color: white !important;
+}
+
+.user-list .ant-list-item:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.user-list .ant-input {
+    padding: 7px !important;
+}

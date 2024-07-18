@@ -1,0 +1,129 @@
+.faqs .upperSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 40px 80px;
+}
+
+.faqs .upperSection h1 {
+  font-size: 3.6rem;
+  font-weight: 700;
+}
+
+.faqs .upperSection svg {
+  width: 100%;
+}
+
+.faqs .fill-primary {
+  fill: #09B850 !important;
+}
+
+.faqs .fill-mode {
+  fill: #202124 !important;
+}
+
+.faqs .opacity-9 {
+  opacity: 0.9 !important;
+}
+
+.faqs .fill-body {
+  fill: #fff !important;
+}
+
+.faqs .faqsPart {
+  margin: 45px 80px;
+}
+
+.faqs .faqsPart .ant-collapse-item {
+  margin-bottom: 10px;
+}
+
+.faqs .faqsPart .ant-collapse {
+  font-size: 16px;
+}
+
+.faqs .faqsPart .ant-collapse-item {
+  margin-bottom: 10px;
+  border-bottom: 0px !important;
+}
+
+.faqs .faqsPart .ant-collapse-content-box {
+  padding-top: 17px !important;
+}
+
+
+.faqs .faqsPart .ant-collapse .ant-collapse-item-active .ant-collapse-header {
+  background-color: black;
+}
+
+.faqs .faqsPart .ant-collapse .ant-collapse-item-active .ant-collapse-header-text {
+  color: white;
+}
+
+.faqs .faqsPart .ant-collapse .ant-collapse-header {
+  background-color: white !important;
+  border-radius: 0.313rem !important;
+  border: 1px solid #dce0e5 !important;
+  padding: 1rem !important;
+}
+
+.faqs .faqsPart .ant-collapse .ant-collapse-item-active .ant-collapse-header {
+  background-color: #202124 !important;
+}
+
+.faqs .ant-collapse p {
+  color: #606261 !important;
+}
+
+.faqs .ant-collapse-item .ant-collapse-expand-icon {
+  color: black !important;
+}
+
+.faqs .ant-collapse-item-active .ant-collapse-expand-icon {
+  color: white !important;
+}
+
+.faqs .stilQuestions {
+  text-align: center;
+  margin: 45px 80px;
+  border-radius: 5px;
+  background-color: #dcf9fd;
+  padding: 2.5rem;
+}
+
+.faqs .stilQuestions h2 {
+  padding: 10px;
+}
+
+.faqs .stilQuestions .faqsbtn button {
+  border: none;
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+@media (max-width:767px) {
+  .faqs {
+    margin: 15px !important;
+  }
+
+  .faqs .faqsPart {
+    margin: 0px !important;
+  }
+
+  .faqs .upperSection {
+    flex-direction: column;
+    row-gap: 23px !important;
+  }
+
+  .faqs .upperSection {
+    margin: 0px !important;
+  }
+
+  .stilQuestions {
+    margin: 0px !important;
+    margin-top: 23px !important;
+  }
+}

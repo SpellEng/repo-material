@@ -30,6 +30,7 @@ require("dotenv").config();
 /******************************************  MiddleWares  ********************************************/
 app.use(express.json({ limit: "5000mb" }));
 app.use(express.urlencoded({ extended: true, limit: "5000mb" }));
+app.use(express.static('client/build'));
 app.use(morgan("tiny"));
 app.use(cors({ origin: ["http://localhost:3000", "http://192.168.243.226:3000", "https://spell-eng-78aa45beff15.herokuapp.com", "http://192.168.1.143:3000"] }));
 app.use('/uploads', express.static(__dirname + '/uploads'));
@@ -48,7 +49,7 @@ mongoose.connect(config.MONGO_URI, {
 // if (process.env.NODE_ENV === 'production') {
 //     app.use(express.static('./client/build'));
 
-app.get('/*', (req, res) => {
+app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
 // }

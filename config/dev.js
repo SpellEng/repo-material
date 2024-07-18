@@ -1,6 +1,6 @@
 module.exports = {
-    // MONGO_URI: 'mongodb://localhost:27017/SpellEng',
-    MONGO_URI: 'mongodb+srv://SpellEng_USPabbi:544396840868PKsk@clusterspelleng.nbsvai6.mongodb.net/SpellEng?retryWrites=true&w=majority&appName=ClusterSpellEng',
+    MONGO_URI: 'mongodb://localhost:27017/SpellEng',
+    // MONGO_URI: 'mongodb+srv://SpellEng_USPabbi:544396840868PKsk@clusterspelleng.nbsvai6.mongodb.net/SpellEng?retryWrites=true&w=majority&appName=ClusterSpellEng',
     JWT_SECRET: 'kdjkasjqr8239r8kfj939kdjkdjfkwt944039043kjgkwjgkwgwlkg404204wegklgkt42-owpglw4-y34pyo3py0239tfkeit049igkjkvjvw049t09tofjkwrjt034tigdfkjgkdfjg0rt9304fsdkfj04t904gigo',
     JWT_EXPIRE: '24h',
     CLOUDINARY_CLOUD_NAME: 'saeedahmed',

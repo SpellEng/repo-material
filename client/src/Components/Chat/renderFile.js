@@ -11,10 +11,7 @@ export const renderFile = (file, noDownload) => {
         return <a href={file?.url} download target="_blank" className="messageFileLink d-flex align-items-center gap-2"><RiFilePdf2Fill /> {file?.name}.pdf</a>;
     }
     else if (
-        file?.format?.toUpperCase() === "PNG" ||
-        file?.format?.toUpperCase() === "JPG" ||
-        file?.format?.toUpperCase() === "JPEG" ||
-        file?.format?.toUpperCase() === "WEBP"
+        file?.type?.startsWith("image")
     ) {
         return <div className="messageFile" >
             <img src={file?.url} alt="Uploaded file" />

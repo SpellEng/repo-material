@@ -1,18 +1,42 @@
-const cloudinary = require('../middlewares/cloudinary');
-const cloudinaryCon = require('../middlewares/cloudinaryConf');
+const config = require('../config/keys');
 const fs = require("fs");
+const AWS = require('aws-sdk');
+
+AWS.config.update({
+    accessKeyId: config.AWS_ACCESS_KEY,
+    secretAccessKey: config.AWS_SECRET_ACCESS_KEY,
+    region: config.AWS_REGION
+});
+
+const s3 = new AWS.S3();
 
 exports.uploadFiles = async (req, res) => {
     try {
         if (req.file) {
-            const uploader = async (path) => await cloudinary.uploads(path, 'SpellEng')
-            const urls = [];
             const { path } = req.file;
-            const newPath = await uploader(path)
-            console.log(newPath);
-            urls.push(newPath);
-            fs.unlinkSync(path);
-            res.status(200).json(urls[0])
+            const fileContent = fs.readFileSync(path);
+            const params = {
+                Bucket: config.AWS_BUCKET_NAME,
+                Key: req.file?.filename, // File name you want to save as in S3
+                Body: fileContent,
+                ACL: 'public-read' // To make the file publicly accessible
+            };
+
+            await s3.upload(params, (err, data) => {
+                if (err) {
+                    throw err;
+                }
+
+                let getData = JSON.parse(JSON.stringify(data));
+                let sanitizedObject = {
+                    url: getData?.Location,
+                    id: getData?.key,
+                    type: req.file?.mimetype,
+                    name: req.file.originalname
+                }
+
+                res.status(200).json(sanitizedObject);
+            });
         } else {
             res.status(400).json({ errorMessage: 'Files could not be uploaded.' });
         }
@@ -40,31 +64,39 @@ exports.uploadMeetingRecordingToCloudinary = async (req, res) => {
         const base64Data = matches[2];
 
         // Upload to Cloudinary
-        const uploadResponse = await cloudinary.uploads(`data:${mimeType};base64,${base64Data}`, {
-            folder: 'SpellEng',
-            resource_type: 'auto'
+        // const uploadResponse = await cloudinary.uploads(`data:${mimeType};base64,${base64Data}`, {
+        //     folder: 'SpellEng',
+        //     resource_type: 'auto'
+        // });
+
+        let buffer = `data:${mimeType};base64,${base64Data}`;
+
+        const params = {
+            Bucket: config.AWS_BUCKET_NAME,
+            Key: "recording.mp4", // File name you want to save as in S3
+            Body: file,
+            ACL: 'public-read' // To make the file publicly accessible
+        };
+
+        await s3.upload(params, (err, data) => {
+            if (err) {
+                throw err;
+            }
+
+            let getData = JSON.parse(JSON.stringify(data));
+            let sanitizedObject = {
+                url: getData?.Location,
+                id: getData?.key
+            }
+            console.log(sanitizedObject);
+            // res.status(200).json(sanitizedObject);
         });
 
-        console.log(uploadResponse);
+        // console.log(uploadResponse);
 
-        res.status(200).json(uploadResponse);
+        // res.status(200).json(uploadResponse);
     } catch (error) {
         console.log(error);
         res.status(400).json({ errorMessage: 'Files could not be uploaded.', error });
     }
 }
-
-exports.deleteFile = async (req, res) => {
-    try {
-        if (req.body.file) {
-            let file = req.body.file;
-            await cloudinaryCon.uploader.destroy(file.id);
-            res.status(200).json({ successMessage: 'File deleted successfully' })
-        } else {
-            res.status(400).json({ errorMessage: 'File could not be deleted.' });
-        }
-    } catch (error) {
-        console.log(error);
-        res.status(400).json({ errorMessage: 'Files could not be uploaded.', error });
-    }
-} 

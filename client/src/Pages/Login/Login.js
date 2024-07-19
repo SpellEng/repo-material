@@ -130,7 +130,7 @@ const Login = () => {
                 <Input.Password
                   onChange={(e) => handleChange('password', e.target.value)}
                   type="password"
-                  placeholder="Enter your email"
+                  placeholder="Enter your password"
                 />
               </div>
               <div>

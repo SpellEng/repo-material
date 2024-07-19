@@ -32,7 +32,7 @@ app.use(express.json({ limit: "5000mb" }));
 app.use(express.urlencoded({ extended: true, limit: "5000mb" }));
 app.use(express.static('client/build'));
 app.use(morgan("tiny"));
-app.use(cors({ origin: ["http://localhost:3000", "http://192.168.243.226:3000", "https://spell-eng-78aa45beff15.herokuapp.com", "http://192.168.1.143:3000"] }));
+app.use(cors({ origin: ["https://www.spelleng.com"] }));
 app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use('/api/files', fileRoutes);
 app.use('/api/subscriptions', subscriptionRoutes);

@@ -45,7 +45,7 @@ const Contact = () => {
         <Row gutter={[40, 40]} justify="center">
           <Col xs={24} md={12} className="contactleft ">
             <h2>
-              Get in Touch with SpellEng for More<span>Information</span>
+              Get in Touch with SpellEng for More Information
             </h2>
             <p className="my-3">
               You can reach us anytime via

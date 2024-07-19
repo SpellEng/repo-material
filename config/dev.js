@@ -11,7 +11,7 @@ module.exports = {
     // PASSWORD: "PHtE6r1fF+2+g2B69xRTs/O9Q8asYYJ4/u5lKwcSt91DD/QDSk1Q/dl4wWe/+Bd7UKJAFvfOyoJosbrKtr/WdmjlY2waXWqyqK3sx/VYSPOZsbq6x00euFQef0TZUIfme9Bj1Sffv9yX",
     EMAIL: 'ali9656623@gmail.com',
     PASSWORD: "dnrdgeoodzullmnp",
-    FRONTEND_URL: "http://localhost:3000",
+    FRONTEND_URL: "https://www.spelleng.com",
     OTP_LESS_BASE_URL: "https://auth.otpless.app/auth/otp/v1",
     OTP_LESS_CLIENT_ID: "SQSB40PCHO7XSIRSHZBVDSFF4LYVSY9I",
     OTP_LESS_CLIENT_SECRET: "y8935rd9lirshfoabpjnvgto3m9ku3vh",

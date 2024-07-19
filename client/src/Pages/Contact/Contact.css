@@ -5,6 +5,7 @@
 .contact .innerContact .contactleft h2 {
   margin-top: 40px;
   font-size: 40px;
+  word-wrap: break-word;
   font-weight: 700;
 }
 

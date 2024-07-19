@@ -82,3 +82,10 @@ h1 {
     font-size: calc(1.485rem + 2.82vw) !important;
   }
 }
+
+@media (min-width: 2000px) {
+  .App {
+    max-width: 2000px;
+    margin: 0px auto;
+  }
+}

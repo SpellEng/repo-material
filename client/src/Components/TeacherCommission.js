@@ -1,3 +1,3 @@
 export const teacherCommission = () => {
-    return 125;
+    return 100;
 };

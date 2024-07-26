@@ -90,20 +90,22 @@ const TeacherReviews = () => {
     return (
         student && student?.email &&
         <div className="TeacherReviews mt-3">
-            <Card className="p-4">
-                <h2 className="mb-4">Leave a Review</h2>
-                <Rate onChange={handleRatingChange} value={currentRating} />
-                <TextArea
-                    rows={4}
-                    value={currentReview}
-                    onChange={handleReviewChange}
-                    placeholder="Write your review here"
-                    className="my-3"
-                />
-                <Button type="primary" onClick={handleSubmit} disabled={!currentReview || !currentRating}>
-                    Submit
-                </Button>
-            </Card>
+            <div className="container">
+                <Card className="p-4">
+                    <h2 className="mb-4">Leave a Review</h2>
+                    <Rate onChange={handleRatingChange} value={currentRating} />
+                    <TextArea
+                        rows={4}
+                        value={currentReview}
+                        onChange={handleReviewChange}
+                        placeholder="Write your review here"
+                        className="my-3"
+                    />
+                    <Button type="primary" onClick={handleSubmit} disabled={!currentReview || !currentRating}>
+                        Submit
+                    </Button>
+                </Card>
+            </div>
         </div>
     );
 };

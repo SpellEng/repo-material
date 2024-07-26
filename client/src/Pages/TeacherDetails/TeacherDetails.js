@@ -1,20 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./TeacherDetails.css";
-import ratingstar from "../../assets/star-fill.svg";
-import graduation from "../../assets/graduation.svg";
-import person from "../../assets/person.svg";
 import quote from "../../assets/quote.svg";
-import calendarpic from "../../assets/calendar.svg";
-import clockpic from "../../assets/clock.svg";
-import graphpic from "../../assets/graph.svg";
-import heartpic from "../../assets/heart.svg";
-import sendpic from "../../assets/send.svg";
-import starpic from "../../assets/star.svg";
-import { Col, Divider, Row, Tabs, Tag } from "antd";
+import { Button, Col, Divider, Row, Tabs, Tag } from "antd";
 import TutorCard from "../../Components/TutorCard/TutorCard";
 import ReviewsAndRatings from "../../Components/TeacherDetails/ReviewsAndRatings/ReviewsAndRatings";
 import AboutTeacher from "../../Components/TeacherDetails/AboutTeacher/AbourTeacher";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ErrorAlert, SuccessAlert } from "../../Components/Messages/messages";
 import axios from "axios";
 import { FaStar } from "react-icons/fa";
@@ -23,9 +14,12 @@ import CalendarComp from "../../Components/CalendarComp/CalendarComp";
 import Loading from "../../Components/Loading/Loading";
 import { isAuthenticated } from "../../Components/Auth/auth";
 import { MdVerified } from "react-icons/md";
+import { Calendar, GraduationCap, Star, User } from "lucide-react";
+import { BsFillSendArrowDownFill } from "react-icons/bs";
 
 const TeacherDetails = () => {
   const location = useLocation();
+  const router = useNavigate();
   const tutorId = location.pathname.split("tutor/")[1];
   const [loading, setLoading] = useState(false);
   const [scheduleLoading, setScheduleLoading] = useState(false);
@@ -43,15 +37,15 @@ const TeacherDetails = () => {
     filterTutorAvailabilites(moment(newDate).format("DD/MM/YYYY"));
   };
 
-  const handleSelectTime = (time) => {
-    setSelectedDateAndTimes({ date, time });
-  };
-
   const filterTutorAvailabilites = async (dt) => {
     setScheduleLoading(true);
     const filteredTutors = await tutorObject?.availability?.filter(av => av?.date === dt);
     setAvailabilitesArray(filteredTutors);
     setScheduleLoading(false);
+  };
+
+  const handleSelectTime = (time) => {
+    setSelectedDateAndTimes({ date, time });
   };
 
 
@@ -133,6 +127,9 @@ const TeacherDetails = () => {
         setLoading(false);
         if (res.status === 200) {
           SuccessAlert(res.data.successMessage);
+          getTutorReservedClasses(date);
+          setSelectedDateAndTimes();
+          router("/student/upcoming-classes");
         } else {
           ErrorAlert(res.data.errorMessage);
         }
@@ -177,7 +174,7 @@ const TeacherDetails = () => {
             <div className="inner">
               <div className="lessonPart">
                 <h3>Lesson</h3>
-                <p>15May,2014 . 1:30PM-3:30PM</p>
+                {/* <p>15May,2014 . 1:30PM-3:30PM</p> */}
                 <Tag style={{ width: "fit-content" }}>Private</Tag>
               </div>
               <Divider />
@@ -201,6 +198,10 @@ const TeacherDetails = () => {
                       })
                     }
                   </div>
+              }
+              {
+                selectedDateAndTimes?.time &&
+                <Button style={{ maxWidth: "200px" }} className="py-4" onClick={handleScheduleClasses}>Confirm Booking</Button>
               }
             </div>
           </div>
@@ -234,116 +235,97 @@ const TeacherDetails = () => {
       <Loading />
       :
       <div className="TeacherDetails">
-        <div className="row">
-          <div className="detailPart col-md-8">
-            <div className="teacher">
-              <div>
-                <img className="teacherPic" src={tutorObject?.picture?.url} alt="" />
-              </div>
-              <div className="teacherInfo">
-                <div className="nameRating">
-                  <div className="name">
-                    <h4>{tutorObject?.fullName}</h4>
-                  </div>
-                  <MdVerified />
-                  <div className="d-flex align-items-center gap-2">
-                    <FaStar /> {averageRating} ({tutorObject?.reviews?.length})
-                  </div>
+        <div className="container">
+          <div className="row">
+            <div className="detailPart col-md-8">
+              <div className="teacher">
+                <div>
+                  <img className="teacherPic" src={tutorObject?.picture?.url} alt="" />
                 </div>
-                <div className="brief">
-                  <p>
-                    {tutorObject?.headline}
-                  </p>
-                </div>
-                <div className="teacherItems">
-                  <div className="lesson">
-                    <img src={graduation} alt="" />
-                    <p>Teaches {tutorObject?.specialities?.map((sp, index) => <span key={index}>{sp}, </span>)}</p>
+                <div className="teacherInfo">
+                  <div className="nameRating">
+                    <div className="name">
+                      <h4>{tutorObject?.fullName}</h4>
+                    </div>
+                    <MdVerified />
+                    <div className="d-flex align-items-center gap-2">
+                      <FaStar /> {averageRating || 0} ({tutorObject?.reviews?.length})
+                    </div>
                   </div>
-                  <div className="native">
-                    <img src={quote} alt="" />
+                  <div className="brief">
                     <p>
-                      Speaks {tutorObject?.languages?.map((lng, index) => <span key={index}>{lng}, </span>)}
+                      {tutorObject?.headline}
                     </p>
                   </div>
-                  <div className="person">
-                    <img src={person} alt="" />
-                    <p>588 lessons taught</p>
+                  <div className="teacherItems">
+                    <div className="lesson">
+                      <GraduationCap />
+                      <p>Teaches {tutorObject?.specialities?.map((sp, index) => <span key={index}>{sp}, </span>)}</p>
+                    </div>
+                    <div className="native">
+                      <img src={quote} alt="" />
+                      <p>
+                        Speaks {tutorObject?.languages?.map((lng, index) => <span key={index}>{lng}, </span>)}
+                      </p>
+                    </div>
+                    <div className="person">
+                      <User />
+                      <p>588 lessons taught</p>
+                    </div>
                   </div>
                 </div>
               </div>
+              <div className="aboutSchedule">
+                <Tabs activeKey={activeTab} items={items} onChange={handleActiveTabChange} />
+              </div>
+              <Divider />
             </div>
-            <div className="aboutSchedule">
-              <Tabs activeKey={activeTab} items={items} onChange={handleActiveTabChange} />
-            </div>
-            <Divider />
-          </div>
-          <div className="col-md-4">
-            <div className="schedulePart py-4">
-              <div className="videoPart">
-                <iframe
-                  width="560"
-                  height="315"
-                  src="https://www.youtube.com/embed/E7wJTI-1dvQ"
-                  title="YouTube video player"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                ></iframe>
-              </div>
-              <div className="reviewsLessons">
-                <div>
-                  <p className="d-flex align-items-center justify-content-center gap-1">
-                    <img src={ratingstar} alt="" /><b>{averageRating}</b>
-                  </p>
-                  <p>{tutorObject?.reviews?.length} reviews</p>
+            <div className="col-md-4">
+              <div className="schedulePart py-4">
+                <div className="videoPart">
+                  <iframe
+                    width="560"
+                    height="315"
+                    src={tutorObject?.videoLink ? tutorObject?.videoLink : "https://www.youtube.com/embed/E7wJTI-1dvQ"}
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
                 </div>
-              </div>
-              <div className="buttons">
-                <button className="btn" onClick={handleScheduleClasses}>
-                  <img src={calendarpic} alt="" />
-                  Schedule a class
-                </button>
-                <Link to={`/chats?receiver=${tutorId}`} className="btn">
-                  <img src={sendpic} alt="" />
-                  Send message
-                </Link>
-                <button className="btn">
-                  <img src={heartpic} alt="" />
-                  Save to my list
-                </button>
-              </div>
-              <div className="teacherItems">
-                <div className="graph">
-                  <img src={graphpic} alt="" />
-                  <p>9 lessons booked in the last 48 hours</p>
+                <div className="reviewsLessons">
+                  <div>
+                    <p className="d-flex align-items-center justify-content-center gap-1">
+                      <Star /><b>{averageRating || 0}</b>
+                    </p>
+                    <b>({tutorObject?.reviews?.length} reviews)</b>
+                  </div>
                 </div>
-                <div className="star">
-                  <img src={starpic} alt="" />
-                  <p>
-                    Super popular: 10 student contacted this tutor in the last 48
-                    hours
-                  </p>
-                </div>
-                <div className="time">
-                  <img src={clockpic} alt="" />
-                  <p>Usually responds in 4 hrs</p>
+                <div className="buttons">
+                  <button className="btn" onClick={handleScheduleClasses}>
+                    <Calendar />
+                    Schedule a class
+                  </button>
+                  <Link to={`/chats?receiver=${tutorId}`} className="btn">
+                    <BsFillSendArrowDownFill />
+                    Send message
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div>
-          <h1 className="my-5">Other Similar Tutors You may Like</h1>
-          <Row gutter={[40, 40]} align="middle">
-            {tutorsArray.map((tutor, index) => {
-              return (
-                <Col key={index} xs={12} md={7} xl={5} xxl={3}>
-                  <TutorCard tutorProps={tutor} />
-                </Col>
-              );
-            })}
-          </Row>
+          <div>
+            <h2 className="my-5">Other Similar Tutors You may Like</h2>
+            <Row gutter={[40, 40]} align="middle">
+              {tutorsArray.map((tutor, index) => {
+                return (
+                  <Col key={index} xs={12} md={7} xl={5} xxl={3}>
+                    <TutorCard tutorProps={tutor} />
+                  </Col>
+                );
+              })}
+            </Row>
+          </div>
         </div>
       </div>
   );

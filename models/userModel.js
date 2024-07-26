@@ -82,6 +82,9 @@ const userSchema = new mongoose.Schema({
     description: {
         type: String,
     },
+    videoLink: {
+        type: String,
+    },
     lastMessage: {
         type: Object
     },
@@ -120,7 +123,13 @@ const userSchema = new mongoose.Schema({
         title: { type: String, required: true },
         amount: { type: Number, required: true },
         date: { type: String, required: true },
-    }]
+    }],
+    subscriptionsHistory: {
+        type: Array
+    },
+    recording: {
+        type: String
+    },
 
 }, { timestamps: true }
 );

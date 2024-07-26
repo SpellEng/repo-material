@@ -413,52 +413,54 @@ const Faqs = () => {
   ];
   return (
     <div className="faqs">
-      <Row className="upperSection">
-        <Col xs={24} md={12}>
-          <h1>Frequently Asked Questions</h1>
-        </Col>
-        <Col xs={24} md={12}>
-          <FaqIcon />
-        </Col>
-      </Row>
-      <div className="faqsPart">
-        <Collapse bordered={false} accordion items={items} />
-      </div>
-      <div className="stilQuestions">
-        <Avatar.Group>
-          <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" />
-          <a href="https://ant.design">
+      <div className="container">
+        <Row className="upperSection">
+          <Col xs={24} md={12}>
+            <h1>Frequently Asked Questions</h1>
+          </Col>
+          <Col xs={24} md={12}>
+            <FaqIcon />
+          </Col>
+        </Row>
+        <div className="faqsPart">
+          <Collapse bordered={false} accordion items={items} />
+        </div>
+        <div className="stilQuestions">
+          <Avatar.Group>
+            <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" />
+            <a href="https://ant.design">
+              <Avatar
+                style={{
+                  backgroundColor: "#f56a00",
+                }}
+              >
+                K
+              </Avatar>
+            </a>
+            <Tooltip title="Ant User" placement="top">
+              <Avatar
+                style={{
+                  backgroundColor: "#87d068",
+                }}
+                icon={<UserOutlined />}
+              />
+            </Tooltip>
             <Avatar
               style={{
-                backgroundColor: "#f56a00",
+                backgroundColor: "#1677ff",
               }}
-            >
-              K
-            </Avatar>
-          </a>
-          <Tooltip title="Ant User" placement="top">
-            <Avatar
-              style={{
-                backgroundColor: "#87d068",
-              }}
-              icon={<UserOutlined />}
+              icon={<AntDesignOutlined />}
             />
-          </Tooltip>
-          <Avatar
-            style={{
-              backgroundColor: "#1677ff",
-            }}
-            icon={<AntDesignOutlined />}
-          />
-        </Avatar.Group>
-        <h2>Still have a question?</h2>
-        <p>
-          We're here to help! Whether it's about our services, scheduling, or
-          anything else, just let us know.
-          <br /> Our team is ready to assist you in any way we can.
-        </p>
-        <div className="faqsbtn mt-4">
-          <button onClick={() => router("/contact-us")}>Contact us</button>
+          </Avatar.Group>
+          <h2>Still have a question?</h2>
+          <p>
+            We're here to help! Whether it's about our services, scheduling, or
+            anything else, just let us know.
+            <br /> Our team is ready to assist you in any way we can.
+          </p>
+          <div className="faqsbtn mt-4">
+            <button onClick={() => router("/contact-us")}>Contact us</button>
+          </div>
         </div>
       </div>
     </div>

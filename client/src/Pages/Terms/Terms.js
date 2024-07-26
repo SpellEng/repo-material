@@ -4,7 +4,7 @@ import "./Terms.css";
 const Terms = () => {
   return (
     <div className="terms">
-      <div className="inner">
+      <div className="inner container">
         <h1>Terms and Conditions</h1>
         <h3>Welcome to SpellEng.com!</h3>
         <p>

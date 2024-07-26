@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import "./Registration.css";
 import { Link, useNavigate } from "react-router-dom";
-import logopic from "../../assets/logo.png";
-import { Alert, Checkbox, Col, Divider, Input, Rate, Row, Select } from "antd";
+import logopic from "../../assets/favicon.ico";
+import { Alert, Checkbox, Col, Divider, Input, Rate, Row } from "antd";
 import OtpInput from "react-otp-input";
-import 'react-phone-number-input/style.css';
-import PhoneInput from 'react-phone-number-input';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
-import loginpic from "../../assets/Login.png";
+import { InputMask } from '@react-input/mask';
+import loginpic from "../../assets/Book A Trial.webp";
 import axios from "axios";
 import { ErrorAlert, SuccessAlert } from "../../Components/Messages/messages";
 import { setAuthentication } from "../../Components/Auth/auth";
@@ -28,7 +25,6 @@ const Registration = () => {
     city: '',
     phoneNumber: '',
     termsAccepted: false,
-    role: "student",
     orderId: ""
   });
 
@@ -53,7 +49,7 @@ const Registration = () => {
           if (res.status === 200) {
             setAuthentication(res.data?.user, res.data?.token);
             SuccessAlert(res.data.successMessage);
-            router("/");
+            router("/student/book-trial");
             setTimeout(() => {
               document.location.reload();
             }, 1000);
@@ -63,7 +59,7 @@ const Registration = () => {
         }).catch(err => {
           setLoading(false);
           console.log(err)
-          ErrorAlert(err?.message);
+          ErrorAlert(err?.response?.data?.errorMessage || err?.message);
         })
       } else {
         ErrorAlert("Please verify your OTP first to continue")
@@ -88,7 +84,7 @@ const Registration = () => {
       }).catch(err => {
         setLoading(false);
         console.log(err)
-        ErrorAlert(err?.message);
+        ErrorAlert(err?.response?.data?.errorMessage || err?.message);
       })
     } else {
       setValidationError("Please enter your phone number.");
@@ -99,61 +95,34 @@ const Registration = () => {
     <div className="registration">
       <Row gutter={[19, 19]}>
         <Col xs={24} md={13} className="leftRegistration">
-          <Swiper
-            className="swiper"
-            spaceBetween={50}
-            slidesPerView={1}
-            // autoplay={{
-            //   delay: 2000,
-            //   disableOnInteraction: true,
-            // }}
-            loop={true}
-            modules={[Autoplay]}
-          >
-            <SwiperSlide className="swiperSlide">
-              <div>
-                <img src={loginpic} alt="" />
-                <div className="bgOpacity" />
-                <div className="caption">
-                  <h3>
-                    "An exceptional agency CEO is a visionary, constantly pushing the boundaries of creativity and pushing their team to new heights. They inspire with their passion and cultivate a culture of trust and respect."
-                  </h3>
-                  <div className="nameAndReviews">
-                    <div>
-                      <h2>Parvej Khan</h2>
-                      <span>Founder, SpellEng</span>
-                    </div>
-                    <Rate value={4.5} allowHalf disabled />
-                  </div>
+          <div>
+            <img src={loginpic} alt="" />
+            <div className="bgOpacity" />
+            <div className="caption">
+              <h3>
+                "Learning English is crucial for career
+                advancement and higher income potential. It opens global job
+                opportunities, improves communication skills, and increases access
+                to valuable educational resources."
+              </h3>
+              <div className="nameAndReviews">
+                <div>
+                  <h2>Parvej Khan</h2>
+                  <span>Founder, SpellEng</span>
                 </div>
+                <Rate value={4.5} allowHalf disabled />
               </div>
-            </SwiperSlide>
-            <SwiperSlide className="swiperSlide">
-              <div>
-                <img src={loginpic} alt="" />
-                <div className="bgOpacity" />
-                <div className="caption">
-                  <h3>
-                    "An exceptional agency CEO is a visionary, constantly pushing the boundaries of creativity and pushing their team to new heights. They inspire with their passion and cultivate a culture of trust and respect."
-                  </h3>
-                  <div className="nameAndReviews">
-                    <div>
-                      <h2>Parvej Khan</h2>
-                      <span>Founder, SpellEng</span>
-                    </div>
-                    <Rate value={4.5} allowHalf disabled />
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
-          </Swiper>
+            </div>
+          </div>
         </Col>
         <Col xs={24} md={11} className="rightRegistration">
-          <Link to="/">
-            <img className="logo" src={logopic} alt="" />
-          </Link>
-          <div className="text-center">
+          <div className="d-flex align-items-center justify-content-center gap-3 mb-2">
+            <Link to="/">
+              <img className="logo" src={logopic} alt="" />
+            </Link>
             <h2>Let's Go: Book a Trial!</h2>
+          </div>
+          <div className="text-center">
             <p>
               Take the first step with an affordable trial session for just @99
             </p>
@@ -177,6 +146,8 @@ const Registration = () => {
                     onChange={(e) => handleChange('fullName', e.target.value)}
                   />
                 </div>
+              </Col>
+              <Col xs={24} md={12}>
                 <div className="item">
                   <label htmlFor="inputEmail" className="form-label">
                     Email
@@ -189,6 +160,8 @@ const Registration = () => {
                     onChange={(e) => handleChange('email', e.target.value)}
                   />
                 </div>
+              </Col>
+              <Col xs={24} md={12}>
                 <div className="item">
                   <label htmlFor="inputPassword" className="form-label">
                     Password
@@ -202,28 +175,17 @@ const Registration = () => {
                   />
                 </div>
               </Col>
-              <Col xs={24} md={24} lg={12} className="rightinput">
-                <div className="item">
-                  <label htmlFor="city" className="form-label">
-                    City
-                  </label>
-                  <Input
-                    required
-                    type="text"
-                    placeholder="Enter your city name"
-                    value={formData.city}
-                    onChange={(e) => handleChange('city', e.target.value)}
-                  />
-                </div>
+              <Col xs={24} md={12} className="rightinput">
                 <div className="item">
                   <label htmlFor="phoneNumber" className="form-label">
                     Phone number
                   </label>
                   <div className="PhoneBtnContainer">
-                    <PhoneInput
+                    <InputMask
                       placeholder="Enter phone number"
-                      value={formData.phoneNumber}
-                      onChange={(phoneNumber) => handleChange('phoneNumber', phoneNumber)}
+                      mask="+91__________"
+                      replacement={{ _: /\d/ }}
+                      onChange={(e) => handleChange('phoneNumber', e.target.value)}
                     />
                     <button onClick={sendOtp} type="button" className="codebtn btn">Send code</button>
                   </div>
@@ -247,30 +209,6 @@ const Registration = () => {
                   <CountdownTimer sendOtp={sendOtp} />
                 </Col>
               }
-              <Col xs={24} className="item">
-                <label htmlFor="name" className="form-label">
-                  You are
-                </label>
-                <Select
-                  placeholder="Tutor"
-                  allowClear
-                  value={formData?.role}
-                  style={{
-                    width: "100%",
-                  }}
-                  onChange={(val) => handleChange('role', val)}
-                  options={[
-                    {
-                      value: "tutor",
-                      label: "Tutor",
-                    },
-                    {
-                      value: "student",
-                      label: "Student",
-                    }
-                  ]}
-                />
-              </Col>
               <Col xs={24}>
                 <Checkbox
                   required

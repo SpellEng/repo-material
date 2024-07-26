@@ -3,6 +3,8 @@ const config = require('./config/keys');
 const userRoutes = require('./routes/userRoutes');
 const fileRoutes = require('./routes/fileRoutes');
 const subscriptionRoutes = require('./routes/subscriptionRoutes');
+const couponRoutes = require('./routes/couponRoutes');
+const authRoutes = require('./routes/authRoutes');
 const scheduledClassesRoutes = require('./routes/schduledClassesRoutes');
 const ScheduledClass = require('./models/scheduledClassesModel');
 const Chat = require('./models/chatModel');
@@ -17,7 +19,8 @@ const nodeCron = require('node-cron');
 const server = require('http').createServer(app);
 const { v4: uuidV4 } = require('uuid');
 const sendEmail = require('./nodemailer');
-const ClassReminderTemplate = require('./templates/class-reminder-template');
+const TutorClassReminderTemplate = require('./templates/tutor-class-reminder-template');
+const StudentClassReminderTemplate = require('./templates/student-class-reminder-template');
 const io = require('socket.io')(server, {
     cors: {
         origin: "*"
@@ -32,12 +35,14 @@ app.use(express.json({ limit: "5000mb" }));
 app.use(express.urlencoded({ extended: true, limit: "5000mb" }));
 app.use(express.static('client/build'));
 app.use(morgan("tiny"));
-app.use(cors({ origin: ["https://www.spelleng.com"] }));
+app.use(cors({ origin: ["https://www.spelleng.com", "http://localhost:3000"] }));
 app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use('/api/files', fileRoutes);
 app.use('/api/subscriptions', subscriptionRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes);
 app.use('/api/scheduled-classes', scheduledClassesRoutes);
+app.use('/api/coupons', couponRoutes);
 
 /******************************************  MongoDb Connection  ********************************************/
 
@@ -49,13 +54,10 @@ mongoose.connect(config.MONGO_URI, {
 // if (process.env.NODE_ENV === 'production') {
 //     app.use(express.static('./client/build'));
 
-app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-});
 // }
 
-// Function to parse date and time in Pakistan time zone
-const parseDateTimePakistan = (date, time, timezone) => {
+// Function to parse date and time in time zone
+const parseDateTime = (date, time, timezone) => {
     const [startTime] = time.split(' - ');
     const startDateTimeString = `${date} ${startTime}`;
     return moment.tz(startDateTimeString, 'DD/MM/YYYY h:mma', timezone);
@@ -66,32 +68,32 @@ const convertToUTC = (localDateTime) => {
     return localDateTime.clone().utc();
 };
 
-// Function to convert Pakistan time to user's local time
-const convertToUserLocalTime = (pakistanTime, userTimeZone) => {
-    return pakistanTime.clone().tz(userTimeZone);
+// Function to convert time to user's local time
+const convertToUserLocalTime = (time, userTimeZone) => {
+    return time.clone().tz(userTimeZone);
 };
 
-nodeCron.schedule('*/1 * * * *', async () => {
+nodeCron.schedule('*/3 * * * *', async () => {
     const nowUTC = moment.utc();
     const fiveMinutesLaterUTC = moment.utc().add(5, 'minutes');
     console.log("Cron job called at UTC time: ", nowUTC.format());
 
     const upcomingClasses = await ScheduledClass.find({ date: { $gte: moment().format("DD/MM/YYYY") } }).populate("students tutor");
     upcomingClasses.forEach(async (upcomingClass) => {
-        // Parse the class date-time in Pakistan time
-        const classDateTimePakistan = parseDateTimePakistan(upcomingClass.date, upcomingClass.time, upcomingClass?.tutor?.timezone);
+        // Parse the class date-time
+        const classDateTime = parseDateTime(upcomingClass.date, upcomingClass.time, upcomingClass?.tutor?.timezone);
 
-        // Convert Pakistan time to student's local time and then to UTC
+        // Convert class time to student's local time and then to UTC
         if (upcomingClass?.students?.length > 0) {
             const studentTimeZone = upcomingClass?.students[0]?.timezone; // Assuming you store the student's time zone
-            const studentLocalDateTime = convertToUserLocalTime(classDateTimePakistan, studentTimeZone);
+            const studentLocalDateTime = convertToUserLocalTime(classDateTime, studentTimeZone);
             const studentNotificationTimeUTC = convertToUTC(studentLocalDateTime?.clone()?.subtract(5, 'minutes'));
 
             if (nowUTC.isSameOrAfter(studentNotificationTimeUTC) && nowUTC.isBefore(studentNotificationTimeUTC.clone().add(5, 'minutes'))) {
                 await sendEmail(
                     upcomingClass?.students[0]?.email,
-                    'Class Reminder From SpellENg',
-                    ClassReminderTemplate(
+                    'Upcoming Class Reminder',
+                    StudentClassReminderTemplate(
                         config.FRONTEND_URL + "/student/upcoming-classes",
                         upcomingClass?.students[0]?.fullName,
                         upcomingClass?.tutor?.fullName,
@@ -102,16 +104,16 @@ nodeCron.schedule('*/1 * * * *', async () => {
             }
         }
 
-        // Convert Pakistan time to tutor's local time and then to UTC
+        // Convert class time to tutor's local time and then to UTC
         const tutorTimeZone = upcomingClass?.tutor?.timezone; // Assuming you store the tutor's time zone
-        const tutorLocalDateTime = convertToUserLocalTime(classDateTimePakistan, tutorTimeZone);
+        const tutorLocalDateTime = convertToUserLocalTime(classDateTime, tutorTimeZone);
         const tutorNotificationTimeUTC = convertToUTC(tutorLocalDateTime.clone().subtract(5, 'minutes'));
 
         if (nowUTC.isSameOrAfter(tutorNotificationTimeUTC) && nowUTC.isBefore(tutorNotificationTimeUTC.clone().add(5, 'minutes'))) {
             await sendEmail(
                 upcomingClass?.tutor?.email,
                 'Class Reminder From SpellENg',
-                ClassReminderTemplate(
+                TutorClassReminderTemplate(
                     config.FRONTEND_URL + "/tutor/upcoming-classes",
                     upcomingClass?.tutor?.fullName,
                     upcomingClass?.students[0]?.fullName,
@@ -281,6 +283,10 @@ io.on('connection', socket => {
             }
         }
     });
+});
+
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
 
 server.listen(process.env.PORT || 8000, () => console.log('Listening to port 8000'));

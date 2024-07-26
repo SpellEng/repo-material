@@ -2,29 +2,33 @@ const nodemailer = require('nodemailer');
 const config = require('./config/keys');
 
 let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    secure: false,
+    host: "smtp.zeptomail.in",
     port: 587,
     auth: {
         user: config.EMAIL,
         pass: config.PASSWORD
-    },
-    tls: {
-        rejectUnauthorized: false
     }
 });
 
 const sendEmail = (email, subject, html) => {
     try {
-        transporter.sendMail({
-            from: config.EMAIL, //put your gmail account here!!!
+        var mailOptions = {
+            from: '"SpellEng Team" <team@spelleng.com>',
             to: email,
-            subject: subject,
-            html: html,
-        })
+            subject,
+            html,
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return console.log(error);
+            }
+            console.log('Successfully sent');
+        });
+
     } catch (error) {
         console.log(error);
-    } 
+    }
 }
 
 module.exports = sendEmail;

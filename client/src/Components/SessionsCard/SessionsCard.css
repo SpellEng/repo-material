@@ -1,7 +1,7 @@
 .SessionCard {
     width: 100%;
     max-width: 510px;
-    background-color: #edf3fb;
+    background-color: var(--secondary-color);
     padding: 0px;
 }
 
@@ -24,8 +24,14 @@
     width: 180px;
 }
 
+.SessionCard .sessionActions button.ant-btn-primary:nth-child(1) {
+    background-color: red !important;
+    width: 100%;
+}
+
 .SessionCard .sessionActions button.ant-btn-primary:last-of-type {
-    background-color: #1677ff !important;
+    background-color: var(--primary-color) !important;
+    width: 100%;
 }
 
 .SessionCard .sessionActions .downloadBtn {

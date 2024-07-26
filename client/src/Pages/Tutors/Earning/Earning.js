@@ -116,77 +116,79 @@ const TutorEarnings = () => {
 
   return (
     <div className="TutorEarnings">
-      <h4>Revenue Earned</h4>
-      <header>
-        <FaInfoCircle />
-        You can get your available revenue Every Week in your
-        preferred payment method.
-      </header>
-      <div className="amountContainer">
-        <div>
-          <p>Withdrawals</p>
-          <h4><CurrencySign />{user?.withdrawals?.reduce((a, b) => a + b?.amount, 0)}</h4>
+      <div className="container">
+        <h4>Revenue Earned</h4>
+        <header>
+          <FaInfoCircle />
+          You can get your available revenue Every Week in your
+          preferred payment method.
+        </header>
+        <div className="amountContainer">
+          <div>
+            <p>Withdrawals</p>
+            <h4><CurrencySign />{user?.withdrawals?.reduce((a, b) => a + b?.amount, 0)}</h4>
+          </div>
+          <div>
+            <p>Available Income</p>
+            <h4><CurrencySign />{classes?.length * teacherCommission()}</h4>
+          </div>
         </div>
-        <div>
-          <p>Available Income</p>
-          <h4><CurrencySign />{classes?.length * 125}</h4>
+        <div className="withdrawBtns">
+          <p>Withdraw To:</p>
+          <Button onClick={() => showModal('bank')} className="btn h-auto">Bank</Button>
+          <Button onClick={() => showModal('upi')} className="btn h-auto">UPI</Button>
         </div>
-      </div>
-      <div className="withdrawBtns">
-        <p>Withdraw To:</p>
-        <Button onClick={() => showModal('bank')} className="btn h-auto">Bank</Button>
-        <Button onClick={() => showModal('upi')} className="btn h-auto">UPI</Button>
-      </div>
-      {
-        user?.paymentDetails?.map((detail, index) => {
-          return (
-            <Card key={index} title={`${detail?.type?.toUpperCase()} Payment Details`} className="paymentDetailsCard mb-3">
-              {
-                detail?.type === "bank" ?
-                  <div key={index}>
-                    <p><strong>Account Holder Name:</strong> {detail?.accountHolderName}</p>
-                    <p><strong>Account Number:</strong> {detail?.accountNumber}</p>
-                    <p><strong>IFSC Code:</strong> {detail?.ifscCode}</p>
-                    <p><strong>Preferred:</strong> {detail?.isPreferred ? 'Yes' : 'No'}</p>
-                  </div>
-                  :
-                  <div>
-                    <p><strong>UPI ID:</strong> {detail?.upiId}</p>
-                    <p><strong>Preferred:</strong> {detail?.isPreferred ? 'Yes' : 'No'}</p>
-                  </div>
-              }
-            </Card>
-          )
-        })
-      }
-      <div className="fullDetail mt-4">
-        <h1>Payment history:</h1>
-        <Table pagination={false} dataSource={classes} columns={columns} />
-      </div>
-      <Modal title="Enter Payment Details" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <Form form={form} layout="vertical">
-          {formType === 'bank' ? (
-            <>
-              <Form.Item name="accountHolderName" label="Account Holder Name" rules={[{ required: true, message: 'Please enter account holder name' }]}>
+        {
+          user?.paymentDetails?.map((detail, index) => {
+            return (
+              <Card key={index} title={`${detail?.type?.toUpperCase()} Payment Details`} className="paymentDetailsCard mb-3">
+                {
+                  detail?.type === "bank" ?
+                    <div key={index}>
+                      <p><strong>Account Holder Name:</strong> {detail?.accountHolderName}</p>
+                      <p><strong>Account Number:</strong> {detail?.accountNumber}</p>
+                      <p><strong>IFSC Code:</strong> {detail?.ifscCode}</p>
+                      <p><strong>Preferred:</strong> {detail?.isPreferred ? 'Yes' : 'No'}</p>
+                    </div>
+                    :
+                    <div>
+                      <p><strong>UPI ID:</strong> {detail?.upiId}</p>
+                      <p><strong>Preferred:</strong> {detail?.isPreferred ? 'Yes' : 'No'}</p>
+                    </div>
+                }
+              </Card>
+            )
+          })
+        }
+        <div className="fullDetail mt-4">
+          <h1>Payment history:</h1>
+          <Table pagination={false} dataSource={classes} columns={columns} />
+        </div>
+        <Modal title="Enter Payment Details" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+          <Form form={form} layout="vertical">
+            {formType === 'bank' ? (
+              <>
+                <Form.Item name="accountHolderName" label="Account Holder Name" rules={[{ required: true, message: 'Please enter account holder name' }]}>
+                  <Input />
+                </Form.Item>
+                <Form.Item name="accountNumber" label="Account Number" rules={[{ required: true, message: 'Please enter account number' }]}>
+                  <Input />
+                </Form.Item>
+                <Form.Item name="ifscCode" label="IFSC Code" rules={[{ required: true, message: 'Please enter IFSC code' }]}>
+                  <Input />
+                </Form.Item>
+              </>
+            ) : (
+              <Form.Item name="upiId" label="UPI ID" rules={[{ required: true, message: 'Please enter UPI ID' }]}>
                 <Input />
               </Form.Item>
-              <Form.Item name="accountNumber" label="Account Number" rules={[{ required: true, message: 'Please enter account number' }]}>
-                <Input />
-              </Form.Item>
-              <Form.Item name="ifscCode" label="IFSC Code" rules={[{ required: true, message: 'Please enter IFSC code' }]}>
-                <Input />
-              </Form.Item>
-            </>
-          ) : (
-            <Form.Item name="upiId" label="UPI ID" rules={[{ required: true, message: 'Please enter UPI ID' }]}>
-              <Input />
+            )}
+            <Form.Item name="isPreferred" valuePropName="checked">
+              <Checkbox>Preferred Payment Method</Checkbox>
             </Form.Item>
-          )}
-          <Form.Item name="isPreferred" valuePropName="checked">
-            <Checkbox>Preferred Payment Method</Checkbox>
-          </Form.Item>
-        </Form>
-      </Modal>
+          </Form>
+        </Modal>
+      </div>
     </div>
   );
 };

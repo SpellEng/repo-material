@@ -15,6 +15,8 @@ import { CallTimer } from "../../Components/VideoCall/CallTimer/CallTimer";
 import ScreenRecording from "../../Components/VideoCall/ScreenRecorder/ScreenRecorder";
 import { isAuthenticated } from "../../Components/Auth/auth";
 import ChatBox from "./ChatBox/ChatBox";
+import { ErrorAlert, SuccessAlert } from "../../Components/Messages/messages";
+import axios from "axios";
 
 const VideoCallComp = ({ classObject }) => {
     const router = useNavigate();
@@ -218,12 +220,36 @@ const VideoCallComp = ({ classObject }) => {
         };
     }, [socket, roomId, myId, players]);
 
+    const endClass = async () => {
+        await axios.put(`${process.env.REACT_APP_BACKEND_URL}/scheduled-classes/end-class/${roomId}`, { ss: "" }, {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token")
+            }
+        }).then(res => {
+            if (res.status === 200) {
+                SuccessAlert(res.data.successMessage);
+            } else {
+                ErrorAlert(res.data.errorMessage);
+            }
+        }).catch(err => {
+            ErrorAlert(err?.message);
+        })
+    };
+
     const handleLeaveRoom = () => {
-        leaveRoom();
-        router("/class/leave-a-review", { state: { roomId } });
-        setTimeout(() => {
-            document.location.reload();
-        }, 1200);
+        if (isAuthenticated()?.role === 1) {
+            leaveRoom();
+            endClass();
+            setTimeout(() => {
+                document.location.reload();
+            }, 1200);
+        } else {
+            leaveRoom();
+            router("/class/leave-a-review", { state: { roomId } });
+            setTimeout(() => {
+                document.location.reload();
+            }, 1200);
+        }
     }
 
     const handleToggleVideOnScreenShare = (val) => {

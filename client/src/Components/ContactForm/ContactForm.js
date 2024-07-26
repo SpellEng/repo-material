@@ -36,6 +36,13 @@ const ContactForm = () => {
       setLoading(false);
       if (res.status === 200) {
         SuccessAlert(res.data.successMessage);
+        setFormData({
+          fullName: '',
+          email: '',
+          phoneNumber: '',
+          type: '',
+          message: ''
+        })
       }
       else {
         ErrorAlert(res.data.errorMessage);
@@ -56,6 +63,7 @@ const ContactForm = () => {
           </label>
           <Input
             type="text"
+            value={formData?.fullName}
             required
             id="textl4"
             placeholder="Full name"
@@ -65,6 +73,7 @@ const ContactForm = () => {
             Phone Number *
           </label>
           <Input
+            value={formData?.phoneNumber}
             required
             type="text"
             id="textl4"
@@ -78,6 +87,7 @@ const ContactForm = () => {
               Email address *
             </label>
             <Input
+              value={formData?.email}
               required
               type="email"
               id="inputPassword4"
@@ -88,6 +98,7 @@ const ContactForm = () => {
           <div className="mt-4">
             <label>Are You? *</label>
             <Select
+              value={formData?.type}
               required
               className="w-100"
               defaultValue="student"
@@ -111,6 +122,7 @@ const ContactForm = () => {
           </label>
           <div>
             <TextArea
+              value={formData?.message}
               required
               rows={5}
               placeholder="Write your message here..."

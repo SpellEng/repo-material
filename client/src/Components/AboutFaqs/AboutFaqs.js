@@ -91,7 +91,7 @@ const AboutFaqs = () => {
       <div className="mainFaqs">
         <Row gutter={{ xs: 40, md: 80 }}>
           <Col xs={24} md={12} className="headingFAqs">
-            <h1>
+            <h1 className="mb-4">
               You have questions we have answers
             </h1>
           </Col>

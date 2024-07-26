@@ -2,12 +2,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 30px 75px;
-    margin-top: 10px;
+    padding-top: 30px;
+    /* padding: 30px 0px; */
 }
 
 .mainNavbar .logo img {
-    width: 200px;
+    width: 175px;
 }
 
 .mainNavbar .navLinks a {
@@ -67,6 +67,16 @@
     color: black;
 }
 
+.mainNavbar .mobileRightNav {
+    display: none;
+}
+
+.mainNavbar .desktopRightNav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
 @media (min-width: 992px) {
     .navbar-expand-lg .navbar-collapse {
         display: flex !important;
@@ -83,6 +93,25 @@
 @media (max-width: 992px) {
     .mainNavbar {
         margin: 6px 0px !important;
+        padding-top: 12px;
+    }
+
+    .mainNavbar .desktopRightNav {
+        display: none !important;
+    }
+
+    .mainNavbar .mobileRightNav {
+        display: block !important;
+    }
+
+    .mainNavbar .mobileRightNav .nav-item {
+        background-color: rgb(213, 246, 213);
+        padding: 6px 10px;
+        border-radius: 4px;
+    }
+
+    .mainNavbar .mobileRightNav .nav-item a {
+        color: rgb(64, 172, 64) !important;
     }
 
     .mainNavbar .container-fluid {
@@ -96,7 +125,7 @@
 
     .mainNavbar .logo img {
         width: auto !important;
-        height: 45px !important;
+        height: 35px !important;
     }
 
     .mainNavbar .rightSide {
@@ -139,10 +168,6 @@
         position: absolute;
         top: 25px;
         right: 10px;
-    }
-
-    .mainNavbar .navbar-toggler svg {
-        color: black !important;
     }
 
     .mainNavbar .navbar-toggler[aria-expanded="false"] {

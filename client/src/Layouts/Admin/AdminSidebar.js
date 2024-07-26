@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, useLocation } from "react-router-dom";
 import { logout } from '../../Components/Auth/auth';
 import { HomeIcon, LogOutIcon, SchoolIcon, UserCogIcon, UserPenIcon } from 'lucide-react';
+import { MdDiscount } from 'react-icons/md';
 
 const AdminSidebar = () => {
     const location = useLocation();
@@ -39,6 +40,14 @@ const AdminSidebar = () => {
                             <button className={`btn ${location.pathname === "/admin/classes" ? "activeLink" : ""}`}>
                                 <SchoolIcon />
                                 <span>Classes</span>
+                            </button>
+                        </Link>
+                    </div>
+                    <div>
+                        <Link to="/admin/coupons">
+                            <button className={`btn ${location.pathname === "/admin/coupons" ? "activeLink" : ""}`}>
+                                <MdDiscount />
+                                <span>Coupons</span>
                             </button>
                         </Link>
                     </div>

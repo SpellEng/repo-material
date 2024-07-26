@@ -1,0 +1,13 @@
+.ShippingPolicy {
+    margin-top: 32px;
+    min-height: 73vh;
+}
+
+.ShippingPolicy h1 {
+    font-size: 3rem !important;
+    margin-bottom: 23px;
+}
+
+.ShippingPolicy p {
+    margin-bottom: 15px !important;
+}

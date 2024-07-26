@@ -19,7 +19,7 @@ AuthenticatorJWT = (req, res, next) => {
 }
 
 isStudent = (req, res, next) => {
-    if (req.user && req.user.role === 0) {
+    if (req.user && (req.user.role === 0 || req.user.role === 2)) {
         return next();
     } else {
         return res.status(401).send({ errorMessage: 'This route is protected for students!.' });

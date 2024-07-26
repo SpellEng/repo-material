@@ -33,6 +33,13 @@ import AdminStudentsList from "./Pages/Admin/Students/Students";
 import AdminClassesList from "./Pages/Admin/Classes/Classes";
 import AdminDashboard from "./Pages/Admin/Dashboard/Dashboard";
 import TeacherReviews from "./Pages/TeacherReviews/TeacherReviews";
+import TutorRegistration from "./Pages/TutorRegistration/TutorRegistration";
+import CancellationAndRefund from "./Pages/CancellationAndRefund/CancellationAndRefund";
+import ShippingPolicy from "./Pages/ShippingPolicy/ShippingPolicy";
+import AdminCoupons from "./Pages/Admin/Coupons/Coupons";
+import BookTrial from "./Pages/BookTrial/BookTrial";
+import ForgotPassword from "./Pages/ResetPassword/ForgotPassword";
+import ResetPassword from "./Pages/ResetPassword/ResetPassword";
 
 function App() {
   const location = useLocation();
@@ -105,13 +112,17 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Registration />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/all-tutors" element={<Tutors />} />
           <Route path="/student/profile" element={<ProtectedRoutes><StudentProfile /></ProtectedRoutes>} />
           <Route path="/student/upcoming-classes" element={<ProtectedRoutes><UpcomingStudent /></ProtectedRoutes>} />
           <Route path="/student/subscriptions" element={<ProtectedRoutes><MySubscriptions /></ProtectedRoutes>} />
+          <Route path="/student/book-trial" element={<ProtectedRoutes><BookTrial /></ProtectedRoutes>} />
           <Route path="/subscription" element={<Subscription />} />
           <Route path="/tutor/:id" element={<TeacherDetails />} />
-          <Route path="/students/dashboard" element={<ProtectedRoutes><StudentDashboard /></ProtectedRoutes>} />
+          <Route path="/student/dashboard" element={<ProtectedRoutes><StudentDashboard /></ProtectedRoutes>} />
+          <Route path="/tutor/registration" element={<TutorRegistration />} />
           <Route path="/tutor/profile" element={<ProtectedRoutes><TutorProfile /></ProtectedRoutes>} />
           <Route path="/tutor/availability" element={<ProtectedRoutes><Availability /></ProtectedRoutes>} />
           <Route path="/tutor/earnings" element={<ProtectedRoutes><TutorEarnings /></ProtectedRoutes>} />
@@ -124,12 +135,15 @@ function App() {
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/about-us" element={<About />} />
           <Route path="/faqs" element={<Faqs />} />
+          <Route path="/cancellation-and-refund-policy" element={<CancellationAndRefund />} />
+          <Route path="/shipping-policy" element={<ShippingPolicy />} />
 
           {/* Admin Routes */}
           <Route path="/admin/dashboard" element={<AdminRoutes><AdminDashboard /></AdminRoutes>} />
           <Route path="/admin/tutors" element={<AdminRoutes><AdminTutorsList /></AdminRoutes>} />
           <Route path="/admin/students" element={<AdminRoutes><AdminStudentsList /></AdminRoutes>} />
           <Route path="/admin/classes" element={<AdminRoutes><AdminClassesList /></AdminRoutes>} />
+          <Route path="/admin/coupons" element={<AdminRoutes><AdminCoupons /></AdminRoutes>} />
 
         </Routes>
         {

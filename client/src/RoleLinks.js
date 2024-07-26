@@ -19,6 +19,10 @@ export const normalLinksArray = [
 
 export const studentLinksArray = [
     {
+        title: "Dashboard",
+        link: "/student/dashboard"
+    },
+    {
         title: "All Tutors",
         link: "/all-tutors"
     },
@@ -33,6 +37,10 @@ export const studentLinksArray = [
     {
         title: "My Subscriptions",
         link: "/student/subscriptions"
+    },
+    {
+        title: "Student Guide",
+        link: "https://www.youtube.com/playlist?list=PLQ4NYHgfNztHgYCSyimk4PmwaBhXIQzDu"
     },
 ];
 
@@ -52,5 +60,9 @@ export const tutorLinksArray = [
     {
         title: "Profile Setting",
         link: "/tutor/profile"
-    }
+    },
+    {
+        title: "Tutor Guide",
+        link: "https://www.youtube.com/playlist?list=PLQ4NYHgfNztF61zsk3Pwy2VqY_SfoxsWp"
+    },
 ];

@@ -1,7 +1,8 @@
 :root {
   --bg-color: #ffffff;
   --bg-dark-color: #041b29;
-  --link-color: #09B850;
+  --primary-color: #09B850;
+  --secondary-color: #d5f6d5;
   --btn-color: #22a791;
   --text-color: #606261;
   --text-secondary-color: #7c7d7c;
@@ -19,6 +20,7 @@ html {
   margin: 0px !important;
   overflow-x: hidden !important;
   color: var(--text-color);
+  font-family: "Inter", sans-serif !important;
 }
 
 
@@ -30,19 +32,26 @@ h5,
 h6 {
   color: #000;
   margin-bottom: 0px;
+  text-transform: capitalize;
 }
 
 h1 span {
-  color: var(--link-color);
+  color: var(--primary-color);
 }
 
 p {
   margin-bottom: 0px;
+  font-size: 17px !important;
 }
 
 a {
-  color: var(--link-color);
+  color: var(--primary-color);
   text-decoration: none;
+  font-size: 17px !important;
+}
+
+button {
+  font-size: 17px !important;
 }
 
 img {
@@ -54,8 +63,22 @@ img {
   padding: 10px;
 }
 
-.ant-btn-primary {
-  background-color: var(--btn-color);
+.ant-btn-primary,
+.ant-btn,
+.ant-btn-primary:hover,
+.ant-btn:hover {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.ant-btn svg,
+.ant-btn span {
+  color: white !important;
+}
+
+.ant-btn-danger,
+.ant-btn-danger:hover {
+  background-color: #dc3545 !important;
 }
 
 .ant-select,
@@ -68,8 +91,16 @@ img {
   overflow-x: auto !important;
 }
 
-.anticon {
+.App .anticon,
+.App svg {
+  cursor: pointer;
+  color: #09b850;
+}
+
+.anticon-star,
+.anticon-star svg {
   cursor: pointer !important;
+  color: #fadb14 !important;
 }
 
 h1 {

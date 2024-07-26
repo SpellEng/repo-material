@@ -1,6 +1,6 @@
 import React from "react";
 import "./WhyChoose.css";
-import choosepic from "../../assets/Choose.png";
+import choosepic from "../../assets/Choose.webp";
 import spread from "../../assets/spread.svg";
 import { Button, Col, Collapse, Row } from "antd";
 import { FaPlus } from "react-icons/fa";
@@ -42,7 +42,7 @@ const WhyChoose = () => {
   ];
   return (
     <div className="WhyChoose">
-      <Row gutter={[40, 40]}>
+      <Row gutter={[40, 40]} className="container m-auto">
         <Col xs={24} md={12} className="imgPart">
           <img src={spread} alt="" className="spread" />
           <img src={choosepic} alt="" />
@@ -51,10 +51,6 @@ const WhyChoose = () => {
           <h2>Why Choose SpellEng?</h2>
           <div className="collapseWhyChoose">
             <Collapse ghost expandIcon={<FaPlus />} accordion items={items} />
-          </div>
-          <div className="whyChooseFooter">
-            <p>SpellEng welcomes all English learners</p>
-            <Button type="primary" onClick={() => router("/all-tutors")}>Book a Trial</Button>
           </div>
         </Col>
       </Row>

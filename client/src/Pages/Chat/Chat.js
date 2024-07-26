@@ -110,7 +110,7 @@ const Chat = () => {
     };
 
     return (
-        <div className={`chat-container ${showUserList ? 'show-user-list' : ''}`}>
+        <div className={`chat-container container ${showUserList ? 'show-user-list' : ''}`}>
             <div className='d-flex'>
                 <UserList users={users} selectedUser={selectedUser} onSelectUser={handleSelectUser} />
                 <Button

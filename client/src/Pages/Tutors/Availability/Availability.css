@@ -1,5 +1,5 @@
 .Availability {
-    padding: 45px 80px;
+    padding: 45px 0px;
 }
 
 .Availability .items {
@@ -34,15 +34,15 @@
 }
 
 .Availability .items .item div.buttons button {
-    background-color: var(--text-secondary-color);
+    background-color: var(--primary-color);
     border-radius: 0px;
     font-size: 14px;
     color: white;
     text-transform: capitalize;
 }
 
-.Availability .items .item div.buttons button:last-of-type {
-    background-color: #bcbdbc;
+.Availability .items .item div.buttons button.removeBtn {
+    background-color: red;
 }
 
 .Availability .items .item div.buttons span {

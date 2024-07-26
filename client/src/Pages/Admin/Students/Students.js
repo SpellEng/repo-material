@@ -1,4 +1,4 @@
-import { Card, List, Popconfirm, Table, Tag, Typography } from 'antd'
+import { Button, Card, List, Popconfirm, Table, Tag, Typography } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { DeleteOutlined, RightOutlined } from '@ant-design/icons'
 import axios from 'axios'
@@ -8,6 +8,7 @@ import AdminLayout from '../../../Layouts/Admin/AdminLayout';
 import { IoEye } from 'react-icons/io5'
 import { Link } from 'react-router-dom';
 import CurrencySign from '../../../Components/CurrencySign'
+import { AddRecordings } from '../../../Components/Admin/Recordings/AddRecordings'
 
 const { Text } = Typography;
 
@@ -19,6 +20,38 @@ const AdminStudentsList = () => {
     const [classes, setClasses] = useState([]);
     const [subscriptions, setSubscriptions] = useState([]);
     const [expandedRowKey, setExpandedRowKey] = useState(null);
+    const [futureClasses, setFutureClasses] = useState([]);
+    const [previousClasses, setPreviousClasses] = useState([]);
+
+    const getFutureClasses = async (id) => {
+        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/scheduled-classes/student/future/${id}`, {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token")
+            }
+        }).then(res => {
+            setLoading(false);
+            setFutureClasses(res.data);
+        }).catch(err => {
+            setLoading(false);
+            console.log(err)
+            ErrorAlert(err?.message);
+        })
+    }
+
+    const getPreviousClasses = async (id) => {
+        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/scheduled-classes/student/past/${id}`, {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token")
+            }
+        }).then(res => {
+            setLoading(false);
+            setPreviousClasses(res.data);
+        }).catch(err => {
+            setLoading(false);
+            console.log(err)
+            ErrorAlert(err?.message);
+        })
+    }
 
     const getAllUsers = async () => {
         setLoading(true);
@@ -66,16 +99,17 @@ const AdminStudentsList = () => {
         })
     }
 
-    const getAllUsersClasses = async (id) => {
-        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/scheduled-classes/all/student/${id}`, {
+    const deleteRecording = async (id) => {
+        await axios.put(`${process.env.REACT_APP_BACKEND_URL}/users/recording/delete/${id}`, { ss: "" }, {
             headers: {
                 authorization: 'Bearer ' + localStorage.getItem("token")
             }
         }).then(res => {
             if (res.statusText === "OK") {
-                setClasses(res.data);
+                SuccessAlert(res.data.successMessage)
+                getAllUsers();
             } else {
-                ErrorAlert(res.data.errorMessage);
+                ErrorAlert(res.data.errorMessage)
             }
         }).catch(err => {
             console.log(err)
@@ -99,10 +133,13 @@ const AdminStudentsList = () => {
     const handleExpand = async (expanded, record) => {
         if (expanded) {
             await fetchSubscriptions(record?._id)
-            await getAllUsersClasses(record._id);
+            await getFutureClasses(record._id);
+            await getPreviousClasses(record._id);
             setExpandedRowKey(record._id);
         } else {
             setExpandedRowKey(null);
+            setPreviousClasses([]);
+            setFutureClasses([]);
         }
     };
 
@@ -163,13 +200,19 @@ const AdminStudentsList = () => {
         },
         {
             title: "Actions",
-            render: (_, product) => (
+            render: (_, user) => (
                 <>
                     <div className='d-flex align-items-center gap-2'>
+                        {
+                            !user?.recording ?
+                                <AddRecordings id={user?._id} updateFunction={getAllUsers} />
+                                :
+                                <Button onClick={() => deleteRecording(user?._id)} type="danger">Remove Recording</Button>
+                        }
                         <Popconfirm
                             title="Delete"
                             description="Are you sure to delete?"
-                            onConfirm={() => deleteHandler(product?._id)}
+                            onConfirm={() => deleteHandler(user?._id)}
                             okText="Yes"
                             cancelText="No"
                         >
@@ -208,15 +251,6 @@ const AdminStudentsList = () => {
                             expandedRowKeys: [expandedRowKey],
                             onExpand: handleExpand,
                             expandedRowRender: (record) => {
-                                let pastClasses = classes?.filter(item => {
-                                    const itemDate = parseDate(item.date);
-                                    return itemDate < today;
-                                });
-
-                                let futureClasses = classes?.filter(item => {
-                                    const itemDate = parseDate(item.date);
-                                    return itemDate > today;
-                                });
 
                                 return (
                                     <div>
@@ -228,7 +262,7 @@ const AdminStudentsList = () => {
                                             </Card>
                                             <Card title="Total Classes Attended">
                                                 <h3>
-                                                    {pastClasses?.length}
+                                                    {previousClasses?.length}
                                                 </h3>
                                             </Card>
                                         </div>

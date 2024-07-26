@@ -1,11 +1,54 @@
-.registration .row .leftRegistration img {
+.registration .row .leftRegistration,
+.registration .row .ant-col {
   width: 100%;
+  position: relative;
+  padding-right: 0px !important;
 }
 
 .registration .leftRegistration img {
+  width: 100% !important;
   height: 100vh;
   height: 100dvh;
   object-fit: cover;
+}
+
+
+.registration .leftRegistration:after {
+  content: '';
+  position: absolute;
+  /* left: 0px; */
+  right: 10px !important;
+  top: 0px;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.registration .leftRegistration .caption {
+  position: absolute;
+  bottom: 15%;
+  margin: 60px;
+  color: white;
+  z-index: 1000;
+}
+
+.registration .leftRegistration .caption h3 {
+  color: white;
+  font-weight: 400;
+  margin-bottom: 23px;
+}
+
+.registration .leftRegistration .caption h2 {
+  color: white;
+}
+
+.registration .leftRegistration .nameAndReviews {
+  display: flex;
+  justify-content: space-between;
+}
+
+.registration .leftRegistration .nameAndReviews .ant-rate {
+  color: white;
 }
 
 .registration .rightRegistration {
@@ -13,8 +56,8 @@
 }
 
 .registration .rightRegistration .logo {
-  width: 200px;
-  margin-bottom: 23px;
+  width: 60px;
+  /* margin-bottom: 23px; */
 }
 
 .registration .rightRegistration h2 {
@@ -77,12 +120,18 @@
   height: 43px;
 }
 
+.registration .rightRegistration .PhoneBtnContainer input {
+  border: none !important;
+  box-shadow: none;
+  outline: none !important;
+}
+
 .registration .rightRegistration .PhoneBtnContainer .codebtn {
   position: absolute;
   right: 10px;
   top: 10px;
   /* margin-left: -15px; */
-  font-size: 14px;
+  font-size: 14px !important;
   width: max-content;
   padding: 0px;
   background-color: transparent;
@@ -91,7 +140,7 @@
 
 
 .registration button {
-  background-color: var(--btn-color);
+  background-color: var(--primary-color);
   color: white;
   border: none;
   box-shadow: none;
@@ -101,56 +150,13 @@
 }
 
 
-.registration .swiperSlide {
-  position: relative;
-  margin-right: 0px !important;
-}
-
-.registration .swiperSlide:after {
-  content: '';
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-}
-
-
-.registration .swiperSlide .caption {
-  position: absolute;
-  bottom: 15%;
-  margin: 60px;
-  color: white;
-  z-index: 1000;
-}
-
-.registration .swiperSlide .caption h3 {
-  color: white;
-  font-weight: 400;
-  margin-bottom: 23px;
-}
-
-.registration .swiperSlide .caption h2 {
-  color: white;
-}
-
-.registration .swiperSlide .nameAndReviews {
-  display: flex;
-  justify-content: space-between;
-}
-
-.registration .swiperSlide .nameAndReviews .ant-rate {
-  color: white;
-}
-
 @media (max-width: 767px) {
   .registration .leftRegistration {
     display: none !important;
   }
 
   .registration .rightRegistration {
-    padding: 30px !important;
+    padding: 28px !important;
     max-width: 500px !important;
     margin: 0px auto;
   }

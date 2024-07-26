@@ -22,7 +22,7 @@
   .AboutTeacher .section-title {
     font-size: 1.25rem;
     margin-top: 20px;
-    color: #1890ff;
+    color: var(--primary-color);
   }
   
   .AboutTeacher .section-content {

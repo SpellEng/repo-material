@@ -19,6 +19,38 @@ const AdminTutorsList = () => {
     const [totalUsers, setTotalUsers] = useState();
     const [expandedRowKey, setExpandedRowKey] = useState(null);
     const [classes, setClasses] = useState([]);
+    const [futureClasses, setFutureClasses] = useState([]);
+    const [previousClasses, setPreviousClasses] = useState([]);
+
+    const getFutureClasses = async (id) => {
+        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/scheduled-classes/tutor/future/${id}`, {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token")
+            }
+        }).then(res => {
+            setLoading(false);
+            setFutureClasses(res.data);
+        }).catch(err => {
+            setLoading(false);
+            console.log(err)
+            ErrorAlert(err?.message);
+        })
+    }
+
+    const getPreviousClasses = async (id) => {
+        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/scheduled-classes/tutor/past/${id}`, {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token")
+            }
+        }).then(res => {
+            setLoading(false);
+            setPreviousClasses(res.data);
+        }).catch(err => {
+            setLoading(false);
+            console.log(err)
+            ErrorAlert(err?.message);
+        })
+    }
 
     const showModal = () => {
         setIsModalVisible(true);
@@ -74,29 +106,15 @@ const AdminTutorsList = () => {
         })
     }
 
-    const getAllTutorsClasses = async (id) => {
-        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/scheduled-classes/all/tutor/${id}`, {
-            headers: {
-                authorization: 'Bearer ' + localStorage.getItem("token")
-            }
-        }).then(res => {
-            if (res.statusText === "OK") {
-                setClasses(res.data);
-            } else {
-                ErrorAlert(res.data.errorMessage);
-            }
-        }).catch(err => {
-            console.log(err)
-            ErrorAlert(err?.message);
-        })
-    }
-
     const handleExpand = async (expanded, record) => {
         if (expanded) {
-            await getAllTutorsClasses(record._id);
+            await getPreviousClasses(record._id);
+            await getFutureClasses(record._id);
             setExpandedRowKey(record._id);
         } else {
             setExpandedRowKey(null);
+            setPreviousClasses([]);
+            setFutureClasses([]);
         }
     };
 
@@ -227,18 +245,7 @@ const AdminTutorsList = () => {
                             expandedRowKeys: [expandedRowKey],
                             onExpand: handleExpand,
                             expandedRowRender: (record) => {
-                                let pastClasses = classes?.filter(item => {
-                                    const itemDate = parseDate(item.date);
-                                    return itemDate < today;
-                                });
-
-                                let futureClasses = classes?.filter(item => {
-                                    const itemDate = parseDate(item.date);
-                                    return itemDate > today;
-                                });
-
-                                let earnings = pastClasses?.length * teacherCommission()
-
+                                let earnings = previousClasses?.length * teacherCommission()
                                 let withdrawals = record?.withdrawals?.reduce((a, b) => a + b?.amount, 0);
 
                                 return (
@@ -292,7 +299,7 @@ const AdminTutorsList = () => {
                                         <div className='d-flex flex-wrap gap-4 mt-3'>
                                             <Card title="All Classes">
                                                 <h3>
-                                                    {classes?.length}
+                                                    {futureClasses?.length + previousClasses?.length}
                                                 </h3>
                                             </Card>
                                             <Card title="Future Classes Scheduled">
@@ -302,7 +309,7 @@ const AdminTutorsList = () => {
                                             </Card>
                                             <Card title="Classes Attended">
                                                 <h3>
-                                                    {pastClasses?.length}
+                                                    {previousClasses?.length}
                                                 </h3>
                                             </Card>
                                             <Card title="Total Earnings">

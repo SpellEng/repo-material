@@ -30,15 +30,6 @@ const AboutTeacher = ({ tutorObject }) => {
                     </ul>
                     <h4 className="section-title">Experience</h4>
                     <p className="section-content">{tutorObject?.experience}</p>
-                    <h4 className="section-title">Contact Information</h4>
-                    <p className="section-content contact-info">
-                        Email: <a href={`mailto:${tutorObject?.email}`}>{tutorObject?.email}</a>
-                    </p>
-                    <p className="section-content contact-info">
-                        Phone: <a href={`tel:${tutorObject?.phoneNumber}`}>{tutorObject?.phoneNumber}</a>
-                    </p>
-                    <h4 className="section-title">Location</h4>
-                    <p className="section-content">{tutorObject?.address}, {tutorObject?.city}</p>
                 </Card>
             </div>
         </div>

@@ -10,7 +10,7 @@ import { TbConfetti } from "react-icons/tb";
 import { ErrorAlert, SuccessAlert } from "../../../Components/Messages/messages";
 import axios from "axios";
 import { isAuthenticated } from "../../../Components/Auth/auth";
-import TimeZoneComponent, { getUserTimezone } from "../../../Components/UserTimeZone";
+import { getUserTimezone } from "../../../Components/UserTimeZone";
 
 const StudentProfile = () => {
   const [loading, setLoading] = useState(false);
@@ -101,7 +101,7 @@ const StudentProfile = () => {
 
   return (
     <div className="StudentProfile">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="container">
         <div className="row mb-3">
           <label htmlFor="inputName" className="col-sm-2 col-form-label">Full Name</label>
           <div className="col-sm-10">
@@ -197,14 +197,14 @@ const StudentProfile = () => {
         </div>
         <div className="row mb-3">
           <label htmlFor="inputHeadline" className="col-sm-2 col-form-label">Headline</label>
-          <div className="col-sm-10">
-            <TextArea value={formData?.headline} required onChange={(e) => handleChange('headline', e.target.value)} />
+          <div className="col-sm-10 mb-4">
+            <TextArea showCount maxLength={200} value={formData?.headline} required onChange={(e) => handleChange('headline', e.target.value)} />
           </div>
         </div>
         <div className="row mb-3">
           <label htmlFor="inputSpecialities" className="col-sm-2 col-form-label">Description</label>
-          <div className="col-sm-10">
-            <TextArea value={formData?.description} required onChange={(e) => handleChange('description', e.target.value)} />
+          <div className="col-sm-10 mb-4">
+            <TextArea showCount maxLength={200} value={formData?.description} required onChange={(e) => handleChange('description', e.target.value)} />
           </div>
         </div>
         <div className="row mb-3 mt-5">

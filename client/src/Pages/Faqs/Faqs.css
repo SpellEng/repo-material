@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 40px 80px;
+  padding: 40px 0px;
 }
 
 .faqs .upperSection h1 {
@@ -31,7 +31,7 @@
 }
 
 .faqs .faqsPart {
-  margin: 45px 80px;
+  margin: 45px 0px;
 }
 
 .faqs .faqsPart .ant-collapse-item {
@@ -47,10 +47,17 @@
   border-bottom: 0px !important;
 }
 
+.faqs .faqsPart .ant-collapse-item .ant-collapse-header {
+  align-items: center !important;
+}
+
 .faqs .faqsPart .ant-collapse-content-box {
   padding-top: 17px !important;
 }
 
+.faqs .faqsPart .ant-collapse .anticon svg {
+  color: black !important;
+}
 
 .faqs .faqsPart .ant-collapse .ant-collapse-item-active .ant-collapse-header {
   background-color: black;
@@ -67,8 +74,12 @@
   padding: 1rem !important;
 }
 
+.faqs .faqsPart .ant-collapse-item-active .anticon svg {
+  color: white !important;
+}
+
 .faqs .faqsPart .ant-collapse .ant-collapse-item-active .ant-collapse-header {
-  background-color: #202124 !important;
+  background-color: var(--primary-color) !important;
 }
 
 .faqs .ant-collapse p {
@@ -85,7 +96,7 @@
 
 .faqs .stilQuestions {
   text-align: center;
-  margin: 45px 80px;
+  margin: 45px 0px;
   border-radius: 5px;
   background-color: #dcf9fd;
   padding: 2.5rem;

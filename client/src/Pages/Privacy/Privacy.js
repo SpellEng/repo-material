@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Privacy = () => {
   return (
     <div className="privacy">
-      <div className="inner">
+      <div className="inner container">
         <h1>Privacy Policy</h1>
         <p className="mb-3">Last updated: June 20, 2024</p>
         <div className="personal">

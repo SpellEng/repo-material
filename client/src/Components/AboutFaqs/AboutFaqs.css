@@ -64,20 +64,28 @@
   border-bottom: 0px !important;
 }
 
+.aboutFaqs .mainFaqs .ant-collapse-item .anticon svg {
+  color: black !important;
+}
+
 .aboutFaqs .mainFaqs .ant-collapse-content-box {
   padding-top: 17px !important;
 }
 
 .aboutFaqs .mainFaqs .ant-collapse .ant-collapse-item-active .ant-collapse-header {
-  background-color: black;
+  background-color: var(--primary-color);
 }
 
 .aboutFaqs .mainFaqs .ant-collapse .ant-collapse-item-active .ant-collapse-header-text {
   color: white;
 }
 
+.aboutFaqs .mainFaqs .ant-collapse .ant-collapse-item-active .anticon svg {
+  color: white !important;
+}
+
 .aboutFaqs .ant-collapse-item .ant-collapse-expand-icon {
-  color: black !important;
+  color: white !important;
 }
 
 .aboutFaqs .ant-collapse-item-active .ant-collapse-expand-icon {

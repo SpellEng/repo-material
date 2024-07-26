@@ -24,7 +24,8 @@ const TutorProfile = () => {
     education: '',
     specialities: [],
     languages: [],
-    description: ""
+    description: "",
+    videoLink: ""
   });
 
   const handleChange = (key, value) => {
@@ -74,7 +75,7 @@ const TutorProfile = () => {
 
   return (
     <div className="TutorProfile">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="container">
         <div className="row mb-3">
           <label htmlFor="inputName" className="col-sm-2 col-form-label">Full Name</label>
           <div className="col-sm-10">
@@ -235,8 +236,14 @@ const TutorProfile = () => {
         </div>
         <div className="row mb-3">
           <label htmlFor="inputSpecialities" className="col-sm-2 col-form-label">Description</label>
+          <div className="col-sm-10 mb-4">
+            <TextArea showCount maxLength={200} value={formData?.description} required onChange={(e) => handleChange('description', e.target.value)} />
+          </div>
+        </div>
+        <div className="row mb-3">
+          <label htmlFor="inputVideo" className="col-sm-2 col-form-label">Video Embed Url</label>
           <div className="col-sm-10">
-            <TextArea value={formData?.description} required onChange={(e) => handleChange('description', e.target.value)} />
+            <Input value={formData?.videoLink} required onChange={(e) => handleChange('videoLink', e.target.value)} />
           </div>
         </div>
         <div className="row mb-3 mt-5">

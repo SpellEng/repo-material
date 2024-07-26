@@ -1,14 +1,17 @@
-import { Card} from 'antd'
+import { Card } from 'antd'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { ErrorAlert } from '../../../Components/Messages/messages';
 import AdminLayout from '../../../Layouts/Admin/AdminLayout';
 import CurrencySign from '../../../Components/CurrencySign';
 import { teacherCommission } from '../../../Components/TeacherCommission';
+import moment from 'moment';
 
 const AdminDashboard = () => {
     const [loading, setLoading] = useState(false);
     const [classes, setClasses] = useState([]);
+    const [futureClasses, setFutureClasses] = useState([]);
+    const [previousClasses, setPreviousClasses] = useState([]);
     const [students, setStudents] = useState([]);
     const [tutors, setTutors] = useState([]);
     const [subscriptions, setSubscriptions] = useState([]);
@@ -78,24 +81,44 @@ const AdminDashboard = () => {
     useEffect(() => {
         getAllUsers();
         getAllTutors();
-        getAllScheduledClasses();
+        getAllFutureScheduledClasses();
+        getAllPastScheduledClasses();
         getAllUsersSubsctiptions();
 
         return () => {
         }
     }, []);
 
-    const getAllScheduledClasses = async () => {
+    const getAllPastScheduledClasses = async () => {
         setLoading(true);
-        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/scheduled-classes`, {
+        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/scheduled-classes/past`, {
             headers: {
                 authorization: 'Bearer ' + localStorage.getItem("token")
             }
         }).then(res => {
             setLoading(false);
             if (res.statusText === "OK") {
-                setClasses(res.data);
-                setTotalScheduledClasses(res.data.count);
+                setPreviousClasses(res.data);
+            } else {
+                ErrorAlert(res.data.errorMessage);
+            }
+        }).catch(err => {
+            setLoading(false);
+            console.log(err)
+            ErrorAlert(err?.message);
+        })
+    }
+
+    const getAllFutureScheduledClasses = async () => {
+        setLoading(true);
+        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/scheduled-classes/future`, {
+            headers: {
+                authorization: 'Bearer ' + localStorage.getItem("token")
+            }
+        }).then(res => {
+            setLoading(false);
+            if (res.statusText === "OK") {
+                setFutureClasses(res.data);
             } else {
                 ErrorAlert(res.data.errorMessage);
             }
@@ -114,16 +137,6 @@ const AdminDashboard = () => {
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-
-    let pastClasses = classes?.filter(item => {
-        const itemDate = parseDate(item.date);
-        return itemDate < today;
-    });
-
-    let futureClasses = classes?.filter(item => {
-        const itemDate = parseDate(item.date);
-        return itemDate > today;
-    });
 
     function sumAmounts(tutors) {
         let totalSum = 0;
@@ -148,7 +161,7 @@ const AdminDashboard = () => {
 
     let totalEarningsThroughSubscriptions = subscriptions?.reduce((a, b) => a + parseInt(b?.amount), 0)
 
-    let earnings = pastClasses?.length * teacherCommission()
+    let earnings = previousClasses?.length * teacherCommission()
 
     return (
         <AdminLayout sidebar>
@@ -178,7 +191,7 @@ const AdminDashboard = () => {
                         </Card>
                         <Card title="All Classes Attended">
                             <h3>
-                                {classes?.length}
+                                {previousClasses?.length}
                             </h3>
                         </Card>
                         <Card title="Total Earnings of Tutors">

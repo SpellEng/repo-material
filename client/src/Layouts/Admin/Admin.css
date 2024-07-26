@@ -28,3 +28,8 @@
     background-color: rgb(213, 246, 213);
     color: var(--btn-color);
 }
+
+.AdminLayout .AdminSidebar svg {
+    color: white !important;
+    font-size: 23px !important;
+}

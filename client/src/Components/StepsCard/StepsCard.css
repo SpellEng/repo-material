@@ -3,7 +3,7 @@
 }
 
 .StepsCard button {
-    background-color: black;
+    background-color: var(--primary-color);
     border-radius: 50%;
     padding: 10px;
     margin-bottom: 12px;
@@ -12,7 +12,7 @@
 .StepsCard button svg {
     width: 36px;
     height: 36px;
-    color: white;
+    color: white !important;
 }
 
 .StepsCard h3 {

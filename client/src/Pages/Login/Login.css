@@ -1,11 +1,53 @@
-.login .row .leftLogin img {
+.login .row .leftLogin,
+.login .row .ant-col {
     width: 100%;
+    position: relative;
+    padding-right: 0px !important;
 }
 
 .login .leftLogin img {
+    width: 100% !important;
     height: 100vh;
     height: 100dvh;
     object-fit: cover;
+}
+
+.login .leftLogin:after {
+    content: '';
+    position: absolute;
+    /* left: 0px; */
+    right: 0px !important;
+    top: 0px;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.login .leftLogin .caption {
+    position: absolute;
+    bottom: 15%;
+    margin: 60px;
+    color: white;
+    z-index: 1000;
+}
+
+.login .leftLogin .caption h3 {
+    color: white;
+    font-weight: 400;
+    margin-bottom: 23px;
+}
+
+.login .leftLogin .caption h2 {
+    color: white;
+}
+
+.login .leftLogin .nameAndReviews {
+    display: flex;
+    justify-content: space-between;
+}
+
+.login .leftLogin .nameAndReviews .ant-rate {
+    color: white;
 }
 
 .login .rightLogin {
@@ -14,7 +56,7 @@
 }
 
 .login .rightLogin .logo {
-    width: 200px;
+    width: 60px;
     margin-bottom: 23px;
 }
 
@@ -39,53 +81,8 @@
     width: 100%;
 }
 
-.login .rightLogin .sendCodeBtn {
-    font-size: 14px;
-}
-
-.login .rightLogin .otpPart {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 23px;
-}
-
-.login .rightLogin .otpPart input {
-    width: 100% !important;
-    max-width: 70px;
-    height: 80px;
-    border-radius: 4px;
-    border: 1px solid #b6b7b8;
-}
-
 .login .rightLogin .loginOption {
     text-align: center;
-}
-
-.login .rightLogin .PhoneInput input {
-    border: none;
-    outline: none;
-    padding: 8px;
-    width: 100%;
-}
-
-.login .rightLogin .PhoneBtnContainer {
-    position: relative;
-    border: 1px solid #b6b7b8;
-    border-radius: 4px;
-    padding: 0px 10px;
-    display: flex;
-    align-items: center;
-    height: 43px;
-}
-
-.login .rightLogin .PhoneBtnContainer .codebtn {
-    position: absolute;
-    right: 10px;
-    top: 8px;
-    /* margin-left: -15px; */
-    font-size: 14px;
-    width: max-content;
-    padding: 0px;
 }
 
 .login .bookTrail {
@@ -96,7 +93,7 @@
 }
 
 .login button {
-    background-color: var(--btn-color);
+    background-color: var(--primary-color);
     color: white;
     border: none;
     box-shadow: none;
@@ -105,55 +102,13 @@
     border-radius: 6px;
 }
 
-.login .swiperSlide {
-    position: relative;
-}
-
-.login .swiperSlide:after {
-    content: '';
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-}
-
-
-.login .swiperSlide .caption {
-    position: absolute;
-    bottom: 15%;
-    margin: 60px;
-    color: white;
-    z-index: 1000;
-}
-
-.login .swiperSlide .caption h3 {
-    color: white;
-    font-weight: 400;
-    margin-bottom: 23px;
-}
-
-.login .swiperSlide .caption h2 {
-    color: white;
-}
-
-.login .swiperSlide .nameAndReviews {
-    display: flex;
-    justify-content: space-between;
-}
-
-.login .swiperSlide .nameAndReviews .ant-rate {
-    color: white;
-}
-
 @media (max-width: 767px) {
     .login .leftLogin {
         display: none !important;
     }
 
     .login .rightLogin {
-        padding: 30px !important;
+        padding: 15px !important;
         padding-top: 32px !important;
         max-width: 500px !important;
         margin: 0px auto;

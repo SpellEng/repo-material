@@ -15,7 +15,7 @@
 }
 
 .TestimonialCard .quoteTestimonial svg {
-  fill: var(--link-color);
+  fill: var(--primary-color);
   font-size: 28px;
 }
 

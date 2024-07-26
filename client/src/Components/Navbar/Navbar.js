@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { isAuthenticated, logout } from "../Auth/auth";
 import { normalLinksArray, studentLinksArray, tutorLinksArray } from "../../RoleLinks";
-import { FaMessage } from "react-icons/fa6";
+import { TiMessages } from "react-icons/ti";
 import { IoIosLogOut } from "react-icons/io";
 import { MenuIcon } from "lucide-react";
 
@@ -20,8 +20,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg mainNavbar">
-      <div className="container-fluid">
+    <nav className="navbar navbar-expand-lg mainNavbar container">
+      <div className="container-fluid px-0">
         <div className="logo navbar-brand">
           <Link to="/">
             <img src={logo} alt="" />
@@ -68,17 +68,26 @@ const Navbar = () => {
           {
             !isAuthenticated() ?
               <>
-                <div className="signUp">
+                <div className="mobileRightNav">
                   <li className="nav-item">
                     <Link to="/login" className="btnSign btn-sm" onClick={handleLinkClick}>
-                      <i className="fa-solid fa-circle-user"></i><span className="signInText">Sign in</span>
+                      <i className="fa-solid fa-circle-user"></i><span className="signInText">Sign In</span>
                     </Link>
                   </li>
                 </div>
-                <div className="signIn">
-                  <li className="nav-item">
-                    <Link to="/signup" className="btnBuy btn-sm" onClick={handleLinkClick}>Book a trial</Link>
-                  </li>
+                <div className="desktopRightNav">
+                  <div className="signUp">
+                    <li className="nav-item">
+                      <Link to="/login" className="btnSign btn-sm" onClick={handleLinkClick}>
+                        <i className="fa-solid fa-circle-user"></i><span className="signInText">Sign in</span>
+                      </Link>
+                    </li>
+                  </div>
+                  <div className="signIn">
+                    <li className="nav-item">
+                      <Link to="/signup" className="btnBuy btn-sm" onClick={handleLinkClick}>Book a trial</Link>
+                    </li>
+                  </div>
                 </div>
               </>
               :
@@ -86,7 +95,7 @@ const Navbar = () => {
                 <div className="">
                   <li className="nav-item">
                     <Link to="/chats" className="" onClick={handleLinkClick}>
-                      <FaMessage className="fs-3" />
+                      <TiMessages className="fs-3" />
                     </Link>
                   </li>
                 </div>

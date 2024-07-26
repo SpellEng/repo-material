@@ -6,13 +6,18 @@ const scheduledClassesSchema = new mongoose.Schema({
         required: true
     },
     time: {
-        type: String,
+        type: String, 
         required: true
     },
     students: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true
+        default: []
+    }],
+    cancelledBy: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        default: []
     }],
     tutor: {
         type: mongoose.Schema.Types.ObjectId,
@@ -28,7 +33,14 @@ const scheduledClassesSchema = new mongoose.Schema({
     meeetingTime: {
         type: String,
     },
+    ended: {
+        type: Boolean,
+        default: false
+    },
     joinId: {
+        type: String,
+    },
+    meetingUrl: {
         type: String,
     },
     messages: [

@@ -1,12 +1,17 @@
 .StudentDashboard {
-    background-color: rgb(251, 255, 42, 0.2);
-    padding: 32px 80px;
+    /* background-color: rgb(251, 255, 42, 0.2); */
+    padding: 32px 0px;
 }
 
 .StudentDashboard section {
     background-color: white;
     border-radius: 10px;
     padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.StudentDashboard .userPicture {
+    border-radius: 50%;
 }
 
 .StudentDashboard section span {
@@ -50,4 +55,14 @@
     align-items: center;
     gap: 10px;
     margin-bottom: 15px;
+}
+
+.StudentDashboard .studentDashboardVideo iframe {
+    width: 100% !important;
+}
+
+@media (max-width:767px) {
+    .StudentDashboard {
+        padding: 15px !important;
+    }
 }

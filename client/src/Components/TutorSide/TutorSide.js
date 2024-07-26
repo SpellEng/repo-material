@@ -1,10 +1,10 @@
 import React from "react";
 import "./TutorSide.css";
-import { Select } from "antd";
+import { Input, Select } from "antd";
 
-const { Option } = Select;
+const { Search } = Input;
 
-const TutorSide = ({ handleSpChange, handleAvailChange, handleTutorCatChange, handleLangChange }) => {
+const TutorSide = ({ handleSpChange, handleAvailChange, handleTutorNameChange, handleLangChange }) => {
 
   return (
     <div className="tutorSide">
@@ -76,28 +76,14 @@ const TutorSide = ({ handleSpChange, handleAvailChange, handleTutorCatChange, ha
           />
         </div>
         <div className="tutorCategories">
-          <Select
-            className="tutorCategoriesSelect"
-            popupClassName="tutorCategoriesSelect"
+          <Search
+            className="w-100"
+            placeholder="Enter Tutor Name to Search"
             allowClear
-            showSearch
-            onChange={handleTutorCatChange}
-            style={{ width: "100%" }}
-            placeholder="Tutor Categories"
-          >
-            <Option value="super">
-              <div>
-                <h3 className="mb-2">Only Super Tutors</h3>
-                <p>Only show highly rated and experienced tutors</p>
-              </div>
-            </Option>
-            <Option value="professional">
-              <div>
-                <h3 className="mb-2">Only professional tutors</h3>
-                <p>Only show tutors with a teaching certificate or relevant education</p>
-              </div>
-            </Option>
-          </Select>
+            size="large"
+            onSearch={(val) => handleTutorNameChange(val)}
+            enterButton="Search"
+          />
         </div>
         <div className="specialities">
           <Select

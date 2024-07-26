@@ -1,5 +1,5 @@
 .footer {
-  margin: 0px 80px;
+  margin: 0px 0px;
 }
 
 .footer section {
@@ -25,7 +25,7 @@
 }
 
 .footer .footerTop h3 {
-  font-size: 50px;
+  font-size: 3rem;
   font-weight: 600;
 }
 
@@ -39,6 +39,10 @@
 
 .footer img {
   width: 100%;
+}
+
+.footer .appsImages img {
+  width: 130px !important;
 }
 
 .footer section a {
@@ -106,7 +110,7 @@
 }
 
 .footer .copyright img {
-  width: 180px !important;
+  width: 175px !important;
 }
 
 @media (max-width: 767px) {

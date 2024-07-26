@@ -7,11 +7,15 @@ const axios = require('axios');
 const moment = require('moment');
 const sendEmail = require('../nodemailer');
 const razorpay = require('../utils/razorpay');
-const Template = require('../templates/email-template');
 const ContactUsTemplate = require('../templates/contact-us-template');
+const StudentBookTrialTemplate = require('../templates/student-book-trial-template');
+const ResetPasswordTemplate = require('../templates/reset-password-template');
+const AdminTutorRegisterationTemplate = require('../templates/admin-tutor-registeration-template');
+const AdminStudentRegisterationTemplate = require('../templates/admin-student-registeration-template');
 
 exports.getAllStudens = async (req, res) => {
     try {
+        sendEmail();
         const findUsers = await User.find({ role: 0 });
         if (findUsers) {
             res.status(200).json(findUsers);
@@ -40,12 +44,11 @@ exports.getUserById = async (req, res) => {
 
 exports.getAllTutors = async (req, res) => {
     try {
-        const { availability, specialities, languages, tutorCategory } = req.body;
+        const { availability, specialities, languages, tutorCategory, showAll, fullName } = req.body;
 
         // Construct the filter object
         const filter = { role: 1 };
         const currentDate = moment().format("DD/MM/YYYY");
-        // currentDate.setHours(0, 0, 0, 0);
         console.log(currentDate);
 
         if (availability) {
@@ -65,8 +68,19 @@ exports.getAllTutors = async (req, res) => {
             filter.tutorCategory = tutorCategory;
         }
 
-        const tutors = await User.find(filter);
-        if (tutors) {
+        if (fullName) {
+            filter.fullName = { $regex: fullName, $options: 'i' }; // Case-insensitive regex search
+        }
+
+        let query = User.find(filter);
+
+        if (!showAll) {
+            query = query.limit(12);
+        }
+
+        const tutors = await query.exec();
+
+        if (tutors.length > 0) {
             res.status(200).json(tutors);
         } else {
             res.status(404).json({ errorMessage: 'No Tutors Found' });
@@ -75,26 +89,31 @@ exports.getAllTutors = async (req, res) => {
         console.log(error);
         res.status(400).send(error);
     }
-}
+};
 
 exports.sendOTPToPhoneNumber = async (req, res) => {
     const { phoneNumber } = req.body;
     try {
-        const response = await axios.post(`${config.OTP_LESS_BASE_URL}/send`, {
-            phoneNumber,
-            otpLength: 6,
-            channel: 'WHATSAPP',
-            expiry: 120
-        }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'clientId': config.OTP_LESS_CLIENT_ID,
-                'clientSecret': config.OTP_LESS_CLIENT_SECRET
-            }
-        });
+        const ifPhoneNumberAlreadyPresent = await User.findOne({ phoneNumber: phoneNumber });
+        if (ifPhoneNumberAlreadyPresent) {
+            res.status(201).json({ errorMessage: 'Phone number already exists. Please try another one.' });
+        } else {
+            const response = await axios.post(`${config.OTP_LESS_BASE_URL}/send`, {
+                phoneNumber,
+                otpLength: 6,
+                channel: 'WHATSAPP',
+                expiry: 120
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'clientId': config.OTP_LESS_CLIENT_ID,
+                    'clientSecret': config.OTP_LESS_CLIENT_SECRET
+                }
+            });
 
-        console.log('OTP sent:', response.data);
-        res.status(200).json({ successMessage: 'OTP has been sent to your whatsapp', orderId: response.data?.orderId });
+            console.log('OTP sent:', response.data);
+            res.status(200).json({ successMessage: 'OTP has been sent to your whatsapp', orderId: response.data?.orderId });
+        }
     } catch (error) {
         console.error('Error sending OTP:', error.response.data);
         res.status(400).json({ errorMessage: 'Failed to send OTP. Please try again' });
@@ -105,12 +124,16 @@ exports.signUp = async (req, res) => {
     const { fullName, city, phoneNumber, email, password, otp, orderId, role, timezone } = req.body;
     console.log(req.body);
     try {
-        if (fullName && email && phoneNumber && city && password && otp) {
-            const ifEmailAlreadyPresent = await User.findOne({ email: req.body.email });
+        if (fullName && email && phoneNumber && password && otp) {
+            const ifEmailAlreadyPresent = await User.findOne({ email: email });
+            const ifPhoneNumberAlreadyPresent = await User.findOne({ phoneNumber: phoneNumber });
             if (ifEmailAlreadyPresent) {
                 res.status(201).json({ errorMessage: 'Email already exists. Please try another one.' });
-            } else {
-
+            }
+            else if (ifPhoneNumberAlreadyPresent) {
+                res.status(201).json({ errorMessage: 'Phone number already exists. Please try another one.' });
+            }
+            else {
                 await axios.post(`${config.OTP_LESS_BASE_URL}/verify`, {
                     otp,
                     orderId,
@@ -154,8 +177,12 @@ exports.signUp = async (req, res) => {
                                             token,
                                             user: saveUser,
                                             successMessage: 'Account created successfuly',
-
                                         });
+                                        if (role === "tutor") {
+                                            sendEmail("admin@spelleng.com", "New Tutor Registration on SpellEng", AdminTutorRegisterationTemplate({ name: user?.fullName, email, regDate: moment(saveUser?.createdAt).format("DD/MM/YYYY") }))
+                                        } else {
+                                            sendEmail("admin@spelleng.com", "New Student Registration on SpellEng", AdminStudentRegisterationTemplate({ name: user?.fullName, email, regDate: moment(saveUser?.createdAt).format("DD/MM/YYYY") }))
+                                        }
                                     }
                                 });
                             } else {
@@ -167,7 +194,7 @@ exports.signUp = async (req, res) => {
                     })
                     .catch(error => {
                         console.error('Error verifying OTP:', error);
-                        return res.status(201).json({ errorMessage: 'Opt is wrong. Error verifying OTP' });
+                        res.status(201).json({ errorMessage: 'Opt is wrong. Error verifying OTP' });
                     });
             }
         } else {
@@ -219,53 +246,6 @@ exports.login = async (req, res) => {
     }
 }
 
-exports.adminLogin = async (req, res) => {
-    try {
-        const findUser = await User.findOne({
-            $or: [{ email: req.body.email }, { username: req.body.email }]
-        });
-
-        if (findUser && findUser.role === 1) {
-            const checkPassword = bcrypt.compareSync(req.body.password, findUser.password);
-            if (checkPassword) {
-                const payload = {
-                    user: {
-                        _id: findUser._id,
-                        role: findUser.role
-                    }
-                }
-                jwt.sign(payload, config.JWT_SECRET, (err, token) => {
-                    if (err) res.status(400).json({ errorMessage: 'Jwt Error' })
-
-                    const {
-                        _id,
-                        role,
-                        username,
-                        email,
-                    } = findUser;
-                    res.status(200).json({
-                        _id,
-                        role,
-                        username,
-                        email,
-                        token,
-                        successMessage: 'Logged In Successfully',
-
-                    });
-                });
-            } else {
-                res.status(201).json({ errorMessage: 'Incorrect username or password.' })
-            }
-
-        } else {
-            res.status(201).json({ errorMessage: 'Incorrect username or password.' })
-        }
-    } catch (error) {
-        console.log(error);
-        res.status(400).send(error);
-    }
-}
-
 exports.updateUser = async (req, res) => {
     try {
         const findUser = await User.findOne({ _id: req.user._id });
@@ -284,6 +264,9 @@ exports.updateUser = async (req, res) => {
             findUser.education = req.body.education;
             if (req.body.timezone) {
                 findUser.timezone = req.body.timezone;
+            }
+            if (req.body.videoLink) {
+                findUser.videoLink = req.body.videoLink;
             }
             if (req.body.specialities) {
                 findUser.specialities = req.body.specialities;
@@ -344,8 +327,7 @@ exports.bookTrial = async (req, res) => {
             await findUser.save();
 
             // Send an email notification
-            sendEmail(email, "Your trial is activated!", Template({ subscriptionId: razorpayPaymentId, name: findUser?.fullName }));
-
+            sendEmail(email, "Your SpellEng Trial Booking Confirmation", StudentBookTrialTemplate({ name: findUser?.fullName, email: findUser?.email, loginUrl: `${config.FRONTEND_URL}/login` }));
             res.json({ successMessage: 'Trial activated successfully. You can book a class with tutors', user: findUser });
         }
     } catch (error) {
@@ -433,6 +415,35 @@ exports.removeTutorTimeSlot = async (req, res) => {
             }
         } else {
             res.status(404).json({ errorMessage: 'User code not found.' })
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(400).send(error);
+    }
+}
+
+exports.saveMeetingRecording = async (req, res) => {
+    const { recording } = req.body;
+    try {
+        const user = await User.findById({ _id: req.params.id });
+        if (user) {
+            user.recording = recording;
+            await user.save()
+            res.status(200).json({ successMessage: 'Recording saved Successfully' });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(400).send(error);
+    }
+}
+
+exports.deleteRecording = async (req, res) => {
+    try {
+        const user = await User.findById({ _id: req.params.id });
+        if (user) {
+            user.recording = null;
+            await user.save()
+            res.status(200).json({ successMessage: 'Recording Deleted Successfully' });
         }
     } catch (error) {
         console.log(error);
@@ -556,13 +567,9 @@ exports.resetPasswordLink = async (req, res) => {
                         res.status(400).json({ errorMessage: 'Token saving failed' });
                     }
                     if (result) {
-                        let url = '';
-                        if (process.env.NODE_ENV === 'production') {
-                            url = `https://SpellEng.com/reset-password/${token}` // The url of the domain on which you are hosting your frontend in production mode to serve the reset-password link page by sending this link to the email
-                        } else {
-                            url = `http://localhost:3000/reset-password/${token}`  // The url of the frontend in developement mode to serve the reset-password link page on the frontend by sending this link to the email
-                        }
-                        sendEmail(req.body.email, "Reset Password Link", `<p>Click this <a href = ${url}>${url}</a> to change your password.</p>`)
+                        let url = `${config.FRONTEND_URL}/reset-password/${token}`
+
+                        sendEmail(req.body.email, "Password Reset Request", ResetPasswordTemplate({ name: user?.fullName, url }))
                         res.status(200).json({ successMessage: 'Check your Inbox!' });
                     }
                 })

@@ -1,7 +1,7 @@
 .WhyChoose {
-  background-color: black;
+  background-color: #292a2d;
   color: white;
-  padding: 73px 80px;
+  padding: 73px 0px;
 }
 
 .WhyChoose .imgPart {
@@ -10,23 +10,20 @@
 
 .WhyChoose .imgPart .spread {
   position: absolute;
-  top: -40px;
+  top: -162px;
   left: -32px;
   width: 100px;
 }
 
 .WhyChoose .imgPart img {
   width: 100%;
-  height: auto;
+  height: 330px;
   border-radius: 4px;
+  margin-top: 6px;
 }
 
 .WhyChoose .row {
   margin: 80px;
-}
-
-.WhyChoose .questionPart {
-  margin-top: 120px;
 }
 
 .WhyChoose .questionPart h2 {
@@ -34,10 +31,6 @@
   font-size: 37px;
   padding-bottom: 30px;
   color: white;
-}
-
-.collapseWhyChoose {
-  margin-bottom: 23px;
 }
 
 .collapseWhyChoose .anticon {
@@ -48,7 +41,7 @@
 }
 
 .WhyChoose .ant-collapse-header {
-  background-color: #292a2d;
+  background-color: #3c3e41;
 }
 
 .WhyChoose .ant-collapse-item {

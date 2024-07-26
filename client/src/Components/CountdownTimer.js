@@ -21,7 +21,7 @@ export const CountdownTimer = ({ sendOtp }) => {
         <div style={{ textAlign: 'center' }}>
             {
                 expired ?
-                    <Button style={{ width: "100px" }} type='primary' onClick={handleSendOTP}>Resend OTP</Button>
+                    <Button style={{ width: "130px" }} type='primary' onClick={handleSendOTP}>Resend OTP</Button>
                     :
                     <span>{minutes}:{seconds}</span>
             }

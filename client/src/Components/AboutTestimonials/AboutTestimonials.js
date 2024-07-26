@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
-import RahulPic from "../../assets/RahulPic.png";
-import NeerajPic from "../../assets/NeerajPic.png";
-import AdityaPic from "../../assets/AdityaPic.png";
+import RahulPic from "../../assets/RahulPic.webp";
+import NeerajPic from "../../assets/NeerajPic.webp";
+import AdityaPic from "../../assets/AdityaPic.webp";
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from "swiper/modules";
@@ -53,43 +53,45 @@ const AboutTestimonials = () => {
 
     return (
         <div className='AboutTestimonials'>
-            <div className='leftContainer'>
-                <h1>Success Stories with SpellEng</h1>
-                <p>
-                    Real Voices, Real Results: Experience the power of personalized English tutoring
-                    through the stories of our satisfied users.
-                </p>
-                <div className='arrowsContainer'>
-                    <button className='btn' onClick={handlePrev}>
-                        <FaArrowLeftLong />
-                    </button>
-                    <button className='btn' onClick={handleNext}>
-                        <FaArrowRightLong />
-                    </button>
+            <div className='container'>
+                <div className='leftContainer'>
+                    <h1>Success Stories with SpellEng</h1>
+                    <p>
+                        Real Voices, Real Results: Experience the power of personalized English tutoring
+                        through the stories of our satisfied users.
+                    </p>
+                    <div className='arrowsContainer'>
+                        <button className='btn' onClick={handlePrev}>
+                            <FaArrowLeftLong />
+                        </button>
+                        <button className='btn' onClick={handleNext}>
+                            <FaArrowRightLong />
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <Swiper
-                    spaceBetween={30}
-                    slidesPerView={1}
-                    loop={true}
-                    autoplay={true}
-                    onSwiper={(swiper) => setSwiperInstance(swiper)}
-                    className="swiper"
-                    modules={[Autoplay]}
-                    breakpoints={{
-                        768: {
-                            slidesPerView: 2,
-                            spaceBetween: 30,
-                        }
-                    }}
-                >
-                    {testimonialArray.map((testimonial, index) => (
-                        <SwiperSlide key={index} className="swiperSlide">
-                            <TestimonialCard testimonialProps={testimonial} />
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
+                <div>
+                    <Swiper
+                        spaceBetween={30}
+                        slidesPerView={1}
+                        loop={true}
+                        autoplay={true}
+                        onSwiper={(swiper) => setSwiperInstance(swiper)}
+                        className="swiper"
+                        modules={[Autoplay]}
+                        breakpoints={{
+                            768: {
+                                slidesPerView: 2,
+                                spaceBetween: 30,
+                            }
+                        }}
+                    >
+                        {testimonialArray.map((testimonial, index) => (
+                            <SwiperSlide key={index} className="swiperSlide">
+                                <TestimonialCard testimonialProps={testimonial} />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                </div>
             </div>
         </div>
     );

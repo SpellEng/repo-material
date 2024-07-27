@@ -17,7 +17,6 @@ const app = express();
 const nodeCron = require('node-cron');
 // const moment = require('moment');
 const server = require('http').createServer(app);
-const { v4: uuidV4 } = require('uuid');
 const sendEmail = require('./nodemailer');
 const TutorClassReminderTemplate = require('./templates/tutor-class-reminder-template');
 const StudentClassReminderTemplate = require('./templates/student-class-reminder-template');
@@ -129,12 +128,6 @@ app.get("/server", (req, res) => {
     res.send("Server is running...")
 })
 
-// Generate a unique room ID
-const roomId = uuidV4();
-
-app.get('/room', (req, res) => {
-    res.json({ roomId });
-});
 
 const sessionsMap = {};
 const socketToRoom = {};
@@ -212,61 +205,6 @@ io.on('connection', socket => {
             console.error('Error sending message:', error);
         }
     });
-
-
-    //Join Video Call Meeting
-    socket.on('join-room', (roomId, userId, loggedInUser) => {
-        console.log(`a new user ${userId} joined room ${roomId}`);
-        socket.join(roomId);
-        let user = {
-            userId, loggedInUser
-        }
-        socket.broadcast.to(roomId).emit('user-connected', user);
-        socketToRoom[socket.id] = roomId; // Track which room the socket is in
-    });
-
-
-    // Sending messages to group video chat
-    socket.on('sendMessageInRoom', async ({ roomId, senderId, message }) => {
-        try {
-            // Save message to MongoDB
-            const newMessage = {
-                message,
-                sender: senderId
-            };
-            console.log(newMessage);
-            // Update or create chat if not exist
-            let findChats = await ScheduledClass.findOne({ _id: roomId }).populate("messages.sender");
-            if (findChats) {
-                findChats?.messages?.push(newMessage);
-                await findChats?.save();
-                let getNewChats = await ScheduledClass.findOne({ _id: roomId }).populate("messages.sender");
-                io.to(roomId).emit('roomMessages', getNewChats?.messages);
-            } else {
-                findChats.messages = [newMessage];
-                await findChats.save();
-                let getNewChats = await ScheduledClass.findOne({ _id: roomId }).populate("messages.sender");
-                io.to(roomId).emit('roomMessages', getNewChats?.messages);
-            }
-        } catch (error) {
-            console.error('Error sending message:', error);
-        }
-    });
-
-    socket.on('user-toggle-audio', (userId, roomId) => {
-        socket.join(roomId)
-        socket.broadcast.to(roomId).emit('user-toggle-audio', userId)
-    })
-
-    socket.on('user-toggle-video', (userId, roomId) => {
-        socket.join(roomId)
-        socket.broadcast.to(roomId).emit('user-toggle-video', userId)
-    })
-
-    socket.on('user-leave', (userId, roomId) => {
-        socket.leave(roomId);
-        socket.broadcast.to(roomId).emit('user-leave', userId)
-    })
 
     socket.on('disconnect', () => {
         console.log('User disconnected:', socket.id);

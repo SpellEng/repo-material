@@ -1,8 +1,13 @@
-import React from 'react';
-import { Rate, List } from 'antd';
+import React, { useState } from 'react';
+import { Rate, List, Button } from 'antd';
 import "./ReviewsAndRatings.css"
 
 const ReviewsAndRatings = ({ reviews }) => {
+    const [visibleReviews, setVisibleReviews] = useState(5);
+
+    const handleShowAll = () => {
+        setVisibleReviews(reviews.length);
+    };
 
     return (
         <div className="ReviewsAndRatings mt-3">
@@ -10,7 +15,7 @@ const ReviewsAndRatings = ({ reviews }) => {
                 <h2 className="mb-4">Reviews</h2>
                 <List
                     itemLayout="horizontal"
-                    dataSource={reviews}
+                    dataSource={reviews.slice(0, visibleReviews)?.reverse()}
                     renderItem={(item) => (
                         <List.Item>
                             <List.Item.Meta
@@ -26,6 +31,11 @@ const ReviewsAndRatings = ({ reviews }) => {
                         </List.Item>
                     )}
                 />
+                {visibleReviews < reviews.length && (
+                    <div className="text-left mt-4">
+                        <Button onClick={handleShowAll}>See More</Button>
+                    </div>
+                )}
             </div>
         </div>
     );

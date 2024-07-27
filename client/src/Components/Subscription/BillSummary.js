@@ -65,7 +65,6 @@ const BillSummary = ({ selectedPlan, selectedClasses, pricingPlans }) => {
                 <h6>Have a discount coupon?</h6>
                 <div>
                     <Search
-                        style={{ width: 200 }}
                         placeholder="Enter coupon code"
                         value={couponCode}
                         allowClear

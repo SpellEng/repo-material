@@ -22,7 +22,7 @@ const Footer = () => {
           <h3>
             Get started on your path to <span>success with us</span>
           </h3>
-          <button onClick={() => router("/all-tutors")}>Book A Trial @ ₹99</button>
+          <button onClick={() => router("/student/book-trial")}>Book A Trial @ ₹99</button>
         </div>
         <Divider />
         <section>

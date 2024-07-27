@@ -9,7 +9,7 @@
     margin-bottom: 12px;
 }
 
-.StepsCard button svg {
+.StepsCard button svg[stroke="currentColor"] {
     width: 36px;
     height: 36px;
     color: white !important;

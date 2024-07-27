@@ -116,10 +116,6 @@
 }
 
 @media (max-width:767px) {
-  .faqs {
-    margin: 15px !important;
-  }
-
   .faqs .faqsPart {
     margin: 0px !important;
   }
@@ -135,6 +131,7 @@
 
   .stilQuestions {
     margin: 0px !important;
+    padding: 23px 15px !important;
     margin-top: 23px !important;
   }
 }

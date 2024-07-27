@@ -44,7 +44,7 @@
 
 @media (max-width:767px) {
   .contact {
-    margin: 15px !important;
+    padding: 15px 0px !important;
   }
 
   .contact .innerContact .contactleft h2 {

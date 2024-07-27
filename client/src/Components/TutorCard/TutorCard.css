@@ -20,8 +20,14 @@
 
 .tutorCard .nameSection .name {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     gap: 4px;
+}
+
+.tutorCard .nameSection .name .ant-avatar,
+.tutorCard .nameSection .name .ant-avatar img {
+    width: 32px !important;
+    height: 32px !important;
 }
 
 .tutorCard .nameSection .name h4 {
@@ -50,15 +56,17 @@
 .tutorCard .buttons .btn {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     margin: 0px auto;
-    padding: 10px 23px;
+    width: 100%;
+    padding: 10px 0px;
     color: white;
     background-color: var(--primary-color);
 }
 
-.tutorCard .buttons .btn svg {
-    color: white;
+.tutorCard .buttons .btn svg[stroke="currentColor"] {
+    color: white !important;
 }
 
 .tutorCard .buttons .btn:nth-child(2) {
@@ -66,8 +74,8 @@
     color: var(--primary-color);
 }
 
-.tutorCard .buttons .btn:nth-child(2) svg {
-    color: var(--primary-color);
+.tutorCard .buttons .btn:nth-child(2) svg[stroke="currentColor"] {
+    color: var(--primary-color) !important;
 }
 
 .tutorCard .buttons button img {
@@ -95,10 +103,12 @@
         justify-content: space-between;
         flex-direction: row;
         gap: 10px;
+        width: 100% !important;
     }
 
     .tutorCard .buttons .btn {
         padding: 8px !important;
+        width: 100% !important;
     }
 
     .tutorCard .nameSection {
@@ -116,7 +126,12 @@
         justify-content: space-between !important;
     }
 
-    .tutorCard .nameSection .name span.ant-avatar {
+    .tutorCard .nameSection .name div:last-of-type {
+        align-self: center !important;
+    }
+
+    .tutorCard .nameSection .name span.ant-avatar,
+    .tutorCard .nameSection .name span.ant-avatar img {
         width: 100px !important;
         height: 100px !important;
     }

@@ -44,8 +44,13 @@
     gap: 10px;
 }
 
-.TeacherDetails .teacherItems img {
-    width: 17px !important;
+/* .TeacherDetails .teacherInfo .teacherItems div svg {
+    font-size: 43px !important;
+    width: 43px !important;
+} */
+
+.TeacherDetails .teacherItems svg {
+    width: 30px !important;
 }
 
 .TeacherDetails .aboutSchedule {
@@ -146,8 +151,8 @@
     height: 240px !important;
 }
 
-.TeacherDetails .schedulePart .buttons button svg {
-    color: white;
+.TeacherDetails .schedulePart .buttons button svg[stroke="currentColor"] {
+    color: white !important;
 }
 
 .TeacherDetails .schedulePart .buttons button:nth-child(1) {
@@ -187,9 +192,6 @@
 }
 
 @media (max-width: 767px) {
-    .TeacherDetails {
-        padding: 15px !important;
-    }
 
     .TeacherDetails .teacher {
         flex-direction: column !important;

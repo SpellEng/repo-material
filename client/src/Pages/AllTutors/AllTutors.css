@@ -20,7 +20,7 @@
 @media (max-width: 767px) {
   .AllTutors {
     margin: 0px 0px !important;
-    padding: 15px !important;
+    padding: 0px !important;
   }
 
   .AllTutors .header {

@@ -7,6 +7,7 @@ import { normalLinksArray, studentLinksArray, tutorLinksArray } from "../../Role
 import { TiMessages } from "react-icons/ti";
 import { IoIosLogOut } from "react-icons/io";
 import { MenuIcon } from "lucide-react";
+import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
   const handleLinkClick = () => {
@@ -71,15 +72,15 @@ const Navbar = () => {
                 <div className="mobileRightNav">
                   <li className="nav-item">
                     <Link to="/login" className="btnSign btn-sm" onClick={handleLinkClick}>
-                      <i className="fa-solid fa-circle-user"></i><span className="signInText">Sign In</span>
+                      <FaUserCircle /> <span className="signInText">Sign In</span>
                     </Link>
                   </li>
                 </div>
                 <div className="desktopRightNav">
                   <div className="signUp">
-                    <li className="nav-item">
+                    <li className="nav-item firstBtn">
                       <Link to="/login" className="btnSign btn-sm" onClick={handleLinkClick}>
-                        <i className="fa-solid fa-circle-user"></i><span className="signInText">Sign in</span>
+                        <FaUserCircle /> <span className="signInText">Sign in</span>
                       </Link>
                     </li>
                   </div>

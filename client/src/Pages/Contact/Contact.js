@@ -13,6 +13,7 @@ import ContactForm from "../../Components/ContactForm/ContactForm";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaPhone } from "react-icons/fa";
 import { LuMail } from "react-icons/lu";
+import { Helmet } from "react-helmet";
 
 const Contact = () => {
   const contactArray = [
@@ -40,6 +41,11 @@ const Contact = () => {
 
   return (
     <div className="contact">
+      <Helmet>
+        <title>Contact SpellEng: Get in Touch with Us</title>
+        <meta name="description" content="Contact SpellEng for any inquiries or support. We're here to help you with your English learning journey." />
+        <link rel="canonical" href="https://www.spelleng.com/contact-us" />
+      </Helmet>
       <div className="innerContact container">
         <Row gutter={[40, 40]} justify="center">
           <Col xs={24} md={12} className="contactleft ">

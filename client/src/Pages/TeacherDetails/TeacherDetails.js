@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./TeacherDetails.css";
-import quote from "../../assets/quote.svg";
 import { Button, Col, Divider, Row, Tabs, Tag } from "antd";
 import TutorCard from "../../Components/TutorCard/TutorCard";
 import ReviewsAndRatings from "../../Components/TeacherDetails/ReviewsAndRatings/ReviewsAndRatings";
@@ -8,7 +7,7 @@ import AboutTeacher from "../../Components/TeacherDetails/AboutTeacher/AbourTeac
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ErrorAlert, SuccessAlert } from "../../Components/Messages/messages";
 import axios from "axios";
-import { FaStar } from "react-icons/fa";
+import { FaQuoteLeft, FaStar } from "react-icons/fa";
 import moment from "moment";
 import CalendarComp from "../../Components/CalendarComp/CalendarComp";
 import Loading from "../../Components/Loading/Loading";
@@ -228,7 +227,9 @@ const TeacherDetails = () => {
     },
   ];
 
-  const averageRating = tutorObject?.reviews?.reduce((acc, review) => acc + review?.rating, 0) / tutorObject?.reviews?.length;
+  const totalRatings = tutorObject?.reviews?.reduce((acc, review) => acc + review?.rating, 0);
+  const averageRating = parseFloat((totalRatings / tutorObject?.reviews?.length).toFixed(2));
+  // const averageRating = tutorObject?.reviews?.reduce((acc, review) => acc + review?.rating, 0) / tutorObject?.reviews?.length;
 
   return (
     loading ?
@@ -262,15 +263,11 @@ const TeacherDetails = () => {
                       <GraduationCap />
                       <p>Teaches {tutorObject?.specialities?.map((sp, index) => <span key={index}>{sp}, </span>)}</p>
                     </div>
-                    <div className="native">
-                      <img src={quote} alt="" />
+                    <div className="native d-flex align-items-center">
+                      <FaQuoteLeft />
                       <p>
                         Speaks {tutorObject?.languages?.map((lng, index) => <span key={index}>{lng}, </span>)}
                       </p>
-                    </div>
-                    <div className="person">
-                      <User />
-                      <p>588 lessons taught</p>
                     </div>
                   </div>
                 </div>
@@ -288,9 +285,9 @@ const TeacherDetails = () => {
                     height="315"
                     src={tutorObject?.videoLink ? tutorObject?.videoLink : "https://www.youtube.com/embed/E7wJTI-1dvQ"}
                     title="YouTube video player"
-                    frameborder="0"
+                    frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
+                    allowFullScreen
                   ></iframe>
                 </div>
                 <div className="reviewsLessons">
@@ -319,7 +316,7 @@ const TeacherDetails = () => {
             <Row gutter={[40, 40]} align="middle">
               {tutorsArray.map((tutor, index) => {
                 return (
-                  <Col key={index} xs={12} md={7} xl={5} xxl={3}>
+                  <Col key={index} xs={24} md={12} lg={8} xl={6} xxl={4}>
                     <TutorCard tutorProps={tutor} />
                   </Col>
                 );

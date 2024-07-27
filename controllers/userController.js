@@ -101,7 +101,7 @@ exports.sendOTPToPhoneNumber = async (req, res) => {
             const response = await axios.post(`${config.OTP_LESS_BASE_URL}/send`, {
                 phoneNumber,
                 otpLength: 6,
-                channel: 'WHATSAPP',
+                channel: 'SMS',
                 expiry: 120
             }, {
                 headers: {
@@ -112,11 +112,11 @@ exports.sendOTPToPhoneNumber = async (req, res) => {
             });
 
             console.log('OTP sent:', response.data);
-            res.status(200).json({ successMessage: 'OTP has been sent to your whatsapp', orderId: response.data?.orderId });
+            res.status(200).json({ successMessage: 'OTP has been sent to your phone number', orderId: response.data?.orderId });
         }
     } catch (error) {
         console.error('Error sending OTP:', error.response.data);
-        res.status(400).json({ errorMessage: 'Failed to send OTP. Please try again' });
+        res.status(400).json({ errorMessage: `Failed to send OTP. ${error.response.data?.message}` });
     }
 }
 
@@ -345,7 +345,7 @@ exports.addReview = async (req, res) => {
             return res.status(404).json({ errorMessage: 'User not found' });
         }
         else {
-            let IfReviewAlreadyPresentForThatClass = user?.reviews?.filter(f => f?.classId == classId && f?.userId == userId);
+            let IfReviewAlreadyPresentForThatClass = user?.reviews?.filter(f => f?.classId === classId && f?.userId === userId);
             if (IfReviewAlreadyPresentForThatClass?.length > 0) {
                 res.status(201).json({ errorMessage: "Your Review is already submitted" });
             } else {

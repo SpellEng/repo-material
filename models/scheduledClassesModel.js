@@ -6,7 +6,7 @@ const scheduledClassesSchema = new mongoose.Schema({
         required: true
     },
     time: {
-        type: String, 
+        type: String,
         required: true
     },
     students: [{
@@ -58,7 +58,12 @@ const scheduledClassesSchema = new mongoose.Schema({
                 default: Date.now
             }
         }
-    ]
+    ],
+    review: {
+        rating: { type: Number, required: true },
+        message: { type: String, required: true },
+        userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
+    },
 }, { timestamps: true });
 
 const ScheduledClass = mongoose.model('ScheduledClass', scheduledClassesSchema);

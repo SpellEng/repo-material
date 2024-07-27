@@ -1,18 +1,29 @@
 import React, { useEffect, useState } from "react";
 import "./UpcomingStudent.css";
-import { Col, Row, Tabs } from "antd";
+import { Col, Modal, Row, Tabs } from "antd";
 import SessionCard from "../../../Components/SessionsCard/SessionsCard";
 import { isAuthenticated } from "../../../Components/Auth/auth";
 import { ErrorAlert, SuccessAlert } from "../../../Components/Messages/messages";
 import axios from "axios";
 import moment from "moment";
+import LeaveAReview from "../../../Components/LeaveAReview/LeaveAReview";
 
 const UpcomingStudent = () => {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("");
   const [futureClasses, setFutureClasses] = useState([]);
   const [previousClasses, setPreviousClasses] = useState([]);
+  const [showReviewModal, setShowReviewModal] = useState(false);
+  const [previousClassWithNoReview, setPreviousClassWithNoReview] = useState({});
   const [user, setUser] = useState({});
+
+  const showModal = () => {
+    setShowReviewModal(true);
+  };
+
+  const handleCancel = () => {
+    setShowReviewModal(false);
+  };
 
   const getUserById = async () => {
     await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/user/${isAuthenticated()?._id}`, {
@@ -61,6 +72,14 @@ const UpcomingStudent = () => {
       setLoading(false);
       if (res.status === 200) {
         setPreviousClasses(res.data);
+        let getPreviousClassWithNoReview = res.data?.find(f => !f?.review);
+        console.log(getPreviousClassWithNoReview);
+        if (getPreviousClassWithNoReview) {
+          setTimeout(() => {
+            showModal();
+          }, 1000);
+          setPreviousClassWithNoReview(getPreviousClassWithNoReview);
+        }
       } else {
         ErrorAlert(res.data.errorMessage);
       }
@@ -91,6 +110,7 @@ const UpcomingStudent = () => {
 
   useEffect(() => {
     getFutureClasses();
+    getPreviousClasses();
     getUserById();
 
     return () => {
@@ -158,6 +178,9 @@ const UpcomingStudent = () => {
 
   return (
     <div className="UpcomingStudent">
+      <Modal destroyOnClose title="Leave a Review" footer={false} open={showReviewModal} onCancel={handleCancel}>
+        <LeaveAReview previousClass={previousClassWithNoReview} updateParent={handleCancel} />
+      </Modal>
       <div className="container">
         {
           activeTab === "2" && user?.recording &&

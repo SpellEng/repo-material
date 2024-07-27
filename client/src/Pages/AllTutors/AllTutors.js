@@ -5,6 +5,7 @@ import TutorSide from "../../Components/TutorSide/TutorSide";
 import { Col, Row } from "antd";
 import { ErrorAlert } from "../../Components/Messages/messages";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 
 const AllTutors = () => {
   const [loading, setLoading] = useState(false);
@@ -40,6 +41,11 @@ const AllTutors = () => {
 
   return (
     <div className="AllTutors">
+      <Helmet>
+        <title>SpellEng: Meet Our Expert English Tutors</title>
+        <meta name="description" content="Explore profiles of our expert English tutors at SpellEng. Find the perfect tutor for your learning needs." />
+        <link rel="canonical" href="https://www.spelleng.com/all-tutors" />
+      </Helmet>
       <div className="innerTutors container">
         <div className="header">
           <h1>Find tutors for 1-On-1 classes.</h1>
@@ -60,19 +66,22 @@ const AllTutors = () => {
           </Col>
           <Col xs={24} md={18}>
             <Row gutter={[43, 43]}>
-              {tutorsArray.map((tutor) => {
+              {tutorsArray.map((tutor, index) => {
                 return (
-                  <Col xs={24} md={8} lg={6} xl={6} className="tutorComponent">
+                  <Col key={index} xs={24} md={12} lg={6} className="tutorComponent">
                     <TutorCard tutorProps={tutor} />
                   </Col>
                 );
               })}
             </Row>
             {
-              !showAll &&
-              <div className="text-center mt-4">
-                <button className="btn" onClick={() => setShowAll(true)}>Show All</button>
-              </div>
+              tutorsArray?.length > 11 &&
+              (
+                !showAll &&
+                <div className="text-center mt-4">
+                  <button className="btn" onClick={() => setShowAll(true)}>Show All</button>
+                </div>
+              )
             }
           </Col>
         </Row>

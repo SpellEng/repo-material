@@ -95,7 +95,7 @@ const Chat = () => {
     };
 
     const sendMessage = async (message, file) => {
-        const senderId = sender?._id; 
+        const senderId = sender?._id;
 
         // Emit sendMessage event to socket server
         await socket.emit('sendMessage', { senderId, receiverId: selectedUser, message, file });
@@ -124,7 +124,7 @@ const Chat = () => {
             <div className="chat-main mt-5 mt-md-0">
                 {receiver ? (
                     <ChatWindow
-                        sender={sender} 
+                        sender={sender}
                         receiver={receiver}
                         messages={messages}
                         onSendMessage={sendMessage}

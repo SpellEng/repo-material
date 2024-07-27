@@ -5,7 +5,6 @@ import SessionCard from "../../../Components/SessionsCard/SessionsCard";
 import axios from "axios";
 import { ErrorAlert, SuccessAlert } from "../../../Components/Messages/messages";
 import { isAuthenticated } from "../../../Components/Auth/auth";
-import ZoomMeeting from "./ZoomMeeting";
 
 const UpcomingTutor = () => {
   const [loading, setLoading] = useState(false);

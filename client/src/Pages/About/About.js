@@ -1,17 +1,24 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import "./About.css";
 import { Col, Divider, Rate, Row } from "antd";
-import AboutFaqs from "../../Components/AboutFaqs/AboutFaqs";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoMdMailOpen } from "react-icons/io";
 import { SiKnowledgebase } from "react-icons/si";
 import { BsUniversalAccessCircle } from "react-icons/bs";
 import { GiPowerLightning, GiTreeGrowth } from "react-icons/gi";
-import AboutTestimonials from "../../Components/AboutTestimonials/AboutTestimonials";
+import { Helmet } from "react-helmet";
+
+const AboutTestimonials = lazy(() => import("../../Components/AboutTestimonials/AboutTestimonials"));
+const AboutFaqs = lazy(() => import("../../Components/AboutFaqs/AboutFaqs"));
 
 const About = () => {
   return (
     <div className="aboutus">
+      <Helmet>
+        <title>About SpellEng - Your Online English Learning Platform</title>
+        <meta name="description" content="Learn about SpellEng and our mission to connect you with expert English tutors for personalized 1-on-1 video lessons, enhancing your spoken English skills." />
+        <link rel="canonical" href="https://www.spelleng.com/about-us" />
+      </Helmet>
       <div className="container">
         <Row gutter={{ xs: 40, md: 80 }}>
           <Col xs={24} md={12} className="leftAbout">
@@ -55,7 +62,7 @@ const About = () => {
             </div>
           </Col>
           <Col xs={24} md={12} className="rightAbout">
-            <iframe width="560" height="300" src="https://www.youtube.com/embed/H9uSOlEnZhc?si=thGcy7J81ZtnQulq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe width="560" height="300" src="https://www.youtube.com/embed/H9uSOlEnZhc?si=thGcy7J81ZtnQulq" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
           </Col>
         </Row>
         <div className="knowAbout">
@@ -141,10 +148,14 @@ const About = () => {
         </div>
       </div>
       <div className="noPadding">
-        <AboutTestimonials />
+        <Suspense fallback={<div></div>}>
+          <AboutTestimonials />
+        </Suspense>
       </div>
       <div className="faqsPart container">
-        <AboutFaqs />
+        <Suspense fallback={<div></div>}>
+          <AboutFaqs />
+        </Suspense>
       </div>
     </div>
   );

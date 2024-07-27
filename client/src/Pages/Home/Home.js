@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import "./Home.css";
 import Header from "../../Components/Header/Header";
-import Digital from "../../Components/Digital/Digital";
-import StepsCard from "../../Components/StepsCard/StepsCard";
-import WhyChoose from "../../Components/WhyChoose/WhyChoose";
 import { Col, Rate, Row } from "antd";
 import { FaHeadphones, FaQuoteLeft, FaRocket, FaSearch } from "react-icons/fa";
 import { GiTargetShot } from "react-icons/gi";
-import Testimonial from "../../Components/Testimonial/Testimonial";
 import RahulPic from "../../assets/RahulPic.webp";
 import NeerajPic from "../../assets/NeerajPic.webp";
 import AdityaPic from "../../assets/AdityaPic.webp";
+import { Helmet } from "react-helmet";
+import Digital from "../../Components/Digital/Digital";
+
+const StepsCard = lazy(() => import("../../Components/StepsCard/StepsCard"));
+const WhyChoose = lazy(() => import("../../Components/WhyChoose/WhyChoose"));
+const Testimonial = lazy(() => import("../../Components/Testimonial/Testimonial"));
 
 const Home = () => {
   const [selectedTestimonial, setSelectedTestimonial] = useState({
@@ -75,6 +77,12 @@ const Home = () => {
 
   return (
     <div className="mainHome">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>SpellEng: Expert English Tutors via 1-on-1 Video Calls</title>
+        <meta name="description" content="SpellEng offers 1-on-1 video calls with expert English tutors to improve your spoken English. Enjoy flexible scheduling, personalized feedback, and a ₹99 trial." />
+        <link rel="canonical" href="https://www.spelleng.com/" />
+      </Helmet>
       <div>
         <Header />
       </div>
@@ -87,7 +95,9 @@ const Home = () => {
           {cardArray.map((stepCard, index) => {
             return (
               <Col key={index} xs={24} md={12} lg={6} className="componentImport">
-                <StepsCard stepProps={stepCard} />
+                <Suspense fallback={<div></div>}>
+                  <StepsCard stepProps={stepCard} />
+                </Suspense>
               </Col>
             );
           })}
@@ -104,9 +114,9 @@ const Home = () => {
                   height="300"
                   src="https://www.youtube.com/embed/g32qUM-Gb7Q?si=PnJASqmLrzf-K8dU"
                   title="YouTube video player"
-                  frameborder="0"
+                  frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
+                  allowFullScreen
                 ></iframe>
               </Col>
               <Col xs={24} md={12} lg={8} className="rightTestimonail">
@@ -115,9 +125,9 @@ const Home = () => {
                   height="300"
                   src="https://www.youtube.com/embed/9X5WdHbSrBA?si=8vSgjcnlQ9mVN5Dl"
                   title="YouTube video player"
-                  frameborder="0"
+                  frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
+                  allowFullScreen
                 ></iframe>
               </Col>
               <Col xs={24} md={12} lg={8} className="rightTestimonail">
@@ -126,9 +136,9 @@ const Home = () => {
                   height="300"
                   src="https://www.youtube.com/embed/DlDNU7lMWYE?si=TOrVCKPEyZsVoT8v"
                   title="YouTube video player"
-                  frameborder="0"
+                  frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
+                  allowFullScreen
                 ></iframe>
               </Col>
             </Row>
@@ -161,9 +171,9 @@ const Home = () => {
                 <h3 className="my-2 mt-3">"Transformed My SpellEng's Results"</h3>
                 <p>{selectedTestimonial?.description}</p>
                 <div className="testimonialArray">
-                  {testimonialArray.map((testimonial) => {
+                  {testimonialArray.map((testimonial, index) => {
                     return (
-                      <button className="btn" onClick={() => setSelectedTestimonial(testimonial)}>
+                      <button key={index} className="btn" onClick={() => setSelectedTestimonial(testimonial)}>
                         <Testimonial testimonialProps={testimonial} />
                       </button>
                     )
@@ -175,7 +185,9 @@ const Home = () => {
         </div>
       </div>
       <div>
-        <WhyChoose />
+        <Suspense fallback={<div></div>}>
+          <WhyChoose />
+        </Suspense>
       </div>
     </div>
   );

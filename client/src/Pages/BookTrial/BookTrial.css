@@ -6,6 +6,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     background-color: white;
     border-radius: 10px;
     box-shadow: var(--shadow-universal);
@@ -43,4 +44,23 @@
     margin-top: 2rem;
     margin-bottom: 15px;
     color: white;
+}
+
+@media (max-width: 767px) {
+    .BookTrial {
+        min-height: auto !important;
+    }
+
+    .BookTrial .inner h2 {
+        font-weight: 600;
+        font-size: 28px !important;
+    }
+
+    .BookTrial .inner .bookBtn button {
+        width: 100%;
+    }
+
+    .BookTrial .inner p {
+        text-align: left !important;
+    }
 }

@@ -77,7 +77,16 @@
     display: none;
 }
 
+.mobileUsersBtn svg[stroke="currentColor"] {
+    color: white !important;
+}
+
 @media (max-width: 768px) {
+    .chat-container {
+        margin-top: 23px;
+        padding-left: 0px !important;
+    }
+
     .user-list {
         display: none;
         position: absolute;
@@ -88,11 +97,13 @@
     }
 
     .chat-window {
-        padding: 10px !important;
+        padding: 10px 0px !important;
     }
 
     .mobileUsersBtn {
-        display: block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         top: 100px;
         position: absolute;
         top: 0px;

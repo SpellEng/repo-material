@@ -159,7 +159,7 @@ const StudentDashboard = () => {
           </Col>
           <Col xs={24} md={16}>
             <section className="studentDashboardVideo text-center">
-              <iframe width="560" height="230" src="https://www.youtube.com/embed/H9uSOlEnZhc?si=axozlwnQsI1CgjLT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <iframe width="560" height="230" src="https://www.youtube.com/embed/H9uSOlEnZhc?si=axozlwnQsI1CgjLT" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
             </section>
           </Col>
         </Row>

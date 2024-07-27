@@ -121,7 +121,7 @@
   .footer .footerTop {
     flex-wrap: wrap !important;
     gap: 19px;
-    padding: 15px !important;
+    /* padding: 15px !important; */
     margin-top: 40px;
   }
 
@@ -130,7 +130,7 @@
   }
 
   .footer section {
-    margin: 15px !important;
+    margin: 0px !important;
     gap: 28px !important;
   }
 

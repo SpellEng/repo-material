@@ -94,13 +94,19 @@ img {
 .App .anticon,
 .App svg {
   cursor: pointer;
-  color: #09b850;
+}
+
+.App svg[stroke="currentColor"] {
+  color: var(--primary-color) !important;
 }
 
 .anticon-star,
 .anticon-star svg {
   cursor: pointer !important;
-  color: #fadb14 !important;
+}
+
+.ant-list-item-meta-description p {
+  word-wrap: break-word !important;
 }
 
 h1 {
@@ -112,11 +118,32 @@ h1 {
   h1 {
     font-size: calc(1.485rem + 2.82vw) !important;
   }
+
+  h2 {
+    font-size: 23px !important;
+  }
 }
 
 @media (min-width: 2000px) {
   .App {
     max-width: 2000px;
     margin: 0px auto;
+  }
+}
+
+@media (min-width: 768px) {
+
+  .container,
+  .container-md,
+  .container-sm {
+    max-width: 90% !important;
+  }
+}
+
+@media (min-width: 576px) {
+
+  .container,
+  .container-sm {
+    max-width: 95%;
   }
 }

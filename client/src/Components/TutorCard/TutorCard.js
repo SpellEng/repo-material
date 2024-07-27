@@ -7,7 +7,8 @@ import { Link } from "react-router-dom";
 import "./TutorCard.css";
 
 const TutorCard = ({ tutorProps }) => {
-  const averageRating = tutorProps?.reviews?.reduce((acc, review) => acc + review?.rating, 0) / tutorProps?.reviews?.length;
+  const totalRatings = tutorProps?.reviews?.reduce((acc, review) => acc + review?.rating, 0);
+  const averageRating = parseFloat((totalRatings / tutorProps?.reviews?.length).toFixed(2));
 
   return (
     <div className="tutorCard">
@@ -16,7 +17,9 @@ const TutorCard = ({ tutorProps }) => {
       </div>
       <div className="nameSection">
         <div className="name">
-          <Avatar icon={<img src={tutorProps?.picture?.url} alt="" />} />
+          <div>
+            <Avatar icon={<img src={tutorProps?.picture?.url} alt="" />} />
+          </div>
           <div>
             <h4>
               {tutorProps?.fullName}

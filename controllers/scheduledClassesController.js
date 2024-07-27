@@ -437,6 +437,58 @@ exports.addStudentsInScheduledClass = async (req, res) => {
   }
 };
 
+const addReviewToUserModel = async ({ rating, message, userId, classId, tutorId }) => {
+  const user = await User.findById({ _id: tutorId, role: 1 });
+  if (!user) {
+    return res.status(404).json({ errorMessage: 'User not found' });
+  }
+  else {
+    const review = {
+      rating,
+      message,
+      userId,
+      classId
+    };
+    if (user?.reviews?.length > 0) {
+      user.reviews.push(review);
+    } else {
+      user.reviews = [review]
+    }
+    await user.save();
+    return true;
+  }
+}
+
+exports.addReview = async (req, res) => {
+  try {
+    const { rating, message, userId, classId, tutorId } = req.body;
+
+    const findClass = await ScheduledClass.findById({ _id: classId });
+    if (!findClass) {
+      return res.status(404).json({ errorMessage: 'Class not found' });
+    }
+    else {
+      let IfReviewAlreadyPresentForThatClass = findClass?.review.userId === userId;
+      if (IfReviewAlreadyPresentForThatClass?.length > 0) {
+        res.status(201).json({ errorMessage: "Your Review is already submitted" });
+      } else {
+        const review = {
+          rating,
+          message,
+          userId
+        };
+        findClass.review = review;
+        await findClass.save();
+        await addReviewToUserModel({ rating, message, userId, classId, tutorId: findClass?.tutor });
+        res.status(200).json({ successMessage: "Review added successfully" });
+      }
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ errorMessage: 'Error adding review', error });
+  }
+};
+
 exports.endClass = async (req, res) => {
   try {
     const scheduledClass = await ScheduledClass.findById({ _id: req.params.id });

@@ -190,7 +190,7 @@ const Availability = () => {
           <a className="btn ant-btn-primary" target="_blank" href={`${process.env.REACT_APP_BACKEND_URL}/auth/authorize`}>Authorize Zoom</a>
         </div>
         <div className="row">
-          <div className="clockSide col-md-4">
+          <div className="clockSide col-md-4 my-4">
             <CalendarComp date={date} onChange={onChange} />
           </div>
           <div className="timeSelect col-md-8">

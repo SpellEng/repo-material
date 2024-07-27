@@ -12,7 +12,7 @@ const StudentBookClassTemplate = ({ studentName, tutorName, date, time, url }) =
             font-family: Arial, sans-serif;
             line-height: 1.6;
             background-color: #f4f4f4;
-            margin: 0;F
+            margin: 0;
             padding: 20px;
         }
 
@@ -82,7 +82,7 @@ const StudentBookClassTemplate = ({ studentName, tutorName, date, time, url }) =
             <p>Your class has been successfully scheduled with ${tutorName}</p>
             <p>Class Details:</p>
             <ul class="details-list">
-                <li><strong>d:</strong> ${date}</li>
+                <li><strong>Date:</strong> ${date}</li>
                 <li><strong>Time:</strong> ${time}</li>
                 <li><strong>Tutor:</strong> ${tutorName}</li>
             </ul>

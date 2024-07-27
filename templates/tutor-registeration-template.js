@@ -12,7 +12,7 @@ const TutorRegisterationTemplate = ({ name }) => {
             font-family: Arial, sans-serif;
             line-height: 1.6;
             background-color: #f4f4f4;
-            margin: 0;F
+            margin: 0;
             padding: 20px;
         }
 

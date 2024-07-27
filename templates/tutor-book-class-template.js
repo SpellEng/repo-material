@@ -12,7 +12,7 @@ const TutorBookClassTemplate = ({ tutorName, studentName, date, time }) => {
             font-family: Arial, sans-serif;
             line-height: 1.6;
             background-color: #f4f4f4;
-            margin: 0;F
+            margin: 0;
             padding: 20px;
         }
 
@@ -82,7 +82,7 @@ const TutorBookClassTemplate = ({ tutorName, studentName, date, time }) => {
             <p>You have a new class scheduled with ${studentName}</p>
             <p>Class Details:</p>
             <ul class="details-list">
-                <li><strong>d:</strong> ${date}</li>
+                <li><strong>Date:</strong> ${date}</li>
                 <li><strong>Time:</strong> ${time}</li>
             </ul>
             <p>Please log in to your SpellEng account to view more details and

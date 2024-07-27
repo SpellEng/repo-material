@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trial Session Booking Confirmation</title>
+    <title>Student Session Booking Confirmation</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -68,6 +68,7 @@
 
         .footer p {
             margin: 5px 0;
+            margin-bottom: 0px;
         }
     </style>
 </head>
@@ -75,21 +76,19 @@
 <body>
     <div class="container">
         <div class="content">
-            <h2>Hello ${studentName},</h2>
-            <p>Thank you for booking a trial session with SpellEng for just 99 INR!</p>
-            <p>We are thrilled to have you start your journey with us.</p>
-            <p>Here are your trial session details:</p>
+            <h2>Dear ${tutorName},</h2>
+            <p>You have a new class scheduled with ${studentName}</p>
+            <p>Class Details:</p>
             <ul class="details-list">
-                <li><strong>Session Cost:</strong> 99 INR</li>
-                <li><strong>Full Name:</strong> ${studentName}</li>
-                <li><strong>Email:</strong> ${studentEmail}</li>
+                <li><strong>Date:</strong> ${date}</li>
+                <li><strong>Time:</strong> ${time}</li>
             </ul>
-            <p>You can log in to your account and view your trial session details <a href="${loginLink}" target="_blank"
-                    class="button">here</a>.</p>
-            <p>If you have any questions or need assistance, feel free to reach out to us.</p>
+            <p>Please log in to your SpellEng account to view more details and
+            prepare for the session.</p>
+            <p>Thank you for your dedication to helping students improve their
+            English skills.</p>
         </div>
         <div class="footer">
-            <p>Happy learning!</p>
             <p>Best regards,</p>
             <p><strong>The SpellEng Team</strong></p>
         </div>

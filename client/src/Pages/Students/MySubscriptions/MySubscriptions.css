@@ -67,6 +67,16 @@
 
 @media (max-width: 767px) {
     .subscriptions-container {
+        padding: 0px !important;
+        padding-top: 15px;
+    }
+
+    .subscriptions-container .subscriptionsItem .inner {
         padding: 15px !important;
+    }
+
+    .subscriptions-container .subscriptionsItem .items {
+        flex-wrap: wrap !important;
+        justify-content: start;
     }
 }

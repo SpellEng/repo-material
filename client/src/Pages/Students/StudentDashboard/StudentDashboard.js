@@ -100,7 +100,7 @@ const StudentDashboard = () => {
               <div className="stats">
                 <div>
                   <small>
-                    lessons
+                    Lessons
                   </small>
                   <h5>{classes?.length}</h5>
                 </div>

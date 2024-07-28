@@ -110,6 +110,10 @@
         padding-top: 12px !important;
     }
 
+    .mainNavbar.container {
+        max-width: 100% !important;
+    }
+
     .mainNavbar .desktopRightNav {
         display: none !important;
     }

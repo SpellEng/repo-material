@@ -32,7 +32,7 @@ const Footer = () => {
             <Link to="/about-us">About Us</Link>
             <Link to="/contact-us">Contact Us</Link>
             <Link to="/all-tutors">All Tutors</Link>
-            <Link to="/subscription">Book a Trial</Link>
+            <Link to="/student/book-trial">Book a Trial</Link>
           </div>
           <div className="legal">
             <h4>Legal Pages</h4>

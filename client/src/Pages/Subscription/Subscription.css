@@ -138,6 +138,10 @@
     row-gap: 19px;
 }
 
+.Subscription .subscriptionContainer .billContainer .item.discount h6:last-of-type {
+    color: red !important;
+}
+
 .Subscription .subscriptionContainer .billContainer .couponContainer .ant-input-group-wrapper {
     width: 100%;
     max-width: 200px;

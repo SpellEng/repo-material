@@ -6,6 +6,10 @@
     /* padding: 30px 0px; */
 }
 
+.mainNavbar.container {
+    max-width: 91% !important;
+}
+
 .mainNavbar .logo img {
     width: 175px;
 }
@@ -43,7 +47,8 @@
     color: white;
     border-radius: 3px;
     border: none;
-    padding: 8px 20px;
+    /* padding: 8px 20px; */
+    padding: 11.6px 17px !important;
 }
 
 .rightSide .darkMood button {

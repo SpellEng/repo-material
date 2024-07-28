@@ -46,13 +46,13 @@ const BillSummary = ({ selectedPlan, selectedClasses, pricingPlans }) => {
                 <h6><CurrencySign />{formatCurrency(currentPrice)}</h6>
             </div>
             {discount > 0 && (
-                <div className='item'>
+                <div className='item discount'>
                     <h6>Discount ({plan.discount}%):</h6>
                     <h6>-<CurrencySign />{formatCurrency(discount)}</h6>
                 </div>
             )}
             {couponDiscountPrice > 0 && (
-                <div className='item'>
+                <div className='item discount'>
                     <h6>Coupon Discount ({discountFromCoupon}%):</h6>
                     <h6>-<CurrencySign />{formatCurrency(couponDiscountPrice)}</h6>
                 </div>

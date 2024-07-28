@@ -58,77 +58,79 @@ const Login = () => {
 
   return (
     <div className="login">
-      <Row>
-        <Col xs={24} md={13} className="leftLogin col-md-7">
-          <div>
-            <img src={loginpic} alt="" />
-            <div className="bgOpacity" />
-            <div className="caption">
-              <h3>
-                "Learning English is crucial for career
-                advancement and higher income potential. It opens global job
-                opportunities, improves communication skills, and increases access
-                to valuable educational resources."
-              </h3>
-              <div className="nameAndReviews">
-                <div>
-                  <h2>Parvej Khan</h2>
-                  <span>Founder, SpellEng</span>
+      <div className="container">
+        <Row>
+          <Col xs={24} md={13} className="leftLogin col-md-7 mt-3">
+            <div>
+              <img src={loginpic} alt="" />
+              <div className="bgOpacity" />
+              <div className="caption">
+                <h3>
+                  "Learning English is crucial for career
+                  advancement and higher income potential. It opens global job
+                  opportunities, improves communication skills, and increases access
+                  to valuable educational resources."
+                </h3>
+                <div className="nameAndReviews">
+                  <div>
+                    <h2>Parvej Khan</h2>
+                    <span>Founder, SpellEng</span>
+                  </div>
+                  <Rate value={4.5} allowHalf disabled />
                 </div>
-                <Rate value={4.5} allowHalf disabled />
               </div>
             </div>
-          </div>
-        </Col>
-        <Col xs={24} md={10} className="rightLogin">
-          <div>
-            <Link to="/">
-              <img className="logo" src={logopic} alt="" />
-            </Link>
-            <h2>WELCOME BACK</h2>
-            <p>Welcome back, please enter your email or phone number</p>
-            <form onSubmit={submitHandler}>
-              <div className="item">
-                <label for="inputEmail" className="form-label">
-                  Email
-                </label>
-                <Input
-                  onChange={(e) => handleChange('email', e.target.value)}
-                  type="email"
-                  placeholder="Enter your email"
-                />
+          </Col>
+          <Col xs={24} md={10} className="rightLogin">
+            <div>
+              <Link to="/">
+                <img className="logo" src={logopic} alt="" />
+              </Link>
+              <h2>WELCOME BACK</h2>
+              <p>Welcome back, please enter your email or phone number</p>
+              <form onSubmit={submitHandler}>
+                <div className="item">
+                  <label for="inputEmail" className="form-label">
+                    Email
+                  </label>
+                  <Input
+                    onChange={(e) => handleChange('email', e.target.value)}
+                    type="email"
+                    placeholder="Enter your email"
+                  />
+                </div>
+                <div className="item">
+                  <label for="inputEmail" className="form-label">
+                    Password
+                  </label>
+                  <Input.Password
+                    onChange={(e) => handleChange('password', e.target.value)}
+                    type="password"
+                    placeholder="Enter your password"
+                  />
+                </div>
+                <div>
+                  <Button loading={loading} htmlType="submit" className="h-auto py-2">Login</Button>
+                </div>
+              </form>
+              <Divider>Or</Divider>
+              <div className="bookTrail">
+                <p>
+                  Not Registered Yet? &nbsp;
+                  <Link to="/signup">Book A Trial @ ₹99</Link>
+                </p>
               </div>
-              <div className="item">
-                <label for="inputEmail" className="form-label">
-                  Password
-                </label>
-                <Input.Password
-                  onChange={(e) => handleChange('password', e.target.value)}
-                  type="password"
-                  placeholder="Enter your password"
-                />
+              <div className="bookTrail">
+                <p>
+                  Forgot Password? &nbsp;
+                  <Link to="/forgot-password">Click here</Link>
+                </p>
               </div>
-              <div>
-                <Button loading={loading} htmlType="submit" className="h-auto py-2">Login</Button>
-              </div>
-            </form>
-            <Divider>Or</Divider>
-            <div className="bookTrail">
-              <p>
-                Not Registered Yet? &nbsp;
-                <Link to="/signup">Book A Trial @ ₹99</Link>
-              </p>
             </div>
-            <div className="bookTrail">
-              <p>
-                Forgot Password? &nbsp;
-                <Link to="/forgot-password">Click here</Link>
-              </p>
-            </div>
-          </div>
-        </Col>
-      </Row>
-    </div >
+          </Col>
+        </Row>
+      </div>
+    </div>
   );
 };
 

@@ -575,13 +575,16 @@ exports.cancelAndRescheduleClass = async (req, res) => {
               { new: true } // Return the updated document
             ).populate("students tutor");
             if (result) {
-              res.status(200).json({ successMessage: 'Scheduled Class Cancelled Successfully. You can reschedule now' });
               if (findUser?.role === 0) {
                 sendEmail(upcomingClass?.tutor?.email, `Class Cancellation Notification`, TutorStudentCancelClassTemplate({ tutorName: upcomingClass?.tutor?.fullName, studentName: upcomingClass?.students[0]?.fullName, date: upcomingClass?.date, time: upcomingClass?.time }));
+                sendEmail(upcomingClass?.students[0]?.email, `Class Cancellation Notification`, StudentTutorCancelClassTemplate({ tutorName: upcomingClass?.tutor?.fullName, studentName: upcomingClass?.students[0]?.fullName, date: upcomingClass?.date, time: upcomingClass?.time }));
                 sendEmail("admin@spelleng.com", `Class Cancellation - Student`, AdminStudentClassCancelTemplate({ tutorName: upcomingClass?.tutor?.fullName, studentName: upcomingClass?.students[0]?.fullName, dateAndTime: `${upcomingClass?.date} ${upcomingClass?.time}`, date: moment().format("DD/MM/YYYY") }));
+                res.status(200).json({ successMessage: 'Scheduled Class Cancelled Successfully. You can reschedule now' });
               } else {
+                sendEmail(upcomingClass?.tutor?.email, `Class Cancellation Notification`, TutorStudentCancelClassTemplate({ tutorName: upcomingClass?.tutor?.fullName, studentName: upcomingClass?.students[0]?.fullName, date: upcomingClass?.date, time: upcomingClass?.time }));
                 sendEmail(upcomingClass?.students[0]?.email, `Class Cancellation Notification`, StudentTutorCancelClassTemplate({ tutorName: upcomingClass?.tutor?.fullName, studentName: upcomingClass?.students[0]?.fullName, date: upcomingClass?.date, time: upcomingClass?.time }));
                 sendEmail("admin@spelleng.com", `Class Cancellation - Tutor`, AdminTutorClassCancelTemplate({ tutorName: upcomingClass?.tutor?.fullName, studentName: upcomingClass?.students[0]?.fullName, dateAndTime: `${upcomingClass?.date} ${upcomingClass?.time}`, date: moment().format("DD/MM/YYYY") }));
+                res.status(200).json({ successMessage: 'Scheduled Class Cancelled Successfully. You can reschedule now' });
               }
             }
           }

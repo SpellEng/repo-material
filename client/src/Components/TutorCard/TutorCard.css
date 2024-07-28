@@ -20,7 +20,7 @@
 
 .tutorCard .nameSection .name {
     display: flex;
-    /* align-items: center; */
+    align-items: center;
     gap: 4px;
 }
 

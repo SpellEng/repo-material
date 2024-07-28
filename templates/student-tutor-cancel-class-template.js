@@ -1,4 +1,4 @@
-const TutorStudentCancelClassTemplate = ({ tutorName, studentName, date, time }) => {
+const StudentTutorCancelClassTemplate = ({ tutorName, studentName, date, time }) => {
     return `
     <!DOCTYPE html>
 <html lang="en">
@@ -78,13 +78,13 @@ const TutorStudentCancelClassTemplate = ({ tutorName, studentName, date, time })
 <body>
     <div class="container">
         <div class="content">
-            <h2>Dear ${tutorName},</h2>
-            <p>We regret to inform you that your class with ${studentName} scheduled for ${date} at ${time} has been canceled.</p>
-            <p>Class Details:</p>
-            <ul class="details-list">
-                <li><strong>Date:</strong> ${date}</li>
-                <li><strong>Time:</strong> ${time}</li>
-            </ul>
+            <h2>Dear ${studentName},</h2>
+            <p>We regret to inform you that your class with ${tutorName} scheduled for ${date} at ${time} has been canceled.</p>
+           <p>You can reschedule your class through your dashboard here: 
+           <br>
+           <a href="https://www.spelleng.com/all-tutors" target="_blank"
+                    class="button">here</a>
+           </p>
             <p>We apologize for any inconvenience this may cause. You can view
             your updated schedule by logging in to your SpellEng account.</p>
             <p>Thank you for your understanding.</p>
@@ -100,4 +100,4 @@ const TutorStudentCancelClassTemplate = ({ tutorName, studentName, date, time })
     `;
 };
 
-module.exports = TutorStudentCancelClassTemplate;
+module.exports = StudentTutorCancelClassTemplate;

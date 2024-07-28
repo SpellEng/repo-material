@@ -575,8 +575,10 @@ exports.cancelAndRescheduleClass = async (req, res) => {
             if (result) {
               res.status(200).json({ successMessage: 'Scheduled Class Cancelled Successfully. You can reschedule now' });
               if (findUser?.role === 0) {
-                sendEmail("admin@spelleng.com", `Class Cancellation -  Student`, AdminStudentClassCancelTemplate({ tutorName: upcomingClass?.tutor?.fullName, studentName: upcomingClass?.students[0]?.fullName, dateAndTime: `${upcomingClass?.date} ${upcomingClass?.time}`, date: moment().format("DD/MM/YYYY") }));
+                sendEmail(upcomingClass?.tutor?.email, `Class Cancellation Notification`, AdminStudentClassCancelTemplate({ tutorName: upcomingClass?.tutor?.fullName, studentName: upcomingClass?.students[0]?.fullName, dateAndTime: `${upcomingClass?.date} ${upcomingClass?.time}`, date: moment().format("DD/MM/YYYY") }));
+                sendEmail("admin@spelleng.com", `Class Cancellation - Student`, AdminStudentClassCancelTemplate({ tutorName: upcomingClass?.tutor?.fullName, studentName: upcomingClass?.students[0]?.fullName, dateAndTime: `${upcomingClass?.date} ${upcomingClass?.time}`, date: moment().format("DD/MM/YYYY") }));
               } else {
+                sendEmail(upcomingClass?.students[0]?.email, `Class Cancellation Notification`, AdminStudentClassCancelTemplate({ tutorName: upcomingClass?.tutor?.fullName, studentName: upcomingClass?.students[0]?.fullName, dateAndTime: `${upcomingClass?.date} ${upcomingClass?.time}`, date: moment().format("DD/MM/YYYY") }));
                 sendEmail("admin@spelleng.com", `Class Cancellation - Tutor`, AdminTutorClassCancelTemplate({ tutorName: upcomingClass?.tutor?.fullName, studentName: upcomingClass?.students[0]?.fullName, dateAndTime: `${upcomingClass?.date} ${upcomingClass?.time}`, date: moment().format("DD/MM/YYYY") }));
               }
             }

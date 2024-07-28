@@ -60,9 +60,9 @@ const scheduledClassesSchema = new mongoose.Schema({
         }
     ],
     review: {
-        rating: { type: Number, required: true },
-        message: { type: String, required: true },
-        userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
+        rating: { type: Number },
+        message: { type: String },
+        userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
     },
 }, { timestamps: true });
 

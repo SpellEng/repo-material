@@ -34,7 +34,7 @@ app.use(express.json({ limit: "5000mb" }));
 app.use(express.urlencoded({ extended: true, limit: "5000mb" }));
 app.use(express.static('client/build'));
 app.use(morgan("tiny"));
-app.use(cors({ origin: ["https://www.spelleng.com", "http://localhost:3000"] }));
+app.use(cors({ origin: ["https://www.spelleng.com", "http://localhost:3000", "https://spelleng.com"] }));
 app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use('/api/files', fileRoutes);
 app.use('/api/subscriptions', subscriptionRoutes);

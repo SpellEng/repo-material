@@ -62,7 +62,7 @@ const Footer = () => {
             </Link>
           </div>
           <div className="socialMedia">
-            <h4>App available on</h4>
+            {/* <h4>App available on</h4>
             <p>Apps Coming Soon!</p>
             <Row gutter={[10, 10]} className="appsImages my-3">
               <Col xs={24} md={12}>
@@ -71,7 +71,7 @@ const Footer = () => {
               <Col xs={24} md={12}>
                 <img src={ios} alt="App Store" />
               </Col>
-            </Row>
+            </Row> */}
             <div className="followPart">
               <h4>Follow On</h4>
               <div className="followLink mt-2">

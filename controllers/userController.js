@@ -481,7 +481,7 @@ exports.changePassword = async (req, res) => {
 exports.sendContactUsEmail = async (req, res) => {
     const { fullName, email, phoneNumber, type, message } = req.body
     try {
-        await sendEmail(config.EMAIL, "Email from Contact Us form", ContactUsTemplate({ fullName, email, phoneNumber, type, message }));
+        await sendEmail("admin@spelleng.com", "Email from Contact Us form", ContactUsTemplate({ fullName, email, phoneNumber, type, message }));
         res.status(200).json({ successMessage: 'Email sent successfuly!' });
     } catch (err) {
         res.status(400).json({ successMessage: ' Failed to send email. Please try again later' });

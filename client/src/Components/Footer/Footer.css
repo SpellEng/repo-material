@@ -143,13 +143,15 @@
 
   .footer .copyright {
     flex-wrap: wrap !important;
+    flex-direction: column;
+    row-gap: 19px;
     text-align: center;
     justify-content: center;
     gap: 19px;
   }
 
   .footer .copyright img {
-    height: 35px !important;
-    width: max-content !important;
+    /* height: 35px !important; */
+    width: 130px !important;
   }
 }

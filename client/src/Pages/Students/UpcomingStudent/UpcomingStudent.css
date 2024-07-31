@@ -21,10 +21,15 @@
     }
 
     .UpcomingStudent .ant-tabs-content-holder {
-        margin-top: 100px;
+        margin-top: 10px;
     }
 
     .UpcomingStudent .downloadBtn {
-        top: 100px;
+        top: 0px;
+        right: 0px;
+        display: block;
+        position: relative;
+        width: max-content;
+        margin-left: auto;
     }
 }

@@ -1,11 +1,9 @@
 const express = require('express');
-const { uploadFiles, deleteFile, uploadMeetingRecordingToCloudinary } = require('../controllers/uploadFilesController');
-const { AuthenticatorJWT } = require('../middlewares/authenticator');
+const { uploadFiles } = require('../controllers/uploadFilesController');
 const upload = require('../middlewares/multer');
 
 const router = express.Router();
  
 router.post('/upload', upload.single("file"), uploadFiles);
-router.post('/base64-upload', AuthenticatorJWT, uploadMeetingRecordingToCloudinary);
 
 module.exports = router;

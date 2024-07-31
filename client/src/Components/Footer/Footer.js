@@ -1,16 +1,15 @@
 import React from "react";
 import "./Footer.css";
 import { Link, useNavigate } from "react-router-dom";
-import android from "../../assets/google-play.svg";
-import ios from "../../assets/app-store.svg";
 import fb from "../../assets/fb.png";
 import insta from "../../assets/insta.png";
 import tw from "../../assets/tw.png";
 import yt from "../../assets/yt.png";
 import Li from "../../assets/Li.png";
-import { Col, Divider, Row } from "antd";
+import { Divider } from "antd";
 import logo from "../../assets/logo.png";
 import { LuClock, LuMail, LuMapPin, LuPhone } from "react-icons/lu";
+import { isAuthenticated } from "../Auth/auth";
 
 const Footer = () => {
   const router = useNavigate();
@@ -19,10 +18,10 @@ const Footer = () => {
     <div className="footer">
       <div className="container">
         <div className="footerTop">
-          <h3>
+          <h2>
             Get started on your path to <span>success with us</span>
-          </h3>
-          <button onClick={() => router("/student/book-trial")}>Book A Trial @ ₹99</button>
+          </h2>
+          <button onClick={() => router(isAuthenticated() ? "/student/book-trial" : "/signup")}>Book A Trial @ ₹99</button>
         </div>
         <Divider />
         <section>
@@ -32,7 +31,7 @@ const Footer = () => {
             <Link to="/about-us">About Us</Link>
             <Link to="/contact-us">Contact Us</Link>
             <Link to="/all-tutors">All Tutors</Link>
-            <Link to="/student/book-trial">Book a Trial</Link>
+            <Link to={isAuthenticated() ? "/student/book-trial" : "/signup"}>Book a Trial</Link>
           </div>
           <div className="legal">
             <h4>Legal Pages</h4>

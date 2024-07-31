@@ -41,7 +41,7 @@ const Subscription = () => {
     <div className="Subscription">
       <div className="inner container">
         <div>
-          <h3 className='text-center'>Choose a plan that suits your budget & schedule</h3>
+          <h3 className='text-center'>Choose a plan that suits your need</h3>
           <div className="features">
             <ul>
               {
@@ -63,26 +63,26 @@ const Subscription = () => {
             </ul>
           </div>
         </div>
-        <div className="classesBtns">
-          <h6>Select No. of classes</h6>
-          <Select
-            defaultValue={12}
-            className='classesSelect'
-            onChange={(val) => setSelectedClasses(val)}
-            options={[
-              {
-                value: 12,
-                label: "12 Classes",
-              },
-              {
-                value: 20,
-                label: "20 Classes",
-              }
-            ]}
-          />
-        </div>
         <div className="subscriptionContainer">
           <div className="subscriptionPlanContainer">
+            <div className="classesBtns">
+              <h6>Select No. of classes</h6>
+              <Select
+                defaultValue={12}
+                className='classesSelect'
+                onChange={(val) => setSelectedClasses(val)}
+                options={[
+                  {
+                    value: 12,
+                    label: "12 Classes per month",
+                  },
+                  {
+                    value: 20,
+                    label: "20 Classes per month",
+                  }
+                ]}
+              />
+            </div>
             {pricingPlans.reverse().map(plan => (
               <PricingPlanCard
                 key={plan.duration}

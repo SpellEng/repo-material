@@ -45,12 +45,13 @@
 @media (max-width:767px) {
   .contact {
     padding: 15px 0px !important;
+    padding-top: 0px !important;
   }
 
   .contact .innerContact .contactleft h2 {
     font-size: 21px;
     word-wrap: break-word;
-    margin-top: 15px !important;
+    margin-top: 0px !important;
   }
 
   .contact .ContactCard .inner {

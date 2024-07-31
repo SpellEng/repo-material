@@ -44,3 +44,9 @@
     width: 130px;
     border-radius: 0px;
 }
+
+@media (max-width:767px) {
+    .TutorEarnings {
+        padding-top: 0px !important;
+    }
+}

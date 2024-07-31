@@ -16,7 +16,6 @@
     "aws-sdk": "^2.1659.0",
     "axios": "^1.7.2",
     "bcryptjs": "^2.4.3",
-    "cloudinary": "^1.27.0",
     "concurrently": "^6.3.0",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
@@ -31,12 +30,9 @@
     "node-cron": "^3.0.3",
     "nodemailer": "^6.7.0",
     "nodemon": "^2.0.13",
-    "otpless-node-js-auth-sdk": "^1.0.8",
     "peer": "^1.0.2",
     "razorpay": "^2.9.4",
     "socket.io": "^4.7.5",
-    "stripe": "^10.17.0",
-    "twilio": "^5.2.1",
     "uuid": "^8.3.2"
   }
 }

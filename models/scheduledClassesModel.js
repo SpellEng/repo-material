@@ -43,6 +43,10 @@ const scheduledClassesSchema = new mongoose.Schema({
     meetingUrl: {
         type: String,
     },
+    trialClass: {
+        type: Boolean,
+        default: false
+    },
     messages: [
         {
             sender: {

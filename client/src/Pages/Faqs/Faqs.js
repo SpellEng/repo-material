@@ -1,7 +1,7 @@
 import React from "react";
 import "./Faqs.css";
 import { Col, Collapse, Row } from "antd";
-import { AntDesignOutlined, UserOutlined } from "@ant-design/icons";
+import { EditOutlined, UserOutlined } from "@ant-design/icons";
 import { Avatar, Tooltip } from "antd";
 import { useNavigate } from "react-router-dom";
 import FaqIcon from "../../assets/FaqIcon";
@@ -428,16 +428,14 @@ const Faqs = () => {
         <div className="stilQuestions">
           <Avatar.Group>
             <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" />
-            <a href="https://ant.design">
-              <Avatar
-                style={{
-                  backgroundColor: "#f56a00",
-                }}
-              >
-                K
-              </Avatar>
-            </a>
-            <Tooltip title="Ant User" placement="top">
+            <Avatar
+              style={{
+                backgroundColor: "#f56a00",
+              }}
+            >
+              K
+            </Avatar>
+            <Tooltip title="SpellEng User" placement="top">
               <Avatar
                 style={{
                   backgroundColor: "#87d068",
@@ -449,7 +447,7 @@ const Faqs = () => {
               style={{
                 backgroundColor: "#1677ff",
               }}
-              icon={<AntDesignOutlined />}
+              icon={<EditOutlined />}
             />
           </Avatar.Group>
           <h2>Still have a question?</h2>

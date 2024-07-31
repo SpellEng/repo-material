@@ -26,7 +26,7 @@ const BookTrial = () => {
                 key: process.env.REACT_APP_RAZORPAY_KEY_ID,
                 amount: 99 * 100,
                 currency: 'INR',
-                name: 'SpellENg Trial Payment @99',
+                name: 'SpellENg Trial Payment @ ₹99',
                 description: 'Trial Payment',
                 order_id: order_id,
                 handler: async function (response) {
@@ -72,7 +72,7 @@ const BookTrial = () => {
         <div className="BookTrial container">
             <div className="inner">
                 <div className="fee">
-                    <h2>Book A Trial Class @ 99</h2>
+                    <h2>Book A Trial Class @ ₹99</h2>
                     <p>
                         You get a 30-minute trial class with an expert tutor,
                         <span> feedback, and recording</span>

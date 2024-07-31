@@ -6,3 +6,9 @@
     font-size: 17px;
     font-weight: 500;
 }
+
+@media (max-width:767px) {
+    .TutorProfile {
+        padding-top: 0px !important;
+    }
+}

@@ -72,9 +72,8 @@ const convertToUserLocalTime = (time, userTimeZone) => {
     return time.clone().tz(userTimeZone);
 };
 
-nodeCron.schedule('*/3 * * * *', async () => {
+nodeCron.schedule('*/4 * * * *', async () => {
     const nowUTC = moment.utc();
-    const fiveMinutesLaterUTC = moment.utc().add(5, 'minutes');
     console.log("Cron job called at UTC time: ", nowUTC.format());
 
     const upcomingClasses = await ScheduledClass.find({ date: { $gte: moment().format("DD/MM/YYYY") } }).populate("students tutor");

@@ -4,6 +4,6 @@ const router = express.Router();
 
 router.get('/authorize', authController.authorizeZoom);
 router.get('/callback', authController.handleZoomCallback);
-router.post('/refresh-token', authController.refreshToken);
+// router.post('/refresh-token', authController.ref);
 
 module.exports = router;

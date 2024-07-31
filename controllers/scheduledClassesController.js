@@ -122,7 +122,7 @@ exports.getAllTutorsScheduledClasses = async (req, res) => {
 
 exports.createMeeting = async (req, res) => {
   const { startTime, email, timezone } = req.body;
-  const zoomAccessToken = authController.getZoomAccessToken();
+  const zoomAccessToken = await authController.getZoomAccessToken();
   console.log(zoomAccessToken, "zoomAccessToken");
 
   try {
@@ -135,7 +135,6 @@ exports.createMeeting = async (req, res) => {
         duration: 20,
         timezone,
         settings: {
-          "join_before_host": false,  // Participants can join only when the meeting starts
           "auto_recording": "cloud",  // Automatically record the meeting
           "mute_upon_entry": false
         },
@@ -159,7 +158,7 @@ exports.createMeeting = async (req, res) => {
   } catch (error) {
     console.log(error.response);
     // console.error('Error creating Zoom meeting', error.response ? error.response.data : error.message);
-    res.status(201).json({ errorMessage: `${error?.response?.data?.message || error?.message}. Please click on authorize zoom button` });
+    res.status(201).json({ errorMessage: `${error?.response?.data?.message || error?.message} Please click on authorize zoom button` });
   }
 };
 
@@ -168,14 +167,13 @@ exports.getAllTutorFutureScheduledClasses = async (req, res) => {
     const currentDateTime = moment();
     const scheduledClasses = await ScheduledClass.find({
       tutor: req.params.id,
-      students: { $exists: true, $not: { $size: 0 } },
-      date: { $gte: moment().format("DD/MM/YYYY") }
+      students: { $exists: true, $not: { $size: 0 } }
     })
       .populate("students tutor").exec();
     // Filter the classes to get only the past ones
     const futureScheduledClasses = scheduledClasses.filter((scheduledClass) => {
       const [startTime, endTime] = scheduledClass.time.split(' - ');
-      const endDateTimeStr = `${scheduledClass.date} ${startTime}`;
+      const endDateTimeStr = `${scheduledClass.date} ${endTime}`;
       const endDateTime = moment(endDateTimeStr, "DD/MM/YYYY h:mma");
 
       return endDateTime.isAfter(currentDateTime);
@@ -232,7 +230,8 @@ exports.getAllStudentCancelledScheduledClasses = async (req, res) => {
       .populate("students tutor").exec();
 
     if (scheduledClasses) {
-      res.status(200).send(scheduledClasses);
+      let classesWithoutTrial = scheduledClasses?.filter(f => !f?.trialClass);
+      res.status(200).send(classesWithoutTrial);
     } else {
       res.status(200).json([]);
     }
@@ -246,16 +245,14 @@ exports.getAllStudentFutureScheduledClasses = async (req, res) => {
   const studentId = req.params.id;
   try {
     const scheduledClasses = await ScheduledClass.find({
-      cancelledBy: { $nin: [mongoose.Types.ObjectId(studentId)] },
-      students: { $in: [mongoose.Types.ObjectId(studentId)] },
-      date: { $gte: moment().format("DD/MM/YYYY") }
+      students: { $in: [mongoose.Types.ObjectId(studentId)] }
     })
       .populate("students tutor").exec();
 
     const currentDateTime = moment();
     const futureScheduledClasses = scheduledClasses.filter((scheduledClass) => {
       const [startTime, endTime] = scheduledClass.time.split(' - ');
-      const endDateTimeStr = `${scheduledClass.date} ${startTime}`;
+      const endDateTimeStr = `${scheduledClass.date} ${endTime}`;
       const endDateTime = moment(endDateTimeStr, "DD/MM/YYYY h:mma");
 
       return endDateTime.isAfter(currentDateTime);
@@ -277,7 +274,6 @@ exports.getAllStudentPastScheduledClasses = async (req, res) => {
   try {
     const currentDateTime = moment();
     const scheduledClasses = await ScheduledClass.find({
-      cancelledBy: { $nin: [mongoose.Types.ObjectId(studentId)] },
       students: { $in: [mongoose.Types.ObjectId(studentId)] },
       date: { $lte: moment().format("DD/MM/YYYY") }
     })
@@ -356,6 +352,7 @@ exports.addStudentsInScheduledClass = async (req, res) => {
   const { tutor, date, time, student } = req.body;
   const findStudent = await User?.findOne({ _id: student });
   const findTutor = await User?.findOne({ _id: tutor });
+  console.log(findStudent)
   if (findStudent?.trialActivated && !findStudent?.trialUsed) {
     try {
       // Check if a scheduled class exists for the given date and time
@@ -369,11 +366,11 @@ exports.addStudentsInScheduledClass = async (req, res) => {
         // Add the student to the students array if not already present
         if (!scheduledClass?.students?.includes(student)) {
           scheduledClass?.students?.push(student);
+          scheduledClass.trialClass = true;
         }
-
         // Save the updated or newly created scheduled class
-        await scheduledClass.save();
         findStudent.trialUsed = true;
+        await scheduledClass.save();
         await findStudent.save();
         sendEmail(findStudent?.email, `Class Scheduled with ${findTutor?.fullName}`, StudentBookClassTemplate({ studentName: findStudent?.fullName, tutorName: findTutor?.fullName, date, time, url: `${config.FRONTEND_URL}/student/upcoming-classes` }));
         sendEmail(findTutor?.email, `Class Scheduled with ${findStudent?.fullName}`, TutorBookClassTemplate({ tutorName: findTutor?.fullName, studentName: findStudent?.fullName, date, time }));
@@ -400,10 +397,10 @@ exports.addStudentsInScheduledClass = async (req, res) => {
           cancelledBy: { $nin: [mongoose.Types.ObjectId(student)] }
         }).populate("students tutor").exec();
 
-        // Filter classes that fall within the current month
+        // Filter classes that fall within the current month with trial class excluded
         const studentCurrentMonthClasses = allScheduledClasses.filter(scheduledClass => {
           const classDate = moment(scheduledClass.date, "DD/MM/YYYY").toDate();
-          return classDate >= currentMonthStart && classDate < nextMonthStart;
+          return !scheduledClass?.trialClass && classDate >= currentMonthStart && classDate < nextMonthStart;
         });
         if (parseInt(checkIfStudentIsSubscribed?.classesPerMonth) > studentCurrentMonthClasses?.length) {
           // Check if a scheduled class exists for the given date and time
@@ -546,12 +543,12 @@ exports.cancelAndRescheduleClass = async (req, res) => {
 
     // Count the number of classes cancelled by the student in the current month
     const findUser = await User.findOne({ _id: studentId });
-    const cancelledCount = await ScheduledClass.countDocuments({
+    const cancelledCount = await ScheduledClass.find({
       cancelledBy: studentId,
       updatedAt: { $gte: currentMonthStart, $lt: nextMonthStart }
     });
-
-    if (cancelledCount >= 3) {
+    const updatedCancelCount = cancelledCount?.filter(f => !f?.trialClass);
+    if (updatedCancelCount?.length >= 3) {
       return res.status(201).json({ errorMessage: 'You have already cancelled 3 classes this month. You cannot cancel more.' });
     }
     else {
@@ -571,15 +568,22 @@ exports.cancelAndRescheduleClass = async (req, res) => {
           } else {
             const result = await ScheduledClass.findByIdAndUpdate(
               { _id: req.params.id },
-              { $push: { cancelledBy: studentId }, $pull: { students: studentId } },
-              { new: true } // Return the updated document
+              { $push: { cancelledBy: studentId }, $pull: { students: studentId }, $set: { trialClass: false } },
             ).populate("students tutor");
             if (result) {
+              console.log(result);
+              // const findScheduledClass = await ScheduledClass.findOne({ _id: req.params.id });
               if (findUser?.role === 0) {
                 sendEmail(upcomingClass?.tutor?.email, `Class Cancellation Notification`, TutorStudentCancelClassTemplate({ tutorName: upcomingClass?.tutor?.fullName, studentName: upcomingClass?.students[0]?.fullName, date: upcomingClass?.date, time: upcomingClass?.time }));
                 sendEmail(upcomingClass?.students[0]?.email, `Class Cancellation Notification`, StudentTutorCancelClassTemplate({ tutorName: upcomingClass?.tutor?.fullName, studentName: upcomingClass?.students[0]?.fullName, date: upcomingClass?.date, time: upcomingClass?.time }));
                 sendEmail("admin@spelleng.com", `Class Cancellation - Student`, AdminStudentClassCancelTemplate({ tutorName: upcomingClass?.tutor?.fullName, studentName: upcomingClass?.students[0]?.fullName, dateAndTime: `${upcomingClass?.date} ${upcomingClass?.time}`, date: moment().format("DD/MM/YYYY") }));
-                res.status(200).json({ successMessage: 'Scheduled Class Cancelled Successfully. You can reschedule now' });
+                if (result?.trialClass) {
+                  findUser.trialUsed = false;
+                  await findUser.save();
+                  res.status(200).json({ successMessage: 'Scheduled Class Cancelled Successfully. You can reschedule now' });
+                } else {
+                  res.status(200).json({ successMessage: 'Scheduled Class Cancelled Successfully. You can reschedule now' });
+                }
               } else {
                 sendEmail(upcomingClass?.tutor?.email, `Class Cancellation Notification`, TutorStudentCancelClassTemplate({ tutorName: upcomingClass?.tutor?.fullName, studentName: upcomingClass?.students[0]?.fullName, date: upcomingClass?.date, time: upcomingClass?.time }));
                 sendEmail(upcomingClass?.students[0]?.email, `Class Cancellation Notification`, StudentTutorCancelClassTemplate({ tutorName: upcomingClass?.tutor?.fullName, studentName: upcomingClass?.students[0]?.fullName, date: upcomingClass?.date, time: upcomingClass?.time }));

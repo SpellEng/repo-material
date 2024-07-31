@@ -42,6 +42,28 @@ exports.getUserById = async (req, res) => {
     }
 }
 
+exports.verifyUserTokenIfUserExists = async (req, res) => {
+    const { token } = req.body;
+    try {
+        if (!token) {
+            res.status(404).json({ errorMessage: 'No token. Access Denied' });
+        } else {
+            const decoded = jwt.verify(token, config.JWT_SECRET);
+            const userInToken = decoded.user;
+            const findUser = await User.findOne({ _id: userInToken?._id });
+            if (findUser) {
+                delete findUser["password"];
+                res.status(200).json(findUser);
+            } else {
+                res.status(202).json({ errorMessage: 'No Users Found' });
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(400).send(error);
+    }
+}
+
 exports.getAllTutors = async (req, res) => {
     try {
         const { availability, specialities, languages, tutorCategory, showAll, fullName } = req.body;
@@ -83,7 +105,7 @@ exports.getAllTutors = async (req, res) => {
         if (tutors.length > 0) {
             res.status(200).json(tutors);
         } else {
-            res.status(404).json({ errorMessage: 'No Tutors Found' });
+            res.status(200).json([]);
         }
     } catch (error) {
         console.log(error);
@@ -101,7 +123,7 @@ exports.sendOTPToPhoneNumber = async (req, res) => {
             const response = await axios.post(`${config.OTP_LESS_BASE_URL}/send`, {
                 phoneNumber,
                 otpLength: 6,
-                channel: 'SMS',
+                channel: 'WHATSAPP',
                 expiry: 120
             }, {
                 headers: {
@@ -122,7 +144,41 @@ exports.sendOTPToPhoneNumber = async (req, res) => {
 
 exports.signUp = async (req, res) => {
     const { fullName, city, phoneNumber, email, password, otp, orderId, role, timezone } = req.body;
-    console.log(req.body);
+    // var salt = bcrypt.genSaltSync(10);
+    // var hash = bcrypt.hashSync(password, salt);
+    // const user = new User({
+    //     role: role === "tutor" ? 1 : 0,
+    //     fullName,
+    //     city,
+    //     phoneNumber,
+    //     email,
+    //     timezone,
+    //     password: hash
+    // });
+
+    // const saveUser = await user.save();
+    // if (saveUser) {
+    //     const payload = {
+    //         user: {
+    //             _id: saveUser._id,
+    //             role: saveUser.role
+    //         }
+    //     }
+    //     jwt.sign(payload, config.JWT_SECRET, (err, token) => {
+    //         if (err) {
+    //             res.status(400).json({ errorMessage: 'Jwt Error' })
+    //         } else {
+    //             delete saveUser["password"];
+    //             res.status(200).json({
+    //                 token,
+    //                 user: saveUser,
+    //                 successMessage: 'Account created successfuly',
+    //             });
+    //         }
+    //     });
+    // } else {
+    //     res.status(400).json({ errorMessage: 'Account not created. Please try again' });
+    // }
     try {
         if (fullName && email && phoneNumber && password && otp) {
             const ifEmailAlreadyPresent = await User.findOne({ email: email });
@@ -149,7 +205,7 @@ exports.signUp = async (req, res) => {
                         console.log(verification)
                         if (verification?.data?.isOTPVerified) {
                             var salt = bcrypt.genSaltSync(10);
-                            var hash = bcrypt.hashSync(req.body.password, salt);
+                            var hash = bcrypt.hashSync(password, salt);
                             const user = new User({
                                 role: role === "tutor" ? 1 : 0,
                                 fullName,
@@ -559,21 +615,21 @@ exports.resetPasswordLink = async (req, res) => {
             User.findOne({ email: req.body.email }).then(user => {
                 if (!user) {
                     res.status(201).json({ errorMessage: 'Email does not exist' });
+                } else {
+                    user.resetToken = token;
+                    user.expireToken = Date.now() + 3600000;
+                    user.save((err, result) => {
+                        if (err) {
+                            res.status(400).json({ errorMessage: 'Token saving failed' });
+                        }
+                        if (result) {
+                            let url = `${config.FRONTEND_URL}/reset-password/${token}`
+
+                            sendEmail(req.body.email, "Password Reset Request", ResetPasswordTemplate({ name: user?.fullName, url }))
+                            res.status(200).json({ successMessage: 'Check your Inbox!' });
+                        }
+                    })
                 }
-                user.resetToken = token;
-                user.expireToken = Date.now() + 3600000;
-                user.save((err, result) => {
-                    if (err) {
-                        res.status(400).json({ errorMessage: 'Token saving failed' });
-                    }
-                    if (result) {
-                        let url = `${config.FRONTEND_URL}/reset-password/${token}`
-
-                        sendEmail(req.body.email, "Password Reset Request", ResetPasswordTemplate({ name: user?.fullName, url }))
-                        res.status(200).json({ successMessage: 'Check your Inbox!' });
-                    }
-                })
-
             })
         })
     } catch (error) {

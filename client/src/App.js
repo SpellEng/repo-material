@@ -7,6 +7,7 @@ import { isAuthenticated } from './Components/Auth/auth';
 import axios from 'axios';
 import Navbar from './Components/Navbar/Navbar';
 import Footer from './Components/Footer/Footer';
+import Learn from './Pages/Learn/Learn';
 
 // Lazy loading components
 const Home = lazy(() => import('./Pages/Home/Home'));
@@ -26,7 +27,6 @@ const Availability = lazy(() => import('./Pages/Tutors/Availability/Availability
 const Terms = lazy(() => import('./Pages/Terms/Terms'));
 const Privacy = lazy(() => import('./Pages/Privacy/Privacy'));
 const Chat = lazy(() => import('./Pages/Chat/Chat'));
-const StudentDashboard = lazy(() => import('./Pages/Students/StudentDashboard/StudentDashboard'));
 const TutorEarnings = lazy(() => import('./Pages/Tutors/Earning/Earning'));
 const MySubscriptions = lazy(() => import('./Pages/Students/MySubscriptions/MySubscriptions'));
 const AdminTutorsList = lazy(() => import('./Pages/Admin/Tutors/Tutors'));
@@ -98,24 +98,24 @@ function App() {
     <div className="App">
       <SocketProvider>
         {
-          location?.pathname !== "/video-class" &&
+          location?.pathname !== "/learn" &&
           <Navbar />
         }
         <Suspense fallback={<div></div>}>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/learn" element={<Learn />} />
             <Route path="/signup" element={<Registration />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password/:token" element={<ResetPassword />} />
-            <Route path="/all-tutors" element={<Tutors />} />
+            <Route path="/all-tutors" element={<ProtectedRoutes><Tutors /></ProtectedRoutes>} />
             <Route path="/student/profile" element={<ProtectedRoutes><StudentProfile /></ProtectedRoutes>} />
             <Route path="/student/upcoming-classes" element={<ProtectedRoutes><UpcomingStudent /></ProtectedRoutes>} />
             <Route path="/student/subscriptions" element={<ProtectedRoutes><MySubscriptions /></ProtectedRoutes>} />
             <Route path="/student/book-trial" element={<ProtectedRoutes><BookTrial /></ProtectedRoutes>} />
             <Route path="/subscription" element={<Subscription />} />
             <Route path="/tutor/:id" element={<TeacherDetails />} />
-            <Route path="/student/dashboard" element={<ProtectedRoutes><StudentDashboard /></ProtectedRoutes>} />
             <Route path="/tutor/registration" element={<TutorRegistration />} />
             <Route path="/tutor/profile" element={<ProtectedRoutes><TutorProfile /></ProtectedRoutes>} />
             <Route path="/tutor/availability" element={<ProtectedRoutes><Availability /></ProtectedRoutes>} />
@@ -139,7 +139,7 @@ function App() {
           </Routes>
         </Suspense>
         {
-          location?.pathname !== "/chats" &&
+          location?.pathname !== "/chats" && location?.pathname !== "/learn" &&
           <Footer />
         }
       </SocketProvider>

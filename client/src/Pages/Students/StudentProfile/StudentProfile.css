@@ -33,5 +33,6 @@
 @media (max-width:767px) {
     .StudentProfile {
         padding: 15px !important;
+        padding-top: 0px !important;
     }
 }

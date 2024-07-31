@@ -5,6 +5,7 @@ import { FaClock } from "react-icons/fa";
 import { isAuthenticated } from "../../../Components/Auth/auth";
 import CalendarComp from "../../../Components/CalendarComp/CalendarComp";
 import { ErrorAlert, SuccessAlert } from "../../../Components/Messages/messages";
+import { staticAvailabilitesArray } from "./availabilitesArray";
 import "./Availability.css";
 
 const Availability = () => {
@@ -94,6 +95,7 @@ const Availability = () => {
       if (res.status === 200) {
         SuccessAlert(res.data.successMessage);
         getTutorById();
+        filterTutorAvailabilites(moment(date).format("DD/MM/YYYY"));
       } else {
         ErrorAlert(res.data.errorMessage);
       }
@@ -112,32 +114,6 @@ const Availability = () => {
     const filteredTutors = await tutorObject?.availability?.filter(av => av?.date === dt);
     setAvailabilitesArray(filteredTutors);
   };
-
-  const timingsArray = [
-    "8:00am - 8:30am",
-    "8:40am - 9:10am",
-    "9:20am - 9:50am",
-    "10:00am - 10:30am",
-    "10:40am - 11:10am",
-    "11:20am - 11:50am",
-    "12:00pm - 12:30pm",
-    "12:40pm - 1:10pm",
-    "1:20pm - 1:50pm",
-    "2:00pm - 2:30pm",
-    "2:40pm - 3:10pm",
-    "3:20pm - 3:50pm",
-    "4:00pm - 4:30pm",
-    "4:40pm - 5:10pm",
-    "5:20pm - 5:50pm",
-    "6:00pm - 6:30pm",
-    "6:40pm - 7:10pm",
-    "7:20pm - 7:50pm",
-    "8:00pm - 8:30pm",
-    "8:40pm - 9:10pm",
-    "9:20pm - 9:50pm",
-    "10:00pm - 10:30pm",
-    "10:30pm - 11:00pm",
-  ];
 
 
   const handleScheduleClasses = async (time, meetingUrl) => {
@@ -173,7 +149,7 @@ const Availability = () => {
 
   useEffect(() => {
     if (tutorObject) {
-      filterTutorAvailabilites(moment(new Date()).format("DD/MM/YYYY"));
+      filterTutorAvailabilites(moment(new Date(date)).format("DD/MM/YYYY"));
     }
 
     return () => {
@@ -199,7 +175,7 @@ const Availability = () => {
             </p>
             <div className="items">
               {
-                timingsArray?.map((time, index) => {
+                staticAvailabilitesArray?.map((time, index) => {
                   const isAdded = availabilitesArray?.some(f => f?.time === time);
 
                   return (

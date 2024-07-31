@@ -84,6 +84,7 @@
 
     .mainHome .testimonialPart {
         margin-top: 30px !important;
+        margin-bottom: 0px !important;
     }
 
     .mainHome .testimonialPart .mainHeading h2 {
@@ -120,5 +121,9 @@
 
     .WhyChoose .questionPart .whyChooseFooter {
         flex-wrap: wrap !important;
+    }
+
+    .mainHome iframe {
+        height: 220px !important;
     }
 }

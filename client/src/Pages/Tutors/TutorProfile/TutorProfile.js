@@ -237,13 +237,13 @@ const TutorProfile = () => {
         <div className="row mb-3">
           <label htmlFor="inputSpecialities" className="col-sm-2 col-form-label">Description</label>
           <div className="col-sm-10 mb-4">
-            <TextArea showCount maxLength={200} value={formData?.description} required onChange={(e) => handleChange('description', e.target.value)} />
+            <TextArea showCount maxLength={500} value={formData?.description} required onChange={(e) => handleChange('description', e.target.value)} />
           </div>
         </div>
         <div className="row mb-3">
           <label htmlFor="inputVideo" className="col-sm-2 col-form-label">Video Embed Url</label>
           <div className="col-sm-10">
-            <Input value={formData?.videoLink} required onChange={(e) => handleChange('videoLink', e.target.value)} />
+            <Input type="url" value={formData?.videoLink} required onChange={(e) => handleChange('videoLink', e.target.value)} />
           </div>
         </div>
         <div className="row mb-3 mt-5">

@@ -11,3 +11,23 @@
 .CancellationAndRefund p {
     margin-bottom: 15px !important;
 }
+
+@media (max-width:767px) {
+    .CancellationAndRefund {
+        padding: 15px !important;
+        padding-top: 0px !important;
+        margin-top: 0px !important;
+    }
+
+    .CancellationAndRefund h1 {
+        margin-bottom: 19px !important;
+        font-size: 30px !important;
+        text-align: left;
+    }
+
+    .CancellationAndRefund h2 {
+        font-size: 36px !important;
+        padding-bottom: 10px !important;
+        text-align: left !important;
+    }
+}

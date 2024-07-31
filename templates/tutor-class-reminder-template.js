@@ -1,4 +1,4 @@
-const TutorClassReminderTemplate = (userName, otherUserName, classTime, classDate) => {
+const TutorClassReminderTemplate = (frontendUrl, userName, otherUserName, classTime, classDate) => {
     return `
     <!DOCTYPE html>
 <html lang="en">

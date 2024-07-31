@@ -17,5 +17,14 @@
 @media (max-width:767px) {
     .UpcomingStudent {
         padding: 15px !important;
+        padding-top: 0px !important;
+    }
+
+    .UpcomingStudent .ant-tabs-content-holder {
+        margin-top: 100px;
+    }
+
+    .UpcomingStudent .downloadBtn {
+        top: 100px;
     }
 }

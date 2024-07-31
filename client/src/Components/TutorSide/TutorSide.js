@@ -1,14 +1,27 @@
 import React from "react";
 import "./TutorSide.css";
 import { Input, Select } from "antd";
+import { staticAvailabilitesArray } from "../../Pages/Tutors/Availability/availabilitesArray";
 
 const { Search } = Input;
 
 const TutorSide = ({ handleSpChange, handleAvailChange, handleTutorNameChange, handleLangChange }) => {
 
+  const trimmedAvailabilitesArray = staticAvailabilitesArray?.map(av => ({ value: av, label: av }));
+
   return (
     <div className="tutorSide">
       <div className="inner">
+        <div className="tutorCategories">
+          <Search
+            className="w-100"
+            placeholder="Enter Tutor Name to Search"
+            allowClear
+            size="large"
+            onSearch={(val) => handleTutorNameChange(val)}
+            enterButton="Search"
+          />
+        </div>
         <div className="specialities">
           <Select
             allowClear
@@ -25,8 +38,8 @@ const TutorSide = ({ handleSpChange, handleAvailChange, handleTutorNameChange, h
                 label: "Conversational English",
               },
               {
-                value: "busniess english",
-                label: "Busniess English",
+                value: "business english",
+                label: "Business English",
               },
               {
                 value: "english for beginners",
@@ -51,38 +64,7 @@ const TutorSide = ({ handleSpChange, handleAvailChange, handleTutorNameChange, h
               width: "100%",
             }}
             onChange={handleAvailChange}
-            options={[
-              {
-                value: "8:00am - 8:30am",
-                label: "8:00am - 8:30am",
-              },
-              {
-                value: "8:40am - 9:10am",
-                label: "8:40am - 9:10am",
-              },
-              {
-                value: "9:20am - 9:50am",
-                label: "9:20am - 9:50am",
-              },
-              {
-                value: "10:00am - 10:30am",
-                label: "10:00am - 10:30am",
-              },
-              {
-                value: "10:40am - 11:00am",
-                label: "10:40am - 11:00am",
-              },
-            ]}
-          />
-        </div>
-        <div className="tutorCategories">
-          <Search
-            className="w-100"
-            placeholder="Enter Tutor Name to Search"
-            allowClear
-            size="large"
-            onSearch={(val) => handleTutorNameChange(val)}
-            enterButton="Search"
+            options={trimmedAvailabilitesArray}
           />
         </div>
         <div className="specialities">

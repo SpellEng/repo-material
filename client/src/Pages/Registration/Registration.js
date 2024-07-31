@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import "./Registration.css";
 import { Link, useNavigate } from "react-router-dom";
 import logopic from "../../assets/favicon.ico";
-import { Alert, Checkbox, Col, Divider, Input, Rate, Row } from "antd";
+import { Alert, Button, Checkbox, Col, Divider, Input, Rate, Row } from "antd";
 import OtpInput from "react-otp-input";
 import { InputMask } from '@react-input/mask';
 import loginpic from "../../assets/Book A Trial.webp";
 import axios from "axios";
 import { ErrorAlert, SuccessAlert } from "../../Components/Messages/messages";
-import { setAuthentication } from "../../Components/Auth/auth";
+import { isAuthenticated, setAuthentication } from "../../Components/Auth/auth";
 import { CountdownTimer } from "../../Components/CountdownTimer";
 import { getUserTimezone } from "../../Components/UserTimeZone";
 
@@ -37,6 +37,70 @@ const Registration = () => {
     });
   };
 
+  const handleTrialPayment = async () => {
+    if (isAuthenticated() && isAuthenticated()?.trialActivated) {
+      ErrorAlert("Trial can be activated once. You have already activated your free trial.")
+    }
+    else if (isAuthenticated() && !isAuthenticated()?.trialActivated) {
+      setLoading(true);
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/subscriptions/create-order`, { amount: 99 }, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
+      }).catch(err => {
+        setLoading(false);
+        console.log(err);
+      })
+      const { id: order_id } = res.data;
+
+      const options = {
+        key: process.env.REACT_APP_RAZORPAY_KEY_ID,
+        amount: 99 * 100,
+        currency: 'INR',
+        name: 'SpellENg Trial Payment @ ₹99',
+        description: 'Trial Payment',
+        order_id: order_id,
+        handler: async function (response) {
+          try {
+            await axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/book-trial`, {
+              user: isAuthenticated()?._id,
+              plan: "Trial",
+              name: isAuthenticated()?.fullName,
+              email: isAuthenticated()?.email,
+              razorpayPaymentId: response.razorpay_payment_id,
+              amount: 99,
+            }, {
+              headers: {
+                Authorization: "Bearer " + localStorage.getItem("token")
+              }
+            }).then(res => {
+              setLoading(false);
+              if (res.status === 200) {
+                SuccessAlert(res.data.successMessage);
+                localStorage.setItem("user", JSON.stringify(res.data?.user));
+                router("/all-tutors")
+              } else {
+                ErrorAlert(res.data.errorMessage);
+              }
+            })
+          } catch (error) {
+            setLoading(false);
+            console.error(error);
+            ErrorAlert('Failed to activate Trial');
+          }
+        },
+        theme: {
+          color: '#F37254'
+        }
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } else {
+      ErrorAlert("Please login first to activate your trial")
+    }
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
     if (fullName, city, phoneNumber, email, password) {
@@ -49,10 +113,7 @@ const Registration = () => {
           if (res.status === 200) {
             setAuthentication(res.data?.user, res.data?.token);
             SuccessAlert(res.data.successMessage);
-            router("/student/book-trial");
-            setTimeout(() => {
-              document.location.reload();
-            }, 1000);
+            handleTrialPayment();
           } else {
             ErrorAlert(res.data.errorMessage);
           }
@@ -125,7 +186,7 @@ const Registration = () => {
             </div>
             <div className="text-center">
               <p>
-                Take the first step with an affordable trial session for just @99
+                Take the first step with an affordable trial session for just @ ₹99
               </p>
             </div>
             <form className="form" onSubmit={submitHandler}>
@@ -220,7 +281,7 @@ const Registration = () => {
                   </Checkbox>
                 </Col>
                 <Col xs={24} className="otpBtn">
-                  <button type="submit">Book a trial</button>
+                  <Button disabled={loading} className="py-2 h-auto" loading={loading} type="primary" htmlType="submit">Book a trial</Button>
                 </Col>
               </Row>
             </form>

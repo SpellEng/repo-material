@@ -4,6 +4,7 @@ import { Col, Row } from "antd";
 import { FaHeadphones, FaVideo } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { BsFillCameraReelsFill } from "react-icons/bs";
+import { isAuthenticated } from "../Auth/auth";
 
 const Header = () => {
   return (
@@ -11,14 +12,14 @@ const Header = () => {
       <div className="subHeader">
         <Row gutter={[40, 40]}>
           <Col xs={24} md={12} className="leftSide">
-            <h1>Speak English With <br /> Confience In Weeks</h1>
+            <h1>Speak English With <br /> Confidence In Weeks</h1>
             <p className="my-4">
               Improve Your English Fluency with Expert Tutors: Personalized 1-on-1 Video
               Calls in a Non-judgmental Environment to Boost Conﬁdence and Achieve Goals Faster.
             </p>
             <div className="buttonPart">
               <div className="trialBtn">
-                <Link to="/student/book-trial" className="btn">Book A Trial @ ₹99</Link>
+                <Link to={isAuthenticated() ? "/student/book-trial" : "/signup"} className="btn">Book A Trial @ ₹99</Link>
               </div>
             </div>
             <div className="iconsPart mt-4">

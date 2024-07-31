@@ -1,12 +1,13 @@
 const express = require('express');
 const { AuthenticatorJWT, isAdmin, isTutor } = require('../middlewares/authenticator');
-const { getAllStudens, getUserById, changePassword, resetPasswordLink, updatePassword, signUp, login, deleteUser, updateUser, sendOTPToPhoneNumber, addTutorTimeSlot, getAllTutors, removeTutorTimeSlot, bookTrial, addReview, addTutorPaymentDetails, withdrawTutorPayments, sendContactUsEmail, saveMeetingRecording, deleteRecording } = require('../controllers/userController');
+const { getAllStudens, getUserById, changePassword, resetPasswordLink, updatePassword, signUp, login, deleteUser, updateUser, sendOTPToPhoneNumber, addTutorTimeSlot, getAllTutors, removeTutorTimeSlot, bookTrial, addReview, addTutorPaymentDetails, withdrawTutorPayments, sendContactUsEmail, saveMeetingRecording, deleteRecording, verifyUserTokenIfUserExists } = require('../controllers/userController');
 
 const router = express.Router();
 
 router.get('/', AuthenticatorJWT, isAdmin, getAllStudens);
 router.post('/tutors', getAllTutors);
 router.get('/user/:id', getUserById);
+router.post('/verify-token', verifyUserTokenIfUserExists);
 router.post('/send-otp', sendOTPToPhoneNumber);
 router.post('/signup', signUp);
 router.post('/login', login);

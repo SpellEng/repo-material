@@ -204,7 +204,7 @@ const StudentProfile = () => {
         <div className="row mb-3">
           <label htmlFor="inputSpecialities" className="col-sm-2 col-form-label">Description</label>
           <div className="col-sm-10 mb-4">
-            <TextArea showCount maxLength={200} value={formData?.description} required onChange={(e) => handleChange('description', e.target.value)} />
+            <TextArea showCount maxLength={500} value={formData?.description} required onChange={(e) => handleChange('description', e.target.value)} />
           </div>
         </div>
         <div className="row mb-3 mt-5">

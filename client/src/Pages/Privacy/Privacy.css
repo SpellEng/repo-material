@@ -31,7 +31,14 @@
 
 @media (max-width:767px) {
     .privacy .inner {
-        margin: 15px !important;
+        padding: 15px !important;
+        padding-top: 0px !important;
+    }
+
+    .privacy .inner h1 {
+        padding-bottom: 19px !important;
+        font-size: 30px !important;
+        text-align: left;
     }
 
     .privacy .inner h2 {

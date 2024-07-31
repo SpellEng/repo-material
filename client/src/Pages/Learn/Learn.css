@@ -1,0 +1,129 @@
+.mainLearn {
+    overflow-x: hidden;
+}
+
+.mainLearn .stepPart {
+    padding: 40px 0px;
+}
+
+.mainLearn h2 {
+    font-size: 3rem;
+}
+
+.mainLearn .stepPart h2 span {
+    color: var(--primary-color);
+}
+
+.mainLearn .testimonialPart .testimonialVideos {
+    background-color: var(--secondary-color);
+    padding-top: 60px;
+    padding-bottom: 60px;
+    margin: 41px 0px;
+}
+
+.mainLearn .testimonialPart .rightTestimonail img {
+    width: 90px;
+    border-radius: 50px;
+}
+
+.mainLearn .testimonialPart iframe {
+    width: 100% !important;
+    height: 240px !important;
+}
+
+.mainLearn .testimonialPart .testimonialArray {
+    display: flex;
+    align-items: center;
+    gap: 19px;
+    margin-top: 23px;
+}
+
+.mainLearn .testimonialPart .testimonialArray button {
+    width: max-content;
+}
+
+.mainLearn .testimonialPart .testimonialArray button:focus {
+    background-color: rgb(227, 253, 244);
+}
+
+.mainLearn .testimonialPart .leftTestimonial .quoteTestimonial {
+    background-color: black;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 19px;
+}
+
+.mainLearn .testimonialPart .leftTestimonial .quoteTestimonial svg {
+    fill: rgb(241, 241, 241);
+    font-size: 28px;
+}
+
+
+.mainLearn .testimonialPart {
+    padding: 10px 0px;
+}
+
+.mainLearn .testimonialPart .mainHeading h2 {
+    font-size: 40px;
+    padding: 10px 0px;
+    font-weight: 650;
+}
+
+.mainLearn .testimonialPart .mainHeading p {
+    color: rgb(93, 93, 93);
+    font-size: 16px;
+}
+
+@media (max-width: 767px) {
+    .mainLearn .stepPart {
+        padding-left: 0px;
+        padding: 15px;
+        margin-top: 0px !important;
+    }
+
+    .mainLearn .testimonialPart {
+        margin-top: 30px !important;
+        margin-bottom: 0px !important;
+    }
+
+    .mainLearn .testimonialPart .mainHeading h2 {
+        font-size: 28px !important;
+    }
+
+    .mainLearn .testimonialPart .mainHeading p {
+        margin-top: 0px !important;
+    }
+
+    .mainLearn .testimonialPart .leftTestimonial {
+        margin-top: 30px !important;
+    }
+
+    .mainLearn .testimonialPart .testimonialArray {
+        flex-wrap: wrap !important;
+    }
+
+    .mainLearn .testimonialPart .testimonialArray .btn {
+        padding: 10px 0px !important;
+    }
+
+    .WhyChoose {
+        padding: 15px !important;
+    }
+
+    .WhyChoose .questionPart h2 {
+        font-size: 28px !important;
+    }
+
+    .WhyChoose .questionPart {
+        margin-top: 19px !important;
+    }
+
+    .WhyChoose .questionPart .whyChooseFooter {
+        flex-wrap: wrap !important;
+    }
+
+    .mainLearn iframe {
+        height: 220px !important;
+    }
+}

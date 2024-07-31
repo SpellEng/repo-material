@@ -4,6 +4,7 @@ import digitalpic from "../../assets/digital.webp";
 import { FaCheckCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Col, Row } from "antd";
+import { isAuthenticated } from "../Auth/auth";
 
 const Digital = () => {
   const router = useNavigate();
@@ -21,7 +22,7 @@ const Digital = () => {
               Personalized Instruction, Flexible Scheduling, Expert Guidance, and Access to Class Recordings!
             </p>
             <div className="digitalButton">
-              <button onClick={() => router("/all-tutors")}>Book A Trial @₹99</button>
+              <button onClick={() => router(isAuthenticated() ? "/student/book-trial" : "/signup")}>Book A Trial @ ₹99</button>
             </div>
             <div className="options">
               <ul className="leftOption">

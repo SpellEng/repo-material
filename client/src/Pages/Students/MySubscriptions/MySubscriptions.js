@@ -50,7 +50,7 @@ const MySubscriptions = () => {
         }).then(res => {
             setLoading(false);
             if (res.status === 200) {
-                setFutureClasses(res.data);
+                setFutureClasses(res.data?.filter(f => !f?.trialClass));
             } else {
                 ErrorAlert(res.data.errorMessage);
             }
@@ -69,7 +69,7 @@ const MySubscriptions = () => {
         }).then(res => {
             setLoading(false);
             if (res.status === 200) {
-                setPreviousClasses(res.data);
+                setPreviousClasses(res.data?.filter(f => !f?.trialClass));
             } else {
                 ErrorAlert(res.data.errorMessage);
             }
@@ -130,10 +130,14 @@ const MySubscriptions = () => {
     return (
         <div className="subscriptions-container">
             <div className="container">
+                <div className='text-center mt-4'>
+                    <h4>Buy Subscription</h4>
+                    <Button className='btn h-auto py-2 px-5 mt-3' type='primary' onClick={() => router("/subscription")}>Buy Now</Button>
+                </div>
                 <List
                     grid={{ gutter: 16, column: 1 }}
                     dataSource={subscriptions}
-                    className="mt-5"
+                    className="mt-2"
                     renderItem={subscription => (
                         <List.Item>
                             <div className='subscriptionsItem'>

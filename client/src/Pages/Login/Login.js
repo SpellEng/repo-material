@@ -110,7 +110,7 @@ const Login = () => {
                   />
                 </div>
                 <div>
-                  <Button loading={loading} htmlType="submit" className="h-auto py-2">Login</Button>
+                  <Button loading={loading} disabled={loading} htmlType="submit" className="h-auto py-2">Login</Button>
                 </div>
               </form>
               <Divider>Or</Divider>

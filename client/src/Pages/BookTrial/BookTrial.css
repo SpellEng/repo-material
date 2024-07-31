@@ -51,6 +51,10 @@
         min-height: auto !important;
     }
 
+    .BookTrial .inner {
+        margin-top: 0px !important;
+    }
+
     .BookTrial .inner h2 {
         font-weight: 600;
         font-size: 28px !important;

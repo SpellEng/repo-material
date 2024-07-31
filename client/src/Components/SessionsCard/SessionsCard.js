@@ -26,7 +26,7 @@ const SessionCard = ({ meetingUrl, type, removeScheduledClass, isTutor, id, stud
             <div className="sessionHeader">
                 <Flex gap="10px" align="center">
                     <Avatar size={48} icon={<img src={tutor?.picture?.url} />} />
-                    <span>{type}: <b>{tutor?.fullName}</b></span>
+                    <span className='name'>{type}: <b>{tutor?.fullName}</b></span>
                 </Flex>
                 {
                     !isUpcoming && isTutor &&
@@ -51,7 +51,7 @@ const SessionCard = ({ meetingUrl, type, removeScheduledClass, isTutor, id, stud
                 {isUpcoming ? (
                     <div className='w-100'>
                         <Flex className='sessionBtns' gap="10px" justify="space-between" align="center">
-                            <Button type="primary" danger onClick={() => removeScheduledClass(id, date, time)}>Cancel</Button>
+                            <Button type="primary" disabled={isMeetingTime()} danger onClick={() => removeScheduledClass(id, date, time)}>Cancel</Button>
                             <Button type="primary" disabled={!isMeetingTime()} onClick={() => openInNewTab(meetingUrl)}>
                                 Join
                             </Button>

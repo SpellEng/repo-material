@@ -67,7 +67,6 @@ exports.getSubscriptionById = async (req, res) => {
 
 exports.createOrder = async (req, res) => {
     const { amount } = req.body;
-    console.log(amount)
     if (amount) {
         const options = {
             amount: parseInt(amount) * 100, // amount in the smallest currency unit
@@ -115,6 +114,7 @@ exports.createSubscription = async (req, res) => {
         const findSubscription = await Subscription.findOne({ user: req.user?._id });
         const findUser = await User.findOne({ user: req.user?._id });
         if (findSubscription) {
+            let newExpiryDateIsAfterPrevDate = moment(expiryDate).isAfter(moment(findSubscription.expiryDate));
             let subscriptionObject = {
                 razorpayPaymentId: findSubscription.razorpayPaymentId,
                 user: req.user?._id,
@@ -126,9 +126,9 @@ exports.createSubscription = async (req, res) => {
             }
             findSubscription.razorpayPaymentId = razorpayPaymentId;
             findSubscription.plan = plan;
-            findSubscription.classesPerMonth = classesPerMonth;
+            findSubscription.classesPerMonth = parseInt(findSubscription.classesPerMonth) + parseInt(classesPerMonth);
             findSubscription.amount = amount;
-            findSubscription.expiryDate = expiryDate;
+            findSubscription.expiryDate = newExpiryDateIsAfterPrevDate ? expiryDate : findSubscription.expiryDate;
             findSubscription.status = "active";
             await findSubscription.save();
 
@@ -138,8 +138,8 @@ exports.createSubscription = async (req, res) => {
                 { new: true }
             )
             // Send an email notification
-            sendEmail(email, "Subscription Plan Confirmation", StudentBuySubscriptionTemplate({ name: findUser?.fullName, plan, duration: durationInMonths, startDate: moment().format("DD/MM/YYYY"), endDate: moment(expiryDate).format("DD/MM/YYYY"), url: `${config.FRONTEND_URL}/student/subscriptions` }));
-            sendEmail("admin@spelleng.com", "Subscription Plan Confirmation", AdminStudentBuySubscriptionTemplate({ name: findUser?.fullName, email: findUser?.email, plan, date: moment().format("DD/MM/YYYY") }));
+            sendEmail(email, "Subscription Plan Confirmation", StudentBuySubscriptionTemplate({ name, plan, duration: durationInMonths, startDate: moment().format("DD/MM/YYYY"), endDate: moment(expiryDate).format("DD/MM/YYYY"), url: `${config.FRONTEND_URL}/student/subscriptions` }));
+            sendEmail("admin@spelleng.com", "Subscription Plan Confirmation", AdminStudentBuySubscriptionTemplate({ name, email: findUser?.email, plan, date: moment().format("DD/MM/YYYY") }));
             res.json({ successMessage: 'Subscription is renewed and activated successfully' });
         } else {
             const newSubscription = new Subscription({
@@ -155,8 +155,8 @@ exports.createSubscription = async (req, res) => {
             await newSubscription.save();
 
             // Send an email notification
-            sendEmail(email, "Subscription Plan Confirmation", StudentBuySubscriptionTemplate({ name: findUser?.fullName, plan, duration: durationInMonths, startDate: moment().format("DD/MM/YYYY"), endDate: moment(expiryDate).format("DD/MM/YYYY"), url: `${config.FRONTEND_URL}/student/subscriptions` }));
-            sendEmail("admin@spelleng.com", "Subscription Plan Confirmation", AdminStudentBuySubscriptionTemplate({ name: findUser?.fullName, email: findUser?.email, plan, date: moment().format("DD/MM/YYYY") }));
+            sendEmail(email, "Subscription Plan Confirmation", StudentBuySubscriptionTemplate({ name, plan, duration: durationInMonths, startDate: moment().format("DD/MM/YYYY"), endDate: moment(expiryDate).format("DD/MM/YYYY"), url: `${config.FRONTEND_URL}/student/subscriptions` }));
+            sendEmail("admin@spelleng.com", "Subscription Plan Confirmation", AdminStudentBuySubscriptionTemplate({ name, email: findUser?.email, plan, date: moment().format("DD/MM/YYYY") }));
             res.json({ successMessage: 'Subscription created and activated successfully' });
         }
     } catch (error) {

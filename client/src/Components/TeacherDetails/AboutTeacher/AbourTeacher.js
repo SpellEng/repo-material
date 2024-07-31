@@ -1,20 +1,8 @@
 import React from 'react';
-import { Card, Avatar } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { Card } from 'antd';
 import './AboutTeacher.css';
 
 const AboutTeacher = ({ tutorObject }) => {
-    // Example teacher data
-    // const tutorObject? = {
-    //     name: 'John Doe',
-    //     avatar: null,
-    //     bio: 'John Doe has over 10 years of experience teaching mathematics and science. He is passionate about helping students understand complex concepts and achieve their academic goals.',
-    //     subjects: ['Mathematics', 'Science', 'Physics'],
-    //     experience: '10 years',
-    //     email: 'john.doe@example.com',
-    //     phone: '+1234567890',
-    //     location: 'New York, USA',
-    // };
 
     return (
         <div className="AboutTeacher">
@@ -22,7 +10,7 @@ const AboutTeacher = ({ tutorObject }) => {
                 <Card className="p-4 about-card">
                     <h4 className="section-title">Bio</h4>
                     <p className="section-content">{tutorObject?.description}</p>
-                    <h4 className="section-title">Subjects Taught</h4>
+                    <h4 className="section-title">Specialities Taught</h4>
                     <ul className="section-content">
                         {tutorObject?.specialities?.map((subject, index) => (
                             <li className='text-capitalize' key={index}>{subject}</li>

@@ -11,10 +11,8 @@ AuthenticatorJWT = (req, res, next) => {
         const decoded = jwt.verify(token, JWT_SECRET);
         req.user = decoded.user;
         next();
-
     } catch (error) {
-        res.status(400).json({ errorMessage: 'You cannot access this rout. Please try logging out and loging in again' });
-
+        res.status(202).json({ errorMessage: 'You cannot access this route. Please try logging out and loging in again' });
     }
 }
 

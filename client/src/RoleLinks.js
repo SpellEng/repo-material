@@ -8,8 +8,8 @@ export const normalLinksArray = [
         link: "/about-us"
     },
     {
-        title: "All Tutors",
-        link: "/all-tutors"
+        title: "FAQs",
+        link: "/faqs"
     },
     {
         title: "Contact Us",
@@ -18,10 +18,6 @@ export const normalLinksArray = [
 ];
 
 export const studentLinksArray = [
-    {
-        title: "Dashboard",
-        link: "/student/dashboard"
-    },
     {
         title: "All Tutors",
         link: "/all-tutors"

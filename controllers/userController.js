@@ -125,7 +125,7 @@ exports.sendOTPToPhoneNumber = async (req, res) => {
             const response = await axios.post(`${config.OTP_LESS_BASE_URL}/send`, {
                 phoneNumber,
                 otpLength: 6,
-                channel: 'WHATSAPP',
+                channel: 'SMS',
                 expiry: 120
             }, {
                 headers: {

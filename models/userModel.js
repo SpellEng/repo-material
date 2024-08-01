@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const availabilitySchema = new mongoose.Schema({
     date: {
         type: String,
-        required: true
+        // required: true
     },
     time: {
         type: String

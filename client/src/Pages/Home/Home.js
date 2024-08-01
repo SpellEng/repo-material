@@ -13,6 +13,7 @@ import Digital from "../../Components/Digital/Digital";
 const StepsCard = lazy(() => import("../../Components/StepsCard/StepsCard"));
 const WhyChoose = lazy(() => import("../../Components/WhyChoose/WhyChoose"));
 const Testimonial = lazy(() => import("../../Components/Testimonial/Testimonial"));
+const TestimonealVideos = lazy(() => import("../../Components/Testimonial/TestimonealVideos"));
 
 const Home = () => {
   const [selectedTestimonial, setSelectedTestimonial] = useState({
@@ -146,41 +147,9 @@ const Home = () => {
         </div>
         <div className="testimonialVideos">
           <div className="container">
-            <Row gutter={[23, 23]}>
-              <Col xs={24} md={12} lg={8} className="rightTestimonail">
-                <iframe
-                  width="560"
-                  height="300"
-                  src="https://www.youtube.com/embed/g32qUM-Gb7Q?si=PnJASqmLrzf-K8dU"
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </Col>
-              <Col xs={24} md={12} lg={8} className="rightTestimonail">
-                <iframe
-                  width="560"
-                  height="300"
-                  src="https://www.youtube.com/embed/9X5WdHbSrBA?si=8vSgjcnlQ9mVN5Dl"
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </Col>
-              <Col xs={24} md={12} lg={8} className="rightTestimonail">
-                <iframe
-                  width="560"
-                  height="300"
-                  src="https://www.youtube.com/embed/DlDNU7lMWYE?si=TOrVCKPEyZsVoT8v"
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </Col>
-            </Row>
+            <Suspense fallback={<div></div>}>
+              <TestimonealVideos />
+            </Suspense>
           </div>
         </div>
       </div>

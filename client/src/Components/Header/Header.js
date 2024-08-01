@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
 import { Col, Row } from "antd";
 import { FaHeadphones, FaVideo } from "react-icons/fa";
@@ -7,6 +7,17 @@ import { BsFillCameraReelsFill } from "react-icons/bs";
 import { isAuthenticated } from "../Auth/auth";
 
 const Header = () => {
+  const [pageLoading, setPageLoading] = useState(true);
+
+  useEffect(() => {
+    setPageLoading(false)
+
+    return () => {
+
+    }
+  }, []);
+
+
   return (
     <div className="mainHeader container">
       <div className="subHeader">
@@ -44,15 +55,19 @@ const Header = () => {
               src={heroImage}
               alt=""
             /> */}
-            <iframe
-              width="560"
-              height="347"
-              src="https://www.youtube.com/embed/H9uSOlEnZhc?si=QBKqBNl-71NAKYcj"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+            {
+              !pageLoading &&
+              <iframe
+                loading="lazy"
+                width="560"
+                height="347"
+                src="https://www.youtube.com/embed/H9uSOlEnZhc?si=QBKqBNl-71NAKYcj"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            }
           </Col>
         </Row>
       </div>

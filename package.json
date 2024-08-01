@@ -30,9 +30,7 @@
     "node-cron": "^3.0.3",
     "nodemailer": "^6.7.0",
     "nodemon": "^2.0.13",
-    "peer": "^1.0.2",
     "razorpay": "^2.9.4",
-    "socket.io": "^4.7.5",
-    "uuid": "^8.3.2"
+    "socket.io": "^4.7.5"
   }
 }

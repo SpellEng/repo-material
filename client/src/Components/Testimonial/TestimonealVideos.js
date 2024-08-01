@@ -6,6 +6,7 @@ const TestimonealVideos = () => {
         <Row gutter={[23, 23]}>
             <Col xs={24} md={12} lg={8} className="rightTestimonail">
                 <iframe
+                    loading="lazy"
                     width="560"
                     height="300"
                     src="https://www.youtube.com/embed/g32qUM-Gb7Q?si=PnJASqmLrzf-K8dU"
@@ -17,6 +18,7 @@ const TestimonealVideos = () => {
             </Col>
             <Col xs={24} md={12} lg={8} className="rightTestimonail">
                 <iframe
+                    loading="lazy"
                     width="560"
                     height="300"
                     src="https://www.youtube.com/embed/9X5WdHbSrBA?si=8vSgjcnlQ9mVN5Dl"
@@ -28,6 +30,7 @@ const TestimonealVideos = () => {
             </Col>
             <Col xs={24} md={12} lg={8} className="rightTestimonail">
                 <iframe
+                    loading="lazy"
                     width="560"
                     height="300"
                     src="https://www.youtube.com/embed/DlDNU7lMWYE?si=TOrVCKPEyZsVoT8v"

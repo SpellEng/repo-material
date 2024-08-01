@@ -25,7 +25,7 @@ const Navbar = () => {
       <div className="container-fluid px-0">
         <div className="logo navbar-brand">
           <Link to="/">
-            <img src={logo} alt="" />
+            <img src={logo} alt="" width="175" />
           </Link>
         </div>
         <div className="collapse navbar-collapse navLinks" id="navbarSupportedContent">

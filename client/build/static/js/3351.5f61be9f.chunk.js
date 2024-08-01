@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkspelleng=self.webpackChunkspelleng||[]).push([[3351],{3351:(e,l,s)=>{s.r(l),s.d(l,{default:()=>d});s(65043);var n=s(70579);const d=e=>{let{stepProps:l}=e;return(0,n.jsxs)("div",{className:"StepsCard",children:[(0,n.jsx)("button",{className:"btn",children:null===l||void 0===l?void 0:l.icon}),(0,n.jsx)("h3",{children:null===l||void 0===l?void 0:l.heading}),(0,n.jsx)("p",{children:null===l||void 0===l?void 0:l.para})]})}}}]);
+//# sourceMappingURL=3351.5f61be9f.chunk.js.map

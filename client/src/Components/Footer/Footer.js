@@ -95,7 +95,7 @@ const Footer = () => {
         </section>
         <Divider />
         <div className="copyright">
-          <img src={logo} alt="" />
+          <img src={logo} alt="" loading="lazy" />
           <p>Copyrights @2024 SpellEng</p>
         </div>
       </div>

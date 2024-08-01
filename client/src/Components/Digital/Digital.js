@@ -14,7 +14,7 @@ const Digital = () => {
       <div className="inner">
         <Row className="row">
           <Col xs={{ span: 24, order: 1 }} md={{ span: 12, order: 0 }} className="picSide col-md-6">
-            <img src={digitalpic} alt="" />
+            <img src={digitalpic} alt="" loading="lazy" />
           </Col>
           <Col xs={{ span: 24, order: 0 }} md={{ span: 12, order: 1 }} className="optionSide col-md-6">
             <h2>Accelerate Your English Learning with 1-on-1 Video Classes</h2>

@@ -20,6 +20,7 @@ const TeacherDetails = () => {
   const location = useLocation();
   const router = useNavigate();
   const tutorId = location.pathname.split("tutor/")[1];
+  const tabKey = location.state;
   const [loading, setLoading] = useState(false);
   const [scheduleLoading, setScheduleLoading] = useState(false);
   const [tutorObject, setTutorObject] = useState({});
@@ -37,6 +38,7 @@ const TeacherDetails = () => {
   };
 
   const filterTutorAvailabilites = async (dt) => {
+    console.log(dt);
     setScheduleLoading(true);
     const filteredTutors = await tutorObject?.availability?.filter(av => av?.date === dt);
     setAvailabilitesArray(filteredTutors);
@@ -54,6 +56,9 @@ const TeacherDetails = () => {
       if (res.status === 200) {
         setTutorObject(res.data);
         getAllTutors(res.data?._id);
+        setActiveTab(tabKey);
+        const filteredTutors = res.data?.availability?.filter(av => av?.date === moment().format("DD/MM/YYYY"));
+        setAvailabilitesArray(filteredTutors);
       } else {
         ErrorAlert(res.data.errorMessage);
       }
@@ -83,6 +88,7 @@ const TeacherDetails = () => {
   const handleActiveTabChange = (val) => {
     setActiveTab(val);
     if (val === "2") {
+      setDate(new Date());
       filterTutorAvailabilites(moment().format("DD/MM/YYYY"));
     }
   }
@@ -149,7 +155,7 @@ const TeacherDetails = () => {
     return () => {
 
     }
-  }, [tutorId]);
+  }, [tutorId, tabKey]);
 
   useEffect(() => {
     getTutorReservedClasses(date);

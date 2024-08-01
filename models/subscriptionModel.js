@@ -22,8 +22,15 @@ const subscriptionSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
+    totalClasses: {
+        type: Number
+    },
+    startDate: {
+        type: String,
+        required: true
+    },
     expiryDate: {
-        type: Date,
+        type: String,
         required: true
     },
     amount: {

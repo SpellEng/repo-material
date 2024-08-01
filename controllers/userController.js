@@ -1,4 +1,6 @@
 const User = require('../models/userModel');
+const ScheduledClass = require('../models/scheduledClassesModel');
+const Subscription = require('../models/subscriptionModel');
 var bcrypt = require('bcryptjs');
 const config = require('../config/keys');
 const jwt = require('jsonwebtoken');
@@ -123,7 +125,7 @@ exports.sendOTPToPhoneNumber = async (req, res) => {
             const response = await axios.post(`${config.OTP_LESS_BASE_URL}/send`, {
                 phoneNumber,
                 otpLength: 6,
-                channel: 'SMS',
+                channel: 'WHATSAPP',
                 expiry: 120
             }, {
                 headers: {
@@ -673,16 +675,27 @@ exports.updatePassword = async (req, res) => {
 
 
 exports.deleteUser = async (req, res) => {
+    const userId = req.params.id;
     try {
-        const deleteUser = await User.findById({ _id: req.params.id })
-        if (deleteUser) {
-            deleteUser.remove();
-            res.status(200).json({ successMessage: `User has been deleted successfully` });
-        } else {
-            res.status(400).json({ errorMessage: 'User could not be deleted. Please try again' });
+        // Check if the user exists
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ errorMessage: 'User not found' });
+        }
+        else {
+            // Pull the user's ID from the students array in ScheduledClass
+            await ScheduledClass.updateMany(
+                { students: userId },
+                { $pull: { students: userId } }
+            );
+
+            // Delete the user
+            await User.findByIdAndRemove(userId);
+
+            res.status(200).json({ successMessage: 'User and all his data has been deleted successfully' });
         }
     } catch (error) {
         console.log(error);
-        res.status(400).send(error);
+        res.status(500).send(error);
     }
 }

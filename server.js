@@ -72,7 +72,7 @@ const convertToUserLocalTime = (time, userTimeZone) => {
     return time.clone().tz(userTimeZone);
 };
 
-nodeCron.schedule('*/4 * * * *', async () => {
+nodeCron.schedule('*/5 * * * *', async () => {
     const nowUTC = moment.utc();
     console.log("Cron job called at UTC time: ", nowUTC.format());
 

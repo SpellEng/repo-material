@@ -7,11 +7,11 @@ const PricingPlanCard = ({ plan, selectedClasses, selectedPlan, setSelectedPlan 
 
     return (
         <div className={`planContainer ${selectedPlan === plan.duration && "selected"}`} onClick={() => setSelectedPlan(plan.duration)}>
-            {plan.discount && (
+            {/* {plan.discount && (
                 <div className='save'>
                     <p>SAVE {plan.discount}%</p>
                 </div>
-            )}
+            )} */}
             <div>
                 <h6>{plan.duration}</h6>
                 <p>No. of classes: <b>{selectedClasses * parseInt(plan.duration)}</b></p>
@@ -21,6 +21,6 @@ const PricingPlanCard = ({ plan, selectedClasses, selectedPlan, setSelectedPlan 
             </div>
         </div>
     );
-};
+}; 
 
 export default PricingPlanCard;

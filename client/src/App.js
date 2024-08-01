@@ -1,10 +1,8 @@
-import React, { lazy, Suspense, useEffect, useState } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { SocketProvider } from './Context/SocketContext';
 import ProtectedRoutes from './Routes/ProtectedRoutes';
 import AdminRoutes from './Routes/AdminRoute';
-import { isAuthenticated } from './Components/Auth/auth';
-import axios from 'axios';
 import Navbar from './Components/Navbar/Navbar';
 import Footer from './Components/Footer/Footer';
 import Learn from './Pages/Learn/Learn';
@@ -43,52 +41,6 @@ const ResetPassword = lazy(() => import('./Pages/ForgotPassword/ResetPassword'))
 
 function App() {
   const location = useLocation();
-  const [subscriptions, setSubscriptions] = useState([]);
-
-  const fetchSubscriptions = async () => {
-    try {
-      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/subscriptions/user/${isAuthenticated()?._id}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token")
-        }
-      });
-      setSubscriptions(response.data);
-    } catch (error) {
-      console.error('Error fetching subscriptions:', error);
-    }
-  };
-
-  useEffect(() => {
-    if (isAuthenticated()?.role === 0) {
-      fetchSubscriptions();
-    }
-  }, []);
-
-  useEffect(() => {
-    const checkExpiry = async () => {
-      const now = new Date();
-      for (let subscription of subscriptions) {
-        const expiryDate = new Date(subscription.expiryDate);
-        if (expiryDate < now && subscription.status !== 'expired') {
-          try {
-            await axios.put(`${process.env.REACT_APP_BACKEND_URL}/subscriptions/update-status/${subscription._id}`, { status: "expired" }, {
-              headers: {
-                Authorization: "Bearer " + localStorage.getItem("token")
-              }
-            }).then(res => {
-              if (res.status === 200) {
-                fetchSubscriptions();
-              }
-            })
-          } catch (error) {
-            console.error('Error updating subscription status:', error);
-          }
-        }
-      }
-    };
-
-    checkExpiry();
-  }, [subscriptions]);
 
   useEffect(() => {
     window.scrollTo(0, 0);

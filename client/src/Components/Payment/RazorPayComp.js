@@ -25,7 +25,7 @@ const RazorPayComp = ({ studentId, plan, amount, classesPerMonth, btnText }) => 
                 key: process.env.REACT_APP_RAZORPAY_KEY_ID,
                 amount,
                 currency: 'INR',
-                name: 'SpellENg Subscription',
+                name: 'SpellEng Subscription',
                 description: 'Subscription Payment',
                 order_id: order_id,
                 handler: async function (response) {

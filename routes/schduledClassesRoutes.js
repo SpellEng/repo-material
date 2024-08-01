@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllScheduledClasses, getAllTutorFutureScheduledClasses, getAllTutorPastScheduledClasses, addScheduledClass, deleteScheduledClass, getAllStudentFutureScheduledClasses, getAllStudentPastScheduledClasses, addStudentsInScheduledClass, getScheduledClassById, deleteScheduledClassByDelAvailability, getReservedClass, cancelAndRescheduleClass, getAllTutorsScheduledClasses, getAllStudentsScheduledClasses, endClass, getAllStudentCancelledScheduledClasses, createMeeting, getAllPastScheduledClasses, getAllFutureScheduledClasses, addReview } = require('../controllers/scheduledClassesController');
+const { getAllScheduledClasses, getAllTutorFutureScheduledClasses, getAllTutorPastScheduledClasses, addScheduledClass, deleteScheduledClass, getAllStudentFutureScheduledClasses, getAllStudentPastScheduledClasses, addStudentsInScheduledClass, getScheduledClassById, deleteScheduledClassByDelAvailability, getReservedClass, cancelAndRescheduleClass, getAllTutorsScheduledClasses, getAllStudentsScheduledClasses, endClass, getAllStudentCancelledScheduledClasses, createMeeting, getAllPastScheduledClasses, getAllFutureScheduledClasses, addReview, cancelAndDeleteScheduledClassByTutor } = require('../controllers/scheduledClassesController');
 const { isAdmin, AuthenticatorJWT, isStudent, isTutor } = require('../middlewares/authenticator');
 
 const router = express.Router();
@@ -23,6 +23,6 @@ router.put('/cancel-and-reschedule/:id', AuthenticatorJWT, isStudent, cancelAndR
 router.put('/add-review', AuthenticatorJWT, addReview);
 router.put('/end-class/:id', AuthenticatorJWT, endClass);
 router.put('/delete-class-and-availability/:id', AuthenticatorJWT, isTutor, deleteScheduledClassByDelAvailability);
-router.delete('/delete/:id', AuthenticatorJWT, isTutor, deleteScheduledClass);
+router.delete('/delete/:id', AuthenticatorJWT, isTutor, cancelAndDeleteScheduledClassByTutor);
 
 module.exports = router;

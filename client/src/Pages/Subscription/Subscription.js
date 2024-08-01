@@ -18,7 +18,7 @@ const Subscription = () => {
       ]
     },
     {
-      duration: "3 Month",
+      duration: "3 Months",
       classes: [
         { count: 12, price: 16000 },
         { count: 20, price: 20000 }
@@ -26,7 +26,7 @@ const Subscription = () => {
       discount: 19
     },
     {
-      duration: "6 Month",
+      duration: "6 Months",
       classes: [
         { count: 12, price: 30000 },
         { count: 20, price: 35000 }

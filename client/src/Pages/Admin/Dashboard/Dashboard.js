@@ -138,6 +138,25 @@ const AdminDashboard = () => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
+    function sumSubsAmounts(students) {
+        let totalSum = 0;
+
+        // Iterate over students array
+        for (let i = 0; i < students.length; i++) {
+            const subscriptionsHistory = students[i].subscriptionsHistory;
+
+            // Check if subscriptions History array exists and is an array
+            if (subscriptionsHistory && Array.isArray(subscriptionsHistory)) {
+                // Iterate over subscriptions History array for each tutor
+                for (let j = 0; j < subscriptionsHistory.length; j++) {
+                    totalSum += parseInt(subscriptionsHistory[j].amount);
+                }
+            }
+        }
+
+        return totalSum;
+    }
+
     function sumAmounts(tutors) {
         let totalSum = 0;
 
@@ -159,7 +178,7 @@ const AdminDashboard = () => {
 
     let withdrawals = sumAmounts(tutors);
 
-    let totalEarningsThroughSubscriptions = subscriptions?.reduce((a, b) => a + parseInt(b?.amount), 0)
+    let totalEarningsThroughSubscriptions = sumSubsAmounts(students);
 
     let earnings = previousClasses?.length * teacherCommission()
 

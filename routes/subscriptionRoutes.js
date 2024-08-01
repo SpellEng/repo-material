@@ -10,7 +10,7 @@ router.get('/active-subscription', AuthenticatorJWT, isStudent, getActiveSubscri
 router.get('/:id', AuthenticatorJWT, getSubscriptionById);
 router.post('/create-order', AuthenticatorJWT, createOrder);
 router.post('/create-subscription', AuthenticatorJWT, createSubscription);
-router.put('/update-status/:id', AuthenticatorJWT, updateSubscriptionStatus);
+// router.put('/update-status/:id', AuthenticatorJWT, updateSubscriptionStatus);
 router.delete('/subscription/cancel/:id', AuthenticatorJWT, cancelSubscription);
 
 

@@ -92,11 +92,13 @@ exports.createSubscription = async (req, res) => {
     let durationInMonths;
     if (plan === '1 Month') {
         durationInMonths = 1;
-    } else if (plan === '3 Month') {
+    } else if (plan === '3 Months') {
         durationInMonths = 3;
     } else {
         durationInMonths = 6;
     }
+
+    let totalClasses = durationInMonths * parseInt(classesPerMonth);
 
     try {
         // Verify the payment with Razorpay
@@ -107,27 +109,31 @@ exports.createSubscription = async (req, res) => {
         }
 
         // Calculate the expiry date based on the plan duration 
-        const expiryDate = new Date();
-        expiryDate.setMonth(expiryDate.getMonth() + durationInMonths);
+        const startDate = moment().format("DD/MM/YYYY");
+        const expiryDate = moment().add(durationInMonths, 'months').format("DD/MM/YYYY");
 
         // Create a new subscription in the database
         const findSubscription = await Subscription.findOne({ user: req.user?._id });
-        const findUser = await User.findOne({ user: req.user?._id });
+        // const findUser = await User.findOne({ user: req.user?._id });
         if (findSubscription) {
-            let newExpiryDateIsAfterPrevDate = moment(expiryDate).isAfter(moment(findSubscription.expiryDate));
+            let newExpiryDateIsAfterPrevDate = moment(expiryDate, "DD/MM/YYYY").isAfter(moment(findSubscription.expiryDate, "DD/MM/YYYY"));
             let subscriptionObject = {
                 razorpayPaymentId: findSubscription.razorpayPaymentId,
                 user: req.user?._id,
                 plan: findSubscription.plan,
+                totalClasses: findSubscription.totalClasses,
                 status: findSubscription.status,
                 classesPerMonth: findSubscription.classesPerMonth,
                 amount: findSubscription.amount,
-                expiryDate: findSubscription.expiryDate
+                expiryDate: findSubscription.expiryDate,
+                startDate: findSubscription.startDate
             }
             findSubscription.razorpayPaymentId = razorpayPaymentId;
             findSubscription.plan = plan;
-            findSubscription.classesPerMonth = parseInt(findSubscription.classesPerMonth) + parseInt(classesPerMonth);
+            findSubscription.totalClasses = findSubscription.totalClasses + totalClasses;
+            findSubscription.classesPerMonth = classesPerMonth;
             findSubscription.amount = amount;
+            findSubscription.startDate = startDate;
             findSubscription.expiryDate = newExpiryDateIsAfterPrevDate ? expiryDate : findSubscription.expiryDate;
             findSubscription.status = "active";
             await findSubscription.save();
@@ -139,7 +145,7 @@ exports.createSubscription = async (req, res) => {
             )
             // Send an email notification
             sendEmail(email, "Subscription Plan Confirmation", StudentBuySubscriptionTemplate({ name, plan, duration: durationInMonths, startDate: moment().format("DD/MM/YYYY"), endDate: moment(expiryDate).format("DD/MM/YYYY"), url: `${config.FRONTEND_URL}/student/subscriptions` }));
-            sendEmail("admin@spelleng.com", "Subscription Plan Confirmation", AdminStudentBuySubscriptionTemplate({ name, email: findUser?.email, plan, date: moment().format("DD/MM/YYYY") }));
+            sendEmail("admin@spelleng.com", "Subscription Plan Confirmation", AdminStudentBuySubscriptionTemplate({ name, email, plan, date: moment().format("DD/MM/YYYY") }));
             res.json({ successMessage: 'Subscription is renewed and activated successfully' });
         } else {
             const newSubscription = new Subscription({
@@ -148,7 +154,9 @@ exports.createSubscription = async (req, res) => {
                 plan,
                 status: 'active',
                 classesPerMonth,
+                totalClasses,
                 amount,
+                startDate,
                 expiryDate
             });
 
@@ -156,7 +164,7 @@ exports.createSubscription = async (req, res) => {
 
             // Send an email notification
             sendEmail(email, "Subscription Plan Confirmation", StudentBuySubscriptionTemplate({ name, plan, duration: durationInMonths, startDate: moment().format("DD/MM/YYYY"), endDate: moment(expiryDate).format("DD/MM/YYYY"), url: `${config.FRONTEND_URL}/student/subscriptions` }));
-            sendEmail("admin@spelleng.com", "Subscription Plan Confirmation", AdminStudentBuySubscriptionTemplate({ name, email: findUser?.email, plan, date: moment().format("DD/MM/YYYY") }));
+            sendEmail("admin@spelleng.com", "Subscription Plan Confirmation", AdminStudentBuySubscriptionTemplate({ name, email, plan, date: moment().format("DD/MM/YYYY") }));
             res.json({ successMessage: 'Subscription created and activated successfully' });
         }
     } catch (error) {

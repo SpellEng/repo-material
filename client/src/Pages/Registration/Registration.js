@@ -57,7 +57,7 @@ const Registration = () => {
         key: process.env.REACT_APP_RAZORPAY_KEY_ID,
         amount: 99 * 100,
         currency: 'INR',
-        name: 'SpellENg Trial Payment @ ₹99',
+        name: 'SpellEng Trial Payment',
         description: 'Trial Payment',
         order_id: order_id,
         handler: async function (response) {
@@ -281,7 +281,7 @@ const Registration = () => {
                   </Checkbox>
                 </Col>
                 <Col xs={24} className="otpBtn">
-                  <Button disabled={loading} className="py-2 h-auto" loading={loading} type="primary" htmlType="submit">Book a trial</Button>
+                  <Button disabled={loading} className="py-2 h-auto" loading={loading} type="primary" htmlType="submit">Book A Trial</Button>
                 </Col>
               </Row>
             </form>

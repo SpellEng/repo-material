@@ -1,3 +1,23 @@
-# https://www.robotstxt.org/robotstxt.html
+# robots.txt for https://www.spelleng.com/
+
+# Allow all user agents
 User-agent: *
-Disallow:
+Disallow: /admin/
+Disallow: /login/
+Disallow: /signup/
+Disallow: /api/
+Disallow: /engine.io/
+Disallow: /student/
+Disallow: /tutor/
+Disallow: /chats/
+Disallow: /class/leave-a-review
+Disallow: /admin/
+Disallow: /subscription/
+Disallow: /video-class/
+Disallow: /learn
+
+# Allow access to all other pages
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.spelleng.com/sitemap.xml

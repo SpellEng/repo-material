@@ -84,7 +84,7 @@ const StudentBuySubscriptionTemplate = ({ name, plan, duration, startDate, endDa
             <p>Plan Details:</p>
             <ul class="details-list">
                 <li><strong>Plan Name:</strong> ${plan}</li>
-                <li><strong>Duration:</strong> ${duration}</li>
+                <li><strong>Duration:</strong> ${plan}</li>
                 <li><strong>Start Date:</strong> ${startDate}</li>
                 <li><strong>End Date:</strong> ${endDate}</li>
             </ul>

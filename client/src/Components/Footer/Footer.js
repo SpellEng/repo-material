@@ -31,7 +31,7 @@ const Footer = () => {
             <Link to="/about-us">About Us</Link>
             <Link to="/contact-us">Contact Us</Link>
             <Link to="/all-tutors">All Tutors</Link>
-            <Link to={isAuthenticated() ? "/student/book-trial" : "/signup"}>Book a Trial</Link>
+            <Link to={isAuthenticated() ? "/student/book-trial" : "/signup"}>Book A Trial</Link>
           </div>
           <div className="legal">
             <h4>Legal Pages</h4>

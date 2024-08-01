@@ -3,12 +3,17 @@ import React from "react";
 import { FaStar } from "react-icons/fa";
 import { GiCalendar } from "react-icons/gi";
 import { LuSend } from "react-icons/lu";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./TutorCard.css";
 
 const TutorCard = ({ tutorProps }) => {
+  const navigate = useNavigate();
   const totalRatings = tutorProps?.reviews?.reduce((acc, review) => acc + review?.rating, 0);
   const averageRating = parseFloat((totalRatings / tutorProps?.reviews?.length).toFixed(2));
+
+  const handleNavigation = (tabKey) => {
+    navigate(`/tutor/${tutorProps?._id}`, { state: tabKey });
+  };
 
   return (
     <div className="tutorCard">
@@ -41,14 +46,14 @@ const TutorCard = ({ tutorProps }) => {
         </div>
       </div>
       <div className="buttons">
-        <Link to={`/tutor/${tutorProps?._id}`} className="btn">
+        <button onClick={() => handleNavigation("2")} className="btn">
           <GiCalendar />
           <div>Book a Class</div>
-        </Link>
-        <Link to={`/tutor/${tutorProps?._id}`} className="btn">
+        </button>
+        <button onClick={() => handleNavigation("1")} className="btn">
           <LuSend />
           <div>View Profile</div>
-        </Link>
+        </button>
       </div>
     </div>
   );

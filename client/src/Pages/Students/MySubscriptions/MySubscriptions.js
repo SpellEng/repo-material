@@ -6,6 +6,7 @@ import { isAuthenticated } from '../../../Components/Auth/auth';
 import { useNavigate } from 'react-router-dom';
 import moment from "moment"
 import { ErrorAlert } from '../../../Components/Messages/messages';
+import { checkSubscriptionStatus } from '../../../Utils/checkSubscriptionStatus';
 
 const MySubscriptions = () => {
     const router = useNavigate();
@@ -101,32 +102,6 @@ const MySubscriptions = () => {
         getCancelledClasses();
     }, []);
 
-    useEffect(() => {
-        const checkExpiry = async () => {
-            const now = new Date();
-            for (let subscription of subscriptions) {
-                const expiryDate = new Date(subscription.expiryDate);
-                if (expiryDate < now && subscription.status !== 'expired') {
-                    try {
-                        await axios.put(`${process.env.REACT_APP_BACKEND_URL}/subscriptions/update-status/${subscription._id}`, { status: "expired" }, {
-                            headers: {
-                                Authorization: "Bearer " + localStorage.getItem("token")
-                            }
-                        }).then(res => {
-                            if (res.status === 200) {
-                                fetchSubscriptions();
-                            }
-                        })
-                    } catch (error) {
-                        console.error('Error updating subscription status:', error);
-                    }
-                }
-            }
-        };
-
-        checkExpiry();
-    }, [subscriptions]);
-
     return (
         <div className="subscriptions-container">
             <div className="container">
@@ -146,18 +121,18 @@ const MySubscriptions = () => {
                                     <h2>{subscription?.plan}</h2>
                                     <p className='mb-4'><b>{subscription?.classesPerMonth} sessions</b> per month</p>
                                     {
-                                        subscription?.status === "expired" ?
+                                        checkSubscriptionStatus(subscription?.expiryDate) ?
                                             <div className='subsctiptionStatus expired'>
-                                                <p>Your subscription has been expired on <b>{moment(subscription.expiryDate).format("MMMM DD, YYYY")}</b></p>
+                                                <p>Your subscription has been expired on <b>{moment(subscription.expiryDate, "DD/MM/YYYY").format("MMMM DD, YYYY")}</b></p>
                                             </div>
                                             :
                                             <div className='subsctiptionStatus'>
-                                                <p>Your subscription will expire on <b>{moment(subscription.expiryDate).format("MMMM DD, YYYY")}</b></p>
+                                                <p>Your subscription will expire on <b>{moment(subscription.expiryDate, "DD/MM/YYYY").format("MMMM DD, YYYY")}</b></p>
                                             </div>
                                     }
                                     <div className='items'>
                                         <div className='item'>
-                                            <h5>{previousClasses?.length + futureClasses?.length}/{subscription?.classesPerMonth}</h5>
+                                            <h5>{previousClasses?.length + futureClasses?.length}/{subscription?.totalClasses}</h5>
                                             <p>Total sessions left</p>
                                         </div>
                                         <div className='item'>
@@ -169,8 +144,8 @@ const MySubscriptions = () => {
                                             <p>Monthly Cancelled Sessions</p>
                                         </div>
                                         <div className='item'>
-                                            <h5>{moment(subscription.expiryDate).format("MMMM DD, YYYY")}</h5>
-                                            <p>Expires on</p>
+                                            <h5>{moment(subscription.expiryDate, "DD/MM/YYYY").format("MMMM DD, YYYY")}</h5>
+                                            <p>{checkSubscriptionStatus(subscription?.expiryDate) ? "Expired" : "Expires"} on</p>
                                         </div>
                                     </div>
                                 </div>

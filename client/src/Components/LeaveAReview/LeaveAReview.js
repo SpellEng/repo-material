@@ -8,7 +8,7 @@ const { TextArea } = Input;
 
 const LeaveAReview = ({ previousClass, updateParent }) => {
     const [currentReview, setCurrentReview] = useState('');
-    const [currentRating, setCurrentRating] = useState(1.5);
+    const [currentRating, setCurrentRating] = useState(5);
 
     const handleReviewChange = (e) => {
         setCurrentReview(e.target.value);

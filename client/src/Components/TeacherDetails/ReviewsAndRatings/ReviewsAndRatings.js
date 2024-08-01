@@ -23,7 +23,7 @@ const ReviewsAndRatings = ({ reviews }) => {
                                 title={item?.userId?.fullName}
                                 description={
                                     <div>
-                                        <Rate disabled value={item?.rating} />
+                                        <Rate allowHalf disabled value={item?.rating} />
                                         <p>{item?.message}</p>
                                     </div>
                                 }

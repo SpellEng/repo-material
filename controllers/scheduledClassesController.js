@@ -324,11 +324,17 @@ exports.getAllStudentFutureScheduledClasses = async (req, res) => {
   const studentId = req.params.id;
   try {
     // const users = await User.updateMany({ role: 1 }, { availability: { $set: null } });
-    const users = await User.findOne({ role: 1 });
-    // users.availability = [];
+    // const users = await User.findOne({ role: 0 });
+    // users.trialUsed = false;
+    // users.trialDetails = null;
+    // users.trialActivated = false;
     // users.save();
-    console.log(users);
-    // const sc = await ScheduledClass.deleteMany();
+    // console.log(users);
+    // const sc = await Subscription.findOne();
+    // // const sc = await ScheduledClass.findById("66ac05f7915869d73c395083").populate("students tutor");
+    // console.log(sc);
+    // sc.expiryDate = "01/08/2024";
+    // sc.save();
     const scheduledClasses = await ScheduledClass.find({
       students: { $in: [mongoose.Types.ObjectId(studentId)] }
     })

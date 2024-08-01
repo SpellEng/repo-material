@@ -323,8 +323,12 @@ exports.getAllStudentCancelledScheduledClasses = async (req, res) => {
 exports.getAllStudentFutureScheduledClasses = async (req, res) => {
   const studentId = req.params.id;
   try {
-    const users = await User.find();
-    console.log(users)
+    // const users = await User.updateMany({ role: 1 }, { availability: { $set: null } });
+    // const users = await User.findOne({ role: 1 });
+    // users.availability = [];
+    // users.save();
+    // console.log(users);
+    // const sc = await ScheduledClass.deleteMany();
     const scheduledClasses = await ScheduledClass.find({
       students: { $in: [mongoose.Types.ObjectId(studentId)] }
     })

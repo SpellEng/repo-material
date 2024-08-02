@@ -30,7 +30,10 @@ const Footer = () => {
             <Link to="/">Homepage</Link>
             <Link to="/about-us">About Us</Link>
             <Link to="/contact-us">Contact Us</Link>
-            <Link to="/all-tutors">All Tutors</Link>
+            {
+              isAuthenticated() &&
+              <Link to="/all-tutors">All Tutors</Link>
+            }
             <Link to={isAuthenticated() ? "/student/book-trial" : "/signup"}>Book A Trial</Link>
           </div>
           <div className="legal">

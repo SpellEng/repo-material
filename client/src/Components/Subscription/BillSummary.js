@@ -18,7 +18,8 @@ const BillSummary = ({ selectedPlan, selectedClasses, pricingPlans }) => {
     if (!plan) return null;
 
     const currentPrice = plan.classes.find(c => c.count === selectedClasses).price;
-    const discount = plan.discount ? (currentPrice * plan.discount) / 100 : 0;
+    // const discount = plan.discount ? (currentPrice * plan.discount) / 100 : 0;
+    const discount = 0;
     const couponDiscountPrice = discountFromCoupon ? (currentPrice * discountFromCoupon) / 100 : 0;
     const netPrice = currentPrice - discount;
 
@@ -45,12 +46,12 @@ const BillSummary = ({ selectedPlan, selectedClasses, pricingPlans }) => {
                 <h6>Base Price:</h6>
                 <h6><CurrencySign />{formatCurrency(currentPrice)}</h6>
             </div>
-            {discount > 0 && (
+            {/* {discount > 0 && (
                 <div className='item discount'>
                     <h6>Discount ({plan.discount}%):</h6>
                     <h6>-<CurrencySign />{formatCurrency(discount)}</h6>
                 </div>
-            )}
+            )} */}
             {couponDiscountPrice > 0 && (
                 <div className='item discount'>
                     <h6>Coupon Discount ({discountFromCoupon}%):</h6>

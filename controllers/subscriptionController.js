@@ -148,6 +148,17 @@ exports.createSubscription = async (req, res) => {
             sendEmail("admin@spelleng.com", "Subscription Plan Confirmation", AdminStudentBuySubscriptionTemplate({ name, email, plan, date: moment().format("DD/MM/YYYY") }));
             res.json({ successMessage: 'Subscription is renewed and activated successfully' });
         } else {
+            let subscriptionObject = {
+                razorpayPaymentId,
+                user: req.user?._id,
+                plan,
+                totalClasses,
+                status: 'active',
+                classesPerMonth,
+                amount,
+                expiryDate,
+                startDate
+            }
             const newSubscription = new Subscription({
                 razorpayPaymentId: razorpayPaymentId,
                 user: req.user?._id,
@@ -161,6 +172,13 @@ exports.createSubscription = async (req, res) => {
             });
 
             await newSubscription.save();
+
+
+            await User.findByIdAndUpdate(
+                { _id: req.user?._id },
+                { $push: { subscriptionsHistory: subscriptionObject } },
+                { new: true }
+            )
 
             // Send an email notification
             sendEmail(email, "Subscription Plan Confirmation", StudentBuySubscriptionTemplate({ name, plan, duration: durationInMonths, startDate: moment().format("DD/MM/YYYY"), endDate: moment(expiryDate).format("DD/MM/YYYY"), url: `${config.FRONTEND_URL}/student/subscriptions` }));

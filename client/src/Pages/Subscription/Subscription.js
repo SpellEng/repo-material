@@ -7,7 +7,7 @@ import BillSummary from '../../Components/Subscription/BillSummary';
 
 const Subscription = () => {
   const [selectedClasses, setSelectedClasses] = useState(12);
-  const [selectedPlan, setSelectedPlan] = useState("3 Month");
+  const [selectedPlan, setSelectedPlan] = useState("3 Months");
 
   const pricingPlans = [
     {

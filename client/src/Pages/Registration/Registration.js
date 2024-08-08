@@ -281,7 +281,7 @@ const Registration = () => {
                   </Checkbox>
                 </Col>
                 <Col xs={24} className="otpBtn">
-                  <Button disabled={loading} className="py-2 h-auto" loading={loading} type="primary" htmlType="submit">Book A Trial</Button>
+                  <Button disabled={loading} className="py-2 h-auto" loading={loading} type="primary" htmlType="submit">Take First Class @ ₹1</Button>
                 </Col>
               </Row>
             </form>

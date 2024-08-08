@@ -38,7 +38,7 @@ const Faqs = () => {
       label: "How do I create an account on SpellEng?",
       children: (
         <p>
-          Visit our website, click on the 'Book a Trial' button, and follow the
+          Visit our website, click on the 'Take First Class @ ₹1' button, and follow the
           prompts to create your account. You will need to provide some basic
           information and set up a payment method.
         </p>

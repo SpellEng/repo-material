@@ -43,7 +43,7 @@ const Registration = () => {
     }
     else if (isAuthenticated() && !isAuthenticated()?.trialActivated) {
       setLoading(true);
-      const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/subscriptions/create-order`, { amount: 99 }, {
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/subscriptions/create-order`, { amount: 1 }, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token")
         }
@@ -55,7 +55,7 @@ const Registration = () => {
 
       const options = {
         key: process.env.REACT_APP_RAZORPAY_KEY_ID,
-        amount: 99 * 100,
+        amount: 1 * 100,
         currency: 'INR',
         name: 'SpellEng Trial Payment',
         description: 'Trial Payment',
@@ -68,7 +68,7 @@ const Registration = () => {
               name: isAuthenticated()?.fullName,
               email: isAuthenticated()?.email,
               razorpayPaymentId: response.razorpay_payment_id,
-              amount: 99,
+              amount: 1,
             }, {
               headers: {
                 Authorization: "Bearer " + localStorage.getItem("token")

@@ -5,32 +5,29 @@ import { FaHeadphones, FaVideo } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { BsFillCameraReelsFill } from "react-icons/bs";
 import { isAuthenticated } from "../Auth/auth";
+// import thumbnail from "../../assets/thumbnail.png";
 
-const Header = () => {
-  const [pageLoading, setPageLoading] = useState(true);
-
-  useEffect(() => {
-    setPageLoading(false)
-
-    return () => {
-
-    }
-  }, []);
-
+const Header = ({ videoLink, learn }) => {
+  const [loadVideo, setLoadVideo] = useState(false);
 
   return (
     <div className="mainHeader container">
       <div className="subHeader">
         <Row gutter={[40, 40]}>
           <Col xs={24} md={12} className="leftSide">
-            <h1>Speak English With <br /> Confidence In Weeks</h1>
+            {
+              learn ?
+                <h1>Start Learning Spoken  <br />English At Just ₹1</h1>
+                :
+                <h1>Speak English With <br /> Confidence In Weeks</h1>
+            }
             <p className="my-4">
               Improve Your English Fluency with Expert Tutors: Personalized 1-on-1 Video
               Calls in a Non-judgmental Environment to Boost Conﬁdence and Achieve Goals Faster.
             </p>
             <div className="buttonPart">
               <div className="trialBtn">
-                <Link to={isAuthenticated() ? "/student/book-trial" : "/signup"} className="btn">Book A Trial @ ₹99</Link>
+                <Link to={isAuthenticated() ? "/student/book-trial" : "/signup"} className="btn">Take First Class ₹1</Link>
               </div>
             </div>
             <div className="iconsPart mt-4">
@@ -51,17 +48,19 @@ const Header = () => {
             </div>
           </Col>
           <Col xs={24} md={12} className="rightSide">
-            {/* <img
-              src={heroImage}
-              alt=""
-            /> */}
             {
-              !pageLoading &&
+              !loadVideo &&
+              // <img
+              //   onClick={() => setLoadVideo(true)}
+              //   src={thumbnail}
+              //   alt=""
+              // />
+              // :
               <iframe
                 loading="lazy"
                 width="560"
                 height="347"
-                src="https://www.youtube.com/embed/H9uSOlEnZhc?si=QBKqBNl-71NAKYcj"
+                src={videoLink ? videoLink : "https://www.youtube.com/embed/H9uSOlEnZhc?si=QBKqBNl-71NAKYcj"}
                 title="YouTube video player"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

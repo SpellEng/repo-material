@@ -104,8 +104,8 @@ const Registration = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (fullName, city, phoneNumber, email, password) {
-      setLoading(true);
       if (otp) {
+        setLoading(true);
         formData.otp = otp;
         formData.timezone = getUserTimezone();
         await axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/signup`, formData).then(res => {
@@ -186,7 +186,7 @@ const Registration = () => {
             </div>
             <div className="text-center">
               <p>
-                Take the first step with an affordable trial session for just @ ₹99
+                Take the first step with an affordable trial session for just @ ₹1
               </p>
             </div>
             <form className="form" onSubmit={submitHandler}>

@@ -100,25 +100,24 @@ nodeCron.schedule('*/5 * * * *', async () => {
                     )
                 );
             }
-        }
+            // Convert class time to tutor's local time and then to UTC
+            const tutorTimeZone = upcomingClass?.tutor?.timezone; // Assuming you store the tutor's time zone
+            const tutorLocalDateTime = convertToUserLocalTime(classDateTime, tutorTimeZone);
+            const tutorNotificationTimeUTC = convertToUTC(tutorLocalDateTime.clone().subtract(5, 'minutes'));
 
-        // Convert class time to tutor's local time and then to UTC
-        const tutorTimeZone = upcomingClass?.tutor?.timezone; // Assuming you store the tutor's time zone
-        const tutorLocalDateTime = convertToUserLocalTime(classDateTime, tutorTimeZone);
-        const tutorNotificationTimeUTC = convertToUTC(tutorLocalDateTime.clone().subtract(5, 'minutes'));
-
-        if (nowUTC.isSameOrAfter(tutorNotificationTimeUTC) && nowUTC.isBefore(tutorNotificationTimeUTC.clone().add(5, 'minutes'))) {
-            await sendEmail(
-                upcomingClass?.tutor?.email,
-                'Class Reminder From SpellENg',
-                TutorClassReminderTemplate(
-                    config.FRONTEND_URL + "/tutor/upcoming-classes",
-                    upcomingClass?.tutor?.fullName,
-                    upcomingClass?.students[0]?.fullName,
-                    upcomingClass?.time,
-                    upcomingClass?.date
-                )
-            );
+            if (nowUTC.isSameOrAfter(tutorNotificationTimeUTC) && nowUTC.isBefore(tutorNotificationTimeUTC.clone().add(5, 'minutes'))) {
+                await sendEmail(
+                    upcomingClass?.tutor?.email,
+                    'Class Reminder From SpellENg',
+                    TutorClassReminderTemplate(
+                        config.FRONTEND_URL + "/tutor/upcoming-classes",
+                        upcomingClass?.tutor?.fullName,
+                        upcomingClass?.students[0]?.fullName,
+                        upcomingClass?.time,
+                        upcomingClass?.date
+                    )
+                );
+            }
         }
     });
 });

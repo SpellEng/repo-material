@@ -79,11 +79,11 @@ const StudentBookTrialTemplate = ({ name, email, loginUrl }) => {
     <div class="container">
         <div class="content">
             <h2>Hello ${name},</h2>
-            <p>Thank you for booking a trial session with SpellEng for just 99 INR!</p>
+            <p>Thank you for booking a trial session with SpellEng for just ₹1!</p>
             <p>We are thrilled to have you start your journey with us.</p>
             <p>Here are your trial session details:</p>
             <ul class="details-list">
-                <li><strong>Session Cost:</strong> 99 INR</li>
+                <li><strong>Session Cost:</strong> ₹1</li>
                 <li><strong>Full Name:</strong> ${name}</li>
                 <li><strong>Email:</strong> ${email}</li>
             </ul>

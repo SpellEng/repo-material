@@ -117,7 +117,7 @@ const Login = () => {
               <div className="bookTrail">
                 <p>
                   Not Registered Yet? &nbsp;
-                  <Link to="/signup">Book A Trial @ ₹99</Link>
+                  <Link to="/signup">Take First Class ₹1</Link>
                 </p>
               </div>
               <div className="bookTrail">

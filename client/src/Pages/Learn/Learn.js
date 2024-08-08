@@ -28,8 +28,8 @@ const Learn = () => {
   const cardArray = [
     {
       icon: <FaSearch />,
-      heading: "Book a Trial Session",
-      para: "Begin with a ₹99 trial session to experience SpellEng and receive personalized feedback.",
+      heading: "Take First Class @ ₹1",
+      para: "Begin with a ₹1 trial session to experience SpellEng and receive personalized feedback.",
     },
     {
       icon: <GiTargetShot />,
@@ -83,14 +83,55 @@ const Learn = () => {
         <Helmet>
           <meta charSet="utf-8" />
           <title>SpellEng: Expert English Tutors via 1-on-1 Video Calls</title>
-          <meta name="description" content="SpellEng offers 1-on-1 video calls with expert English tutors to improve your spoken English. Enjoy flexible scheduling, personalized feedback, and a ₹99 trial." />
+          <meta name="description" content="SpellEng offers 1-on-1 video calls with expert English tutors to improve your spoken English. Enjoy flexible scheduling, personalized feedback, and a ₹1 trial." />
           <link rel="canonical" href="https://www.spelleng.com/" />
         </Helmet>
         <div>
-          <Header />
+          <Header learn={true} videoLink={"https://www.youtube.com/embed/rjno8Z9OJ_w?si=nasZ0-I6S78_oHoM"} />
         </div>
         <div>
           <Digital />
+        </div>
+        <div className="testimonialPart">
+          <div className="testimonialVideos">
+            <div className="container">
+              <Row gutter={[23, 23]}>
+                <Col xs={24} md={12} lg={8} className="rightTestimonail">
+                  <iframe
+                    width="560"
+                    height="300"
+                    src="https://www.youtube.com/embed/YYrdGIROKeQ?si=YK4g0Y75LAWY0jIk"
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </Col>
+                <Col xs={24} md={12} lg={8} className="rightTestimonail">
+                  <iframe
+                    width="560"
+                    height="300"
+                    src="https://www.youtube.com/embed/rjno8Z9OJ_w?si=9zileQpqyXlWQBUy"
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </Col>
+                <Col xs={24} md={12} lg={8} className="rightTestimonail">
+                  <iframe
+                    width="560"
+                    height="300"
+                    src="https://www.youtube.com/embed/l6Ra7KzyO5s?si=OS3DSui1hLrEMGgg"
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </Col>
+              </Row>
+            </div>
+          </div>
         </div>
         <div className="stepPart mt-5 container">
           <h2 className="mb-5 text-center">How SpellEng works in <span>4</span> easy steps</h2>

@@ -2,6 +2,7 @@ import React from "react";
 import "./LearnNavbar.css";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import { FaPhone } from "react-icons/fa";
 
 const LearnNavbar = () => {
   return (
@@ -13,7 +14,10 @@ const LearnNavbar = () => {
           </Link>
         </div>
         <div className="trialBtn">
-          <Link to="/signup" className="btn">Book A Trial @ ₹99</Link>
+          <a href="tel: 9982117398" className="btn">
+            <FaPhone />
+            <span>9982117398</span>
+          </a>
         </div>
       </div>
     </nav>

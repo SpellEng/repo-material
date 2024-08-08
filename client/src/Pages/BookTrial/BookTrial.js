@@ -72,7 +72,7 @@ const BookTrial = () => {
         <div className="BookTrial container">
             <div className="inner">
                 <div className="fee">
-                    <h2>Book A Trial Class @ ₹99</h2>
+                    <h2>Book A Trial Class @ ₹1</h2>
                     <p>
                         You get a 30-minute trial class with an expert tutor,
                         <span> feedback, and recording</span>

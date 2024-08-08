@@ -29,7 +29,7 @@ const Home = () => {
     {
       icon: <FaSearch />,
       heading: "Book a Trial Session",
-      para: "Begin with a ₹99 trial session to experience SpellEng and receive personalized feedback.",
+      para: "Begin with a ₹1 trial session to experience SpellEng and receive personalized feedback.",
     },
     {
       icon: <GiTargetShot />,
@@ -81,7 +81,7 @@ const Home = () => {
       <Helmet>
         <meta charSet="utf-8" />
         <title>SpellEng: Expert English Tutors via 1-on-1 Video Calls</title>
-        <meta name="description" content="SpellEng offers 1-on-1 video calls with expert English tutors to improve your spoken English. Enjoy flexible scheduling, personalized feedback, and a ₹99 trial." />
+        <meta name="description" content="SpellEng offers 1-on-1 video calls with expert English tutors to improve your spoken English. Enjoy flexible scheduling, personalized feedback, and a ₹1 trial." />
         <link rel="canonical" href="https://www.spelleng.com/" />
       </Helmet>
       <div>

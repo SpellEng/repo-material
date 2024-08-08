@@ -26,7 +26,7 @@ const Faqs = () => {
       label: "How do I get started with SpellEng?",
       children: (
         <p>
-          To get started, simply sign up for a trial class @₹99, choose your
+          To get started, simply sign up for a trial class @₹1, choose your
           tutor, and schedule your first session.
           <br />
           Registration and Account:
@@ -63,7 +63,7 @@ const Faqs = () => {
       children: (
         <p>
           No, we don't offer a free trial session. But we offer a trial class at
-          a minimal fee of ₹99, so you can experience our tutoring services
+          a minimal fee of ₹1, so you can experience our tutoring services
           before committing to a subscription.
         </p>
       ),

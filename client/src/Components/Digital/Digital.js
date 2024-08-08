@@ -22,7 +22,7 @@ const Digital = () => {
               Personalized Instruction, Flexible Scheduling, Expert Guidance, and Access to Class Recordings!
             </p>
             <div className="digitalButton">
-              <button onClick={() => router(isAuthenticated() ? "/student/book-trial" : "/signup")}>Book A Trial @ ₹99</button>
+              <button onClick={() => router(isAuthenticated() ? "/student/book-trial" : "/signup")}>Take First Class ₹1</button>
             </div>
             <div className="options">
               <ul className="leftOption">

@@ -27,7 +27,7 @@ const Header = ({ videoLink, learn }) => {
             </p>
             <div className="buttonPart">
               <div className="trialBtn">
-                <Link to={isAuthenticated() ? "/student/book-trial" : "/signup"} className="btn">Take First Class ₹1</Link>
+                <Link to={isAuthenticated() ? "/student/book-trial" : "/signup"} className="btn">Take First Class @ ₹1</Link>
               </div>
             </div>
             <div className="iconsPart mt-4">

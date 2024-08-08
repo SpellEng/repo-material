@@ -86,7 +86,7 @@ const Navbar = () => {
                   </div>
                   <div className="signIn">
                     <li className="nav-item">
-                      <Link to="/signup" className="btnBuy btn-sm" onClick={handleLinkClick}>Book A Trial</Link>
+                      <Link to="/signup" className="btnBuy btn-sm" onClick={handleLinkClick}>Take First Class @ ₹1</Link>
                     </li>
                   </div>
                 </div>

@@ -21,7 +21,7 @@ const Footer = () => {
           <h2>
             Get started on your path to <span>success with us</span>
           </h2>
-          <button onClick={() => router(isAuthenticated() ? "/student/book-trial" : "/signup")}>Take First Class ₹1</button>
+          <button onClick={() => router(isAuthenticated() ? "/student/book-trial" : "/signup")}>Take First Class @ ₹1</button>
         </div>
         <Divider />
         <section>
